@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+				xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+				x:Class="BrewBuddy.View.BeerTab"
+				Title="{Binding Title}">
+	<ContentPage.Content>
+
+	  <StackLayout>
+	    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+	      <SearchBar x:Name="Searchbar" Placeholder="Search by name" SearchButtonPressed="SearchClicked" HorizontalOptions="FillAndExpand"/>
+   	      <Button Text="Search" Clicked="SearchClicked" HorizontalOptions="FillAndExpand"/>
+	    </StackLayout>
+	      <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="Center"/>
+	      <Label Text="{Binding ListHeader}" IsVisible="{Binding IsDataVisible}"/>
+	      <ScrollView>
+	      <ListView ItemsSource="{Binding Items}" ItemTapped="ItemTapped" IsVisible="{Binding IsDataVisible}">
+	        <ListView.ItemTemplate>
+	          <DataTemplate>
+	            <ViewCell>
+	              <StackLayout>
+	                <Label Text="{Binding Name}"/>
+	              </StackLayout>
+	            </ViewCell>
+	          </DataTemplate>
+	        </ListView.ItemTemplate>
+	      </ListView>
+	      </ScrollView>
+	    </StackLayout>
+
+	</ContentPage.Content>
+</ContentPage>

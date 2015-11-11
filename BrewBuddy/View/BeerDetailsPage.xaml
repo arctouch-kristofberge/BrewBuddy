@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="BrewBuddy.View.BeerDetailsPage"
+		Title="{Binding Title}">
+	<ContentPage.Content>
+	<StackLayout>
+	  <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
+	  <StackLayout  IsVisible="{Binding IsDataVisible}">
+	    <Label Text="{Binding Header}"/>
+	    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+	      <StackLayout>
+	        <Label Text="Alc."/>
+	        <Label Text="{Binding Abv}"/>
+	      </StackLayout>
+	      <StackLayout>
+	        <Label Text="IBU"/>
+	        <Label Text="{Binding Ibu}"/>
+	      </StackLayout>
+	      <StackLayout>
+	        <Label Text="Grav."/>
+	        <Label Text="{Binding OriginalGravity}"/>
+	      </StackLayout>
+	    </StackLayout>
+	    <Label Text="{Binding Description}"/>
+	  </StackLayout>
+	  </StackLayout>
+	</ContentPage.Content>
+</ContentPage>
