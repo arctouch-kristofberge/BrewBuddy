@@ -4,7 +4,7 @@ using BrewBuddy.View;
 using BrewBuddy.Model;
 using BrewBuddy.Shared;
 using System.Threading.Tasks;
-using BrewBuddy.Exception;
+using BrewBuddy.CustomExceptions;
 
 [assembly: Xamarin.Forms.Dependency(typeof(BrewBuddy.Service.NavigationService))]
 namespace BrewBuddy.Service

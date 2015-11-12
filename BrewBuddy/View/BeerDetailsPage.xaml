@@ -8,20 +8,48 @@
 	  <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
 	  <StackLayout  IsVisible="{Binding IsDataVisible}">
 	    <Label Text="{Binding Header}"/>
-	    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-	      <StackLayout>
-	        <Label Text="Alc."/>
-	        <Label Text="{Binding Abv}"/>
-	      </StackLayout>
-	      <StackLayout>
-	        <Label Text="IBU"/>
-	        <Label Text="{Binding Ibu}"/>
-	      </StackLayout>
-	      <StackLayout>
-	        <Label Text="Grav."/>
-	        <Label Text="{Binding OriginalGravity}"/>
-	      </StackLayout>
-	    </StackLayout>
+	      <Grid HorizontalOptions="FillAndExpand">
+	      	<Grid.RowDefinitions>
+	      	  <RowDefinition Height="Auto"/>
+	      	  <RowDefinition Height="Auto"/>
+	      	</Grid.RowDefinitions>
+	      	<Grid.ColumnDefinitions>
+	      	  <ColumnDefinition Width="*"/>
+	      	  <ColumnDefinition Width="*"/>
+	      	  <ColumnDefinition Width="*"/>
+	      	</Grid.ColumnDefinitions>
+
+	      	<Label Text="Alc."
+	      	  Grid.Row="0" Grid.Column="0"
+	      	  HorizontalOptions="Center"
+	      	  VerticalOptions="Center"/>
+
+	      	<Label Text="{Binding Abv}"
+	      	  Grid.Row="1" Grid.Column="0"
+	      	  HorizontalOptions="Center"
+	      	  VerticalOptions="Center"/>
+
+	      	  <Label Text="IBU"
+	      	  Grid.Row="0" Grid.Column="1"
+	      	  HorizontalOptions="Center"
+	      	  VerticalOptions="Center"/>
+
+	      	  <Label Text="{Binding Ibu}"
+	      	  Grid.Row="1" Grid.Column="1"
+	      	  HorizontalOptions="Center"
+	      	  VerticalOptions="Center"/>
+
+	      	  <Label Text="OG"
+	      	  Grid.Row="0" Grid.Column="2"
+	      	  HorizontalOptions="Center"
+	      	  VerticalOptions="Center"/>
+
+	      	  <Label Text="{Binding OriginalGravity}"
+	      	  Grid.Row="1" Grid.Column="2"
+	      	  HorizontalOptions="Center"
+	      	  VerticalOptions="Center"/>
+
+	      </Grid>
 	    <Label Text="{Binding Description}"/>
 	  </StackLayout>
 	  </StackLayout>

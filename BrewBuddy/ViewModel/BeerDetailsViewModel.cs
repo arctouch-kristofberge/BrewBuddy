@@ -3,7 +3,7 @@ using BrewBuddy.Model;
 using BrewBuddy.Service;
 using PropertyChanged;
 using BrewBuddy.Shared;
-using BrewBuddy.Exception;
+using BrewBuddy.CustomExceptions;
 
 namespace BrewBuddy.ViewModel
 {
@@ -40,12 +40,10 @@ namespace BrewBuddy.ViewModel
 			{
 				FillDetails (beer.Id);
 			}
-			catch(NoItemsFoundException){
+			catch(NoItemsFoundException)
+			{
 				Header = Constants.Text.NO_ITEMS_FOUND;
 			}
-
-			Title = _beer.Name;
-			Header = string.Format ("{0} ({1} Vol.)", Name, Year);
 
 			SetDataLoading (false);
 		}
@@ -66,9 +64,21 @@ namespace BrewBuddy.ViewModel
 			Labels = _beer.Labels;
 			ServingTemperatureDisplay = _beer.ServingTemperatureDisplay;
 			StatusDisplay = _beer.StatusDisplay;
-			//Available = _beer.Available;
+			Available = _beer.Available;
 			BeerVariation = _beer.BeerVariation;
 			Year = _beer.Year;
+
+			Title = Name;
+			Header = GetHeaderText();
+		}
+
+		private string GetHeaderText()
+		{
+			var headerText = Name;
+			if (!string.IsNullOrEmpty (Year))
+				headerText += string.Format (" ({0})", Year);
+
+			return headerText;
 		}
 	}
 }

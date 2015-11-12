@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using BrewBuddy.Model;
 using PortableRest;
 using System.Collections.Generic;
-using BrewBuddy.Exception;
+using BrewBuddy.CustomExceptions;
 
 [assembly: Xamarin.Forms.Dependency(typeof(BrewBuddy.Service.BreweryDb))]
 namespace BrewBuddy.Service 
@@ -56,7 +56,7 @@ namespace BrewBuddy.Service
 
 			try
 			{
-				var response = _client.ExecuteAsync<DataObject<BreweryDetails>>(_request).Result;
+				var response = await _client.ExecuteAsync<DataObject<BreweryDetails>>(_request);
 				return response.Data[0];
 			}
 			catch (ArgumentNullException)
@@ -72,7 +72,7 @@ namespace BrewBuddy.Service
 
 			try
 			{
-				var response = _client.ExecuteAsync<DataObject<BeerDetails>>(_request).Result;
+				var response = await _client.ExecuteAsync<DataObject<BeerDetails>>(_request);
 				return response.Data[0];
 			}
 			catch (ArgumentNullException) 

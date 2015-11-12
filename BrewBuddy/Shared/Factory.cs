@@ -2,7 +2,7 @@
 using BrewBuddy.ViewModel;
 using BrewBuddy.Model;
 using BrewBuddy.Service;
-using BrewBuddy.Exception;
+using BrewBuddy.CustomExceptions;
 
 namespace BrewBuddy.Shared
 {

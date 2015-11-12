@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BrewBuddy.Exception
+namespace BrewBuddy.CustomExceptions
 {
 	public class NoItemsFoundException : System.Exception
 	{

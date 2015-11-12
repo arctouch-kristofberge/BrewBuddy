@@ -17,7 +17,7 @@ namespace BrewBuddy.Model
 		public string Labels { get; set; }
 		public string ServingTemperatureDisplay { get; set; }
 		public string StatusDisplay { get; set; }
-		//public Available Available { get; set; }
+		public Available Available { get; set; }
 		public string BeerVariation { get; set; }
 		public string Year { get; set; }
 	}

@@ -69,6 +69,10 @@
     <Compile Include="ViewModel\BeerDetailsViewModel.cs" />
     <Compile Include="Model\Available.cs" />
     <Compile Include="ViewModel\BaseDataViewModel.cs" />
+    <Compile Include="Design\VisualDesign.cs" />
+    <Compile Include="View\CustomViews\StandardButton.xaml.cs">
+      <DependentUpon>StandardButton.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -120,6 +124,8 @@
     <Folder Include="View\Tabs\" />
     <Folder Include="Shared\" />
     <Folder Include="Exception\" />
+    <Folder Include="Design\" />
+    <Folder Include="View\CustomViews\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\MainPage.xaml">
@@ -135,6 +141,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="View\BeerDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomViews\StandardButton.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

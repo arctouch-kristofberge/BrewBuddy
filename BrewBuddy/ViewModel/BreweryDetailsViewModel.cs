@@ -1,7 +1,7 @@
 ﻿using System;
 using BrewBuddy.Model;
 using BrewBuddy.Service;
-using BrewBuddy.Exception;
+using BrewBuddy.CustomExceptions;
 using BrewBuddy.Shared;
 using System.Threading.Tasks;
 using PropertyChanged;

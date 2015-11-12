@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using BrewBuddy.Service;
-using BrewBuddy.Exception;
+using BrewBuddy.CustomExceptions;
 using System.Collections.ObjectModel;
 using BrewBuddy.Model;
 using PropertyChanged;
@@ -46,7 +46,8 @@ namespace BrewBuddy.ViewModel
 
 		public void SearchClicked(string parameter)
 		{
-			FillItems (parameter);
+			if(!IsLoading)
+				FillItems (parameter);
 		}
 
 		public async void ItemTapped(T item)
