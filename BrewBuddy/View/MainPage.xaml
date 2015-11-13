@@ -2,6 +2,8 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" 
 			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 			x:Class="BrewBuddy.View.MainPage"
-			Title="{Binding Title}">
+			Title="{Binding Title}"
+			xmlns:design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy"
+			BackgroundColor="{x:Static design:VisualDesign.PAGE_BACKGROUND_COLOR}">
 
 </TabbedPage>

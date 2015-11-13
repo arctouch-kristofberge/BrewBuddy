@@ -32,15 +32,44 @@ namespace BrewBuddy.Service
 		}
 
 		public async Task<ObservableCollection<Beer>> GetBeers (string name)
-		{
+		{ 
 			string[][] parameters = { new string[]{ "name", name } };
 			SetupClientAndRequest ("beers", parameters);
 
 			try 
 			{
 				var response = await _client.ExecuteAsync<DataObject<Beer>> (_request);
-				return new ObservableCollection<Beer>(response.Data);
+				var beers = new ObservableCollection<Beer>(response.Data);
+				var beersWithBreweries = await FillBreweries(beers);
+				return beersWithBreweries;
 			} 
+			catch (ArgumentNullException) 
+			{
+				throw new NoItemsFoundException ();
+			}
+		}
+
+		private async Task<ObservableCollection<Beer>> FillBreweries(ObservableCollection<Beer> beers)
+		{
+			foreach(Beer beer in beers)
+			{
+				var brewery = await GetBreweryByBeer (beer.Id);
+				beer.BreweryName = brewery.Name;
+			}
+
+			return beers;
+		}
+
+		public async Task<Brewery> GetBreweryByBeer(string id)
+		{
+			string resource = string.Format (@"beer/{0}/breweries", id);
+			SetupClientAndRequest (resource);
+
+			try
+			{
+				var response = await _client.ExecuteAsync<DataObject<Brewery>>(_request);
+				return response.Data[0];
+			}
 			catch (ArgumentNullException) 
 			{
 				throw new NoItemsFoundException ();
@@ -71,7 +100,7 @@ namespace BrewBuddy.Service
 			SetupClientAndRequest ("beers", parameters);
 
 			try
-			{
+			{ 
 				var response = await _client.ExecuteAsync<DataObject<BeerDetails>>(_request);
 				return response.Data[0];
 			}
@@ -83,6 +112,11 @@ namespace BrewBuddy.Service
 		#endregion
 
 		#region Private methods
+		private void SetupClientAndRequest (string resource)
+		{
+			SetupClientAndRequest (resource, new string[][]{});
+		}
+
 		private void SetupClientAndRequest (string resource, string[][] parameters)
 		{
 			_client = new RestClient () { BaseUrl = @"http://api.brewerydb.com/v2/" };

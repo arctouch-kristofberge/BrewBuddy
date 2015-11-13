@@ -26,6 +26,12 @@ namespace BrewBuddy.ViewModel
 
 			GetItemsFunction = getItemsFunction;
 		}
+		
+		public void SearchClicked(string parameter)
+		{
+			if(!IsLoading)
+				FillItems (parameter);
+		}
 
 		private async void FillItems(string name)
 		{
@@ -41,13 +47,9 @@ namespace BrewBuddy.ViewModel
 				Items.Clear ();
 				ListHeader = Constants.Text.NO_ITEMS_FOUND;
 			}
-			SetDataLoading (false);
-		}
 
-		public void SearchClicked(string parameter)
-		{
-			if(!IsLoading)
-				FillItems (parameter);
+
+			SetDataLoading (false);
 		}
 
 		public async void ItemTapped(T item)

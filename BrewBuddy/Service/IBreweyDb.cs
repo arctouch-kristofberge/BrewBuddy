@@ -11,6 +11,7 @@ namespace BrewBuddy.Service
 		Task<ObservableCollection<Beer>> GetBeers (string name);
 		Task<BreweryDetails> GetBreweryDetails (string id);
 		Task<BeerDetails> GetBeerDetails (string id);
+		Task<Brewery> GetBreweryByBeer (string id);
 	}
 }
 
