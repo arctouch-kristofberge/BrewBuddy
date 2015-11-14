@@ -63,6 +63,8 @@ namespace BrewBuddy.Design
 
 		#region List item
 		public static readonly Color LISTITEM_BACKGROUND_COLOR = BACKGROUND_COLOR;
+		public static readonly Color LISTITEM_FIRSTLINE_BACKGROUND_COLOR = BRAND_COLOR;
+		public static readonly Color LISTITEM_SECONDLINE_BACKGROUND_COLOR = BRAND_COLOR_LIGHT;
 		public static readonly Color LISTITEM_FIRSTLINE_TEXT_COLOR = TEXT_COLOR_PRIMARY;
 		public static readonly Color LISTITEM_SECONDLINE_TEXT_COLOR = TEXT_COLOR_SECONDARY;
 		public static readonly string LISTITEM_FIRSTLINE_FONT_FAMILY = FONT_FAMILY;

@@ -14,7 +14,7 @@ namespace BrewBuddy.Model
 		public string GlasswareId { get; set; }
 		public string StyleId { get; set; }
 		public string IsOrganic { get; set; }
-		public string Labels { get; set; }
+		public Images Labels { get; set; }
 		public string ServingTemperatureDisplay { get; set; }
 		public string StatusDisplay { get; set; }
 		public Available Available { get; set; }

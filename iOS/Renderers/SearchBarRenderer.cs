@@ -33,7 +33,7 @@ namespace BrewBuddy.iOS.Renderers
 		private void SetTextColor(Color color)
 		{
 			var searchBar = Control as UISearchBar;
-			UIColor uiColor = GetUIColor (color);
+			UIColor uiColor = Helpers.Visual.GetUIColor (color);
 
 			foreach (UIView view in searchBar.Subviews)
 			{
@@ -50,16 +50,6 @@ namespace BrewBuddy.iOS.Renderers
 					}
 				}
 			}
-		}
-
-		private UIColor GetUIColor(Color color)
-		{
-			var uiColor = new UIColor (
-				(nfloat) color.R,
-				(nfloat) color.G,
-				(nfloat) color.R,
-				(nfloat) color.A);
-			return uiColor;
 		}
 	}
 }

@@ -76,8 +76,9 @@
     <Compile Include="View\CustomViews\TabSearchBar.xaml.cs">
       <DependentUpon>TabSearchBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CustomViews\TwoLinesListViewCell.xaml.cs">
-      <DependentUpon>TwoLinesListViewCell.xaml</DependentUpon>
+    <Compile Include="View\CustomViews\SearchResultsList.cs" />
+    <Compile Include="View\CustomViews\TwoLinesViewCell.xaml.cs">
+      <DependentUpon>TwoLinesViewCell.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -155,7 +156,7 @@
     <EmbeddedResource Include="View\CustomViews\TabSearchBar.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\CustomViews\TwoLinesListViewCell.xaml">
+    <EmbeddedResource Include="View\CustomViews\TwoLinesViewCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

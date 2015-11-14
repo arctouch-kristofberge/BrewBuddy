@@ -108,6 +108,7 @@ namespace BrewBuddy.Service
 			{
 				throw new NoItemsFoundException ();
 			}
+			return null;
 		}
 		#endregion
 

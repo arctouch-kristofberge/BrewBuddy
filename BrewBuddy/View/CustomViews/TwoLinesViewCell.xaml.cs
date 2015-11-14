@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace BrewBuddy.View.Custom
 {
-	public partial class TwoLinesListViewCell : ViewCell
+	public partial class TwoLinesViewCell : ViewCell
 	{
 		#region Bindable properties
 		public string FirstLine
@@ -13,7 +13,7 @@ namespace BrewBuddy.View.Custom
 			set{ SetValue (FirstLineProperty, value); }
 		}
 
-		public static readonly BindableProperty FirstLineProperty = BindableProperty.Create<TwoLinesListViewCell, string>(
+		public static readonly BindableProperty FirstLineProperty = BindableProperty.Create<TwoLinesViewCell, string>(
 			x => x.FirstLine,
 			string.Empty,
 			BindingMode.OneWay,
@@ -22,7 +22,7 @@ namespace BrewBuddy.View.Custom
 
 		private static void FirstLineUpdated(BindableObject bindable, string oldValue, string newValue)
 		{
-			((TwoLinesListViewCell)bindable).FirstLineLabel.Text = newValue;
+			((TwoLinesViewCell)bindable).FirstLineLabel.Text = newValue;
 		}
 		
 		public string SecondLine
@@ -31,7 +31,7 @@ namespace BrewBuddy.View.Custom
 			set{ SetValue (SecondLineProperty, value); }
 		}
 
-		public static readonly BindableProperty SecondLineProperty = BindableProperty.Create<TwoLinesListViewCell, string>(
+		public static readonly BindableProperty SecondLineProperty = BindableProperty.Create<TwoLinesViewCell, string>(
 			x => x.SecondLine,
 			string.Empty,
 			BindingMode.OneWay,
@@ -40,12 +40,12 @@ namespace BrewBuddy.View.Custom
 		
 		private static void SecondLineUpdated(BindableObject bindable, string oldValue, string newValue)
 		{
-			((TwoLinesListViewCell)bindable).SecondLineLabel.Text = newValue;
+			((TwoLinesViewCell)bindable).SecondLineLabel.Text = newValue;
 		}
 		#endregion
 
 
-		public TwoLinesListViewCell ()
+		public TwoLinesViewCell ()
 		{
 			InitializeComponent ();
 		}
