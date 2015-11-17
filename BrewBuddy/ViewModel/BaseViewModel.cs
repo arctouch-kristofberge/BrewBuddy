@@ -16,7 +16,7 @@ namespace BrewBuddy.ViewModel
 			}
 		}
 
-		public IFavorites FavoritesDb
+		public IFavoritesDb FavoritesDb
 		{
 			get
 			{

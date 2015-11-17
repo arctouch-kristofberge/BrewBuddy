@@ -4,6 +4,8 @@ using Xamarin.Forms;
 using BrewBuddy.Design;
 using System.Reflection;
 using System.Windows.Input;
+using BrewBuddy.Event;
+using BrewBuddy.Model;
 
 namespace BrewBuddy.View.Custom
 {
@@ -70,7 +72,7 @@ namespace BrewBuddy.View.Custom
 		}
 		#endregion
 
-		public event EventHandler<bool> FavoriteToggled;
+		public event EventHandler<FavoriteToggledEventArgs> FavoriteToggled;
 
 		#endregion
 
@@ -94,7 +96,11 @@ namespace BrewBuddy.View.Custom
 			IsFavorite = !IsFavorite;
 
 			if(FavoriteToggled != null)
-				FavoriteToggled(this, IsFavorite);
+				FavoriteToggled(this, 
+					new FavoriteToggledEventArgs (){
+						IsFavorite = IsFavorite,
+						Item = this.BindingContext as BaseModel
+					});
 		}
 	}
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BrewBuddy
 {
-	public interface IFavorites
+	public interface IFavoritesDb
 	{
 		Task AddAsync<T>(T item) where T : BaseModel, IFavorite;
 		Task RemoveAsync<T> (T item) where T : BaseModel, IFavorite;

@@ -16,11 +16,7 @@
 	      <ListView ItemsSource="{Binding Items}" ItemTapped="ItemTapped" IsVisible="{Binding IsDataVisible}">
 	        <ListView.ItemTemplate>
 	          <DataTemplate>
-	            <ViewCell>
-	              <StackLayout>
-	                <Label Text="{Binding Name}"/>
-	              </StackLayout>
-	            </ViewCell>
+	            <CustomView:MyViewCell FirstLine="{Binding Name}" FavoriteToggled="FavoriteToggled" IsFavorite="{Binding IsFavorite}"/>
 	          </DataTemplate>
 	        </ListView.ItemTemplate>
 	      </ListView>

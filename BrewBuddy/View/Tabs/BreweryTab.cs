@@ -6,6 +6,8 @@ using BrewBuddy.ViewModel;
 using BrewBuddy.Model;
 using BrewBuddy.Service;
 using BrewBuddy.Shared;
+using BrewBuddy.View.Custom;
+using BrewBuddy.Event;
 
 namespace BrewBuddy.View
 {
@@ -18,16 +20,20 @@ namespace BrewBuddy.View
 			BindingContext = new Factory ().GetListTabViewModel<Brewery>();
 		}
 
-		void SearchClicked(object sender, EventArgs e)
+		private void SearchClicked(object sender, EventArgs e)
 		{
 			var searchParameter = ((SearchBar)Searchbar).Text;
 			((ListTabViewModel<Brewery>)BindingContext).SearchClicked (searchParameter);
 		}
 
-		void ItemTapped(object sender, ItemTappedEventArgs e)
+		private void ItemTapped(object sender, ItemTappedEventArgs e)
 		{
 			((ListTabViewModel<Brewery>)BindingContext).ItemTapped (e.Item as Brewery);
 		}
+
+		private void FavoriteToggled(object sender, FavoriteToggledEventArgs e)
+		{
+			((ListTabViewModel<Brewery>)BindingContext).FavoriteToggled (e.Item as Brewery, e.IsFavorite);
+		}
 	}
 }
-

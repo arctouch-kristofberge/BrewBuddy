@@ -5,6 +5,8 @@ using Xamarin.Forms;
 using BrewBuddy.ViewModel;
 using BrewBuddy.Shared;
 using BrewBuddy.Model;
+using BrewBuddy.View.Custom;
+using BrewBuddy.Event;
 
 namespace BrewBuddy.View
 {
@@ -28,9 +30,9 @@ namespace BrewBuddy.View
 			((ListTabViewModel<Beer>)BindingContext).ItemTapped (e.Item as Beer);
 		}
 
-		void FavoriteToggled(object sender, bool isFavorite)
+		void FavoriteToggled(object sender, FavoriteToggledEventArgs e)
 		{
-			((ListTabViewModel<Beer>)BindingContext).FavoriteToggled (sender as Beer, isFavorite);
+			((ListTabViewModel<Beer>)BindingContext).FavoriteToggled (e.Item as Beer, e.IsFavorite);
 		}
 	}
 }

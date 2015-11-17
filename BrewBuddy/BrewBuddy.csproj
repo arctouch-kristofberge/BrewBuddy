@@ -81,12 +81,10 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\IBaseModel.cs" />
-    <Compile Include="Services\IFavorites.cs" />
     <Compile Include="Interface\IEnvironment.cs" />
     <Compile Include="Services\FavoritesDb.cs" />
-    <Compile Include="View\CustomViews\MyListView.xaml.cs">
-      <DependentUpon>MyListView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Services\IFavoritesDb.cs" />
+    <Compile Include="Event\FavoriteToggledEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -148,6 +146,7 @@
     <Folder Include="Resources\" />
     <Folder Include="Services\" />
     <Folder Include="Interface\" />
+    <Folder Include="Event\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\MainPage.xaml">
@@ -180,9 +179,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Star_nfav.png">
       <LogicalName>star_nfav</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\CustomViews\MyListView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

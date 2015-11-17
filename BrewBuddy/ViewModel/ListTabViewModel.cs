@@ -40,7 +40,12 @@ namespace BrewBuddy.ViewModel
 			Items = new ObservableCollection<T> ();
 			try 
 			{
-				Items = await GetItemsFunction(name);
+				ObservableCollection<T> items = await GetItemsFunction(name);
+
+				foreach(T item in items)
+					item.IsFavorite = await FavoritesDb.IsFavorite (item);
+
+				Items = items;
 				ListHeader = "Search results";
 			} 
 			catch (NoItemsFoundException)

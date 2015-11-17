@@ -19,7 +19,7 @@ namespace BrewBuddy
 		}
 
 		public IEnvironment Environment { get; private set; }
-		public IFavorites Favorites  { get; private set; }
+		public IFavoritesDb Favorites  { get; private set; }
 		public IBreweryDb BreweryDb  { get; private set; }
 		public INavigationService NavigationService { get; private set; }
 

@@ -11,7 +11,7 @@ using BrewBuddy.CustomExceptions;
 
 namespace BrewBuddy.Service
 {
-	public class FavoritesDb : IFavorites
+	public class FavoritesDb : IFavoritesDb
 	{
 		private const string DATABASE_FILE = "favorites.db";
 
@@ -40,16 +40,15 @@ namespace BrewBuddy.Service
 
 		public Task RemoveAsync<T> (T item) where T : BaseModel, IFavorite
 		{
-			var record = new FavoriteRecord (){
-				Type = GetType (item),
-				Id = item.Id
-			};
-			return GetAsyncConnection ().DeleteAsync (record);
+			string type = GetType (item);
+			var sql = string.Format ( "DELETE FROM FavoriteRecord WHERE Id = '{0}' AND Type = '{1}'", item.Id, type);
+
+			return GetAsyncConnection ().ExecuteAsync (sql);
 		}
 
 		public async Task<bool> IsFavorite<T> (T item) where T :BaseModel, IFavorite
 		{ 
-			var sql = string.Format ("Select count(*) from FavoriteRecord where Id = {0} and Type = {1}", item.Id, GetType (item));
+			var sql = string.Format ("Select count(*) from FavoriteRecord where Id = '{0}' and Type = '{1}'", item.Id, GetType (item));
 			var result = await GetAsyncConnection ().ExecuteScalarAsync<int> (sql);
 			return result > 0;
 		}
