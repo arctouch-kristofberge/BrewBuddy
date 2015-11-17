@@ -15,7 +15,7 @@ namespace BrewBuddy.Shared
 			BEER, BREWERY
 		}
 
-		public ListTabViewModel<T> GetListTabViewModel<T>() where T : IListItemModel
+		public ListTabViewModel<T> GetListTabViewModel<T>() where T : BaseModel
 		{
 			var db = new BreweryDb ();
 			var type = typeof(T).ToString();

@@ -5,7 +5,7 @@ using Xamarin.Forms.Platform.iOS;
 using UIKit;
 using BrewBuddy.Design;
 
-[assembly: ExportRenderer(typeof(TwoLinesViewCell), typeof(BrewBuddy.iOS.Renderers.TwoLinesViewCellRenderer))]
+[assembly: ExportRenderer(typeof(MyViewCell), typeof(BrewBuddy.iOS.Renderers.TwoLinesViewCellRenderer))]
 namespace BrewBuddy.iOS.Renderers
 {
 	public class TwoLinesViewCellRenderer : ViewCellRenderer
@@ -24,7 +24,7 @@ namespace BrewBuddy.iOS.Renderers
 
 						if (firstLabel != null)
 						{
-							firstLabel.BackgroundColor = Helpers.Visual.GetUIColor ( VisualDesign.LISTITEM_FIRSTLINE_BACKGROUND_COLOR);
+//							firstLabel.BackgroundColor = Helpers.Visual.GetUIColor ( VisualDesign.LISTITEM_FIRSTLINE_BACKGROUND_COLOR);
 							firstLabel.Layer.BorderWidth = 0;
 						}
 						else
@@ -34,7 +34,7 @@ namespace BrewBuddy.iOS.Renderers
 								var secondLabel = subSubView as LabelRenderer;
 								if(secondLabel!=null)
 								{
-									secondLabel.BackgroundColor = Helpers.Visual.GetUIColor ( VisualDesign.LISTITEM_SECONDLINE_BACKGROUND_COLOR);
+//									secondLabel.BackgroundColor = Helpers.Visual.GetUIColor ( VisualDesign.LISTITEM_SECONDLINE_BACKGROUND_COLOR);
 									secondLabel.Layer.BorderWidth = 0;
 								}
 							}

@@ -2,9 +2,8 @@
 
 namespace BrewBuddy.Model
 {
-	public class BeerDetails : IDetailsModel
+	public class BeerDetails : BaseModel
 	{
-		public string Id { get; set; } 
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public string FoodPairings { get; set; }

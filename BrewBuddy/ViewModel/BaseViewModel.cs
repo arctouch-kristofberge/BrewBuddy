@@ -8,14 +8,23 @@ namespace BrewBuddy.ViewModel
 	[ImplementPropertyChanged]
 	public abstract class BaseViewModel
 	{
-		public INavigationService NavigationService { get; set; }
+		public INavigationService NavigationService 
+		{ 
+			get
+			{
+				return ((App)Application.Current).NavigationService;
+			}
+		}
+
+		public IFavorites FavoritesDb
+		{
+			get
+			{
+				return ((App)Application.Current).Favorites;
+			}
+		}
 
 		public string Title { get; set; }
-
-		public BaseViewModel ()
-		{
-			NavigationService = DependencyService.Get<INavigationService>();
-		}
 	}
 }
 

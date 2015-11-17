@@ -2,6 +2,7 @@
 
 using Xamarin.Forms;
 using BrewBuddy.View;
+using BrewBuddy.Service;
 
 namespace BrewBuddy
 {
@@ -9,9 +10,18 @@ namespace BrewBuddy
 	{
 		public App ()
 		{
-			// The root page of your application
+			Environment = DependencyService.Get<IEnvironment> ();
+			Favorites = new FavoritesDb (Environment.DatabasePlatform, Environment.PersonalFolder);
+			BreweryDb = new BreweryDb ();
+			NavigationService = DependencyService.Get<INavigationService>();
+
 			MainPage = new NavigationPage (new MainPage());
 		}
+
+		public IEnvironment Environment { get; private set; }
+		public IFavorites Favorites  { get; private set; }
+		public IBreweryDb BreweryDb  { get; private set; }
+		public INavigationService NavigationService { get; private set; }
 
 		protected override void OnStart ()
 		{

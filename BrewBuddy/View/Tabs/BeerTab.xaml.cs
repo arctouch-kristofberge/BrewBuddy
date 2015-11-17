@@ -27,5 +27,10 @@ namespace BrewBuddy.View
 		{
 			((ListTabViewModel<Beer>)BindingContext).ItemTapped (e.Item as Beer);
 		}
+
+		void FavoriteToggled(object sender, bool isFavorite)
+		{
+			((ListTabViewModel<Beer>)BindingContext).FavoriteToggled (sender as Beer, isFavorite);
+		}
 	}
 }

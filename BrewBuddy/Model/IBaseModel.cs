@@ -2,7 +2,7 @@
 
 namespace BrewBuddy.Model
 {
-	public interface IDetailsModel
+	public interface IBaseModel
 	{
 		string Id { get; set; }
 	}

@@ -13,13 +13,13 @@
 	      <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="Center"/>
 	      <Label Text="{Binding ListHeader}" IsVisible="{Binding IsDataVisible}"/>
 	      <ScrollView>
-	      <CustomView:SearchResultsList ItemsSource="{Binding Items}" ItemTapped="ItemTapped" IsVisible="{Binding IsDataVisible}">
+	      <ListView ItemsSource="{Binding Items}" ItemTapped="ItemTapped" IsVisible="{Binding IsDataVisible}">
 	        <ListView.ItemTemplate>
 	          <DataTemplate>
-	            <CustomView:TwoLinesViewCell FirstLine="{Binding Name}" SecondLine="{Binding BreweryName}"/>
+	            <CustomView:MyViewCell FirstLine="{Binding Name}" SecondLine="{Binding BreweryName}" FavoriteToggled="FavoriteToggled"/>
 	          </DataTemplate>
 	        </ListView.ItemTemplate>
-	      </CustomView:SearchResultsList>
+	      </ListView>
 	      </ScrollView>
 	    </StackLayout>
 

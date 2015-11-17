@@ -16,7 +16,7 @@ namespace BrewBuddy.Service
 
 		}
 
-		public async Task NavigateToDetails<T>(T item) where T : IListItemModel
+		public async Task NavigateToDetails<T>(T item) where T : BaseModel
 		{
 			var type = typeof(T).ToString();
 			switch (type) 

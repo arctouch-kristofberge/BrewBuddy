@@ -7,11 +7,12 @@ using BrewBuddy.Model;
 using PropertyChanged;
 using BrewBuddy.Shared;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace BrewBuddy.ViewModel
 {
 	[ImplementPropertyChanged]
-	public class ListTabViewModel<T> : BaseDataViewModel where T : IListItemModel
+	public class ListTabViewModel<T> : BaseDataViewModel where T : BaseModel, IFavorite
 	{
 		#region Properties
 		public ObservableCollection<T> Items { get; set; }
@@ -55,6 +56,14 @@ namespace BrewBuddy.ViewModel
 		public async void ItemTapped(T item)
 		{
 			await NavigationService.NavigateToDetails(item);
+		}
+
+		public void FavoriteToggled(T item, bool isFav)
+		{
+			if (isFav)
+				FavoritesDb.AddAsync (item);
+			else
+				FavoritesDb.RemoveAsync (item);
 		}
 	}
 }

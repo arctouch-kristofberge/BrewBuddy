@@ -84,6 +84,11 @@ namespace BrewBuddy.Design
 		#region Page
 		public static readonly Color PAGE_BACKGROUND_COLOR = BACKGROUND_COLOR;
 		#endregion
+
+		#region Images
+		public static readonly string ICON_NOT_FAVORITE = "star_nfav";
+		public static readonly string ICON_FAVORITE = "Star_fav.png";
+		#endregion
 	}
 }
 
