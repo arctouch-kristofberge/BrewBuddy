@@ -20,7 +20,15 @@ namespace BrewBuddy.ViewModel
 		{
 			get
 			{
-				return ((App)Application.Current).Favorites;
+				return ((App)Application.Current).FavoritesDb;
+			}
+		}
+
+		public IBreweryDb BreweryDb
+		{
+			get
+			{
+				return ((App)Application.Current).BreweryDb;
 			}
 		}
 

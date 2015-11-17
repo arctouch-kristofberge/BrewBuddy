@@ -18,6 +18,7 @@ namespace BrewBuddy.View
 
 			Children.Add (new BeerTab ());
 			Children.Add (new BreweryTab ());
+			Children.Add (new FavoritesTab ());
 		}
 	}
 }

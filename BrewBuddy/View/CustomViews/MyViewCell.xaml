@@ -4,7 +4,7 @@
 	x:Class="BrewBuddy.View.Custom.MyViewCell"
 	xmlns:design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy">
   <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-    <Image x:Name="FavIcon" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+    <Image x:Name="FavIcon" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
       <Image.GestureRecognizers>
         <TapGestureRecognizer Tapped="FavIconTapped"/>
       </Image.GestureRecognizers>

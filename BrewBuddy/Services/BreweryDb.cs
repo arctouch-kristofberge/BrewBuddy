@@ -5,6 +5,7 @@ using BrewBuddy.Model;
 using PortableRest;
 using System.Collections.Generic;
 using BrewBuddy.CustomExceptions;
+using BrewBuddy.Shared;
 
 [assembly: Xamarin.Forms.Dependency(typeof(BrewBuddy.Service.BreweryDb))]
 namespace BrewBuddy.Service 
@@ -17,7 +18,10 @@ namespace BrewBuddy.Service
 		#region ListItems
 		public async Task<ObservableCollection<Brewery>> GetBreweries(string name)
 		{
-			string[][] parameters = { new string[]{ "name", name } };
+			DbParameter[] parameters = { 
+				new DbParameter(){ key = "name", value = name }
+			};
+
 			SetupClientAndRequest ("breweries", parameters);
 
 			try 
@@ -33,7 +37,10 @@ namespace BrewBuddy.Service
 
 		public async Task<ObservableCollection<Beer>> GetBeers (string name)
 		{ 
-			string[][] parameters = { new string[]{ "name", name } };
+			DbParameter[] parameters = { 
+				new DbParameter(){ key = "name", value = name }
+			};
+
 			SetupClientAndRequest ("beers", parameters);
 
 			try 
@@ -80,7 +87,10 @@ namespace BrewBuddy.Service
 		#region Details
 		public async Task<BreweryDetails> GetBreweryDetails (string id)
 		{
-			string[][] parameters = { new string[] { "ids", id } };
+			DbParameter[] parameters = { 
+				new DbParameter(){ key = "ids", value = id }
+			};
+
 			SetupClientAndRequest ("breweries", parameters);
 
 			try
@@ -96,7 +106,10 @@ namespace BrewBuddy.Service
 
 		public async Task<BeerDetails> GetBeerDetails(string id)
 		{
-			string[][] parameters = { new string[] { "ids", id } };
+			DbParameter[] parameters = { 
+				new DbParameter(){ key = "ids", value = id }
+			};
+
 			SetupClientAndRequest ("beers", parameters);
 
 			try
@@ -108,30 +121,56 @@ namespace BrewBuddy.Service
 			{
 				throw new NoItemsFoundException ();
 			}
-			return null;
+		}
+
+		public async Task<List<T>> GetItemsById<T>(List<string> ids) where T : BaseModel
+		{
+			DbParameter[] parameters = { 
+				new DbParameter(){ key = "ids", value = string.Join (",", ids) }
+			};
+
+			var type = typeof(T).ToString ();
+			var resource = type == Constants.Model.BEER ? "beers" : "breweries";
+			SetupClientAndRequest (resource, parameters);
+
+			try
+			{
+				var result = await _client.ExecuteAsync<DataObject<T>> (_request);
+				return result.Data;
+			}
+			catch (ArgumentNullException)
+			{
+				throw new NoItemsFoundException ();
+			}
 		}
 		#endregion
 
 		#region Private methods
 		private void SetupClientAndRequest (string resource)
 		{
-			SetupClientAndRequest (resource, new string[][]{});
+			SetupClientAndRequest (resource, new DbParameter[]{});
 		}
 
-		private void SetupClientAndRequest (string resource, string[][] parameters)
+		private void SetupClientAndRequest (string resource, DbParameter[] parameters)
 		{
 			_client = new RestClient () { BaseUrl = @"http://api.brewerydb.com/v2/" };
 			_request = new RestRequest ();
 			_request.Resource = resource;
 			_request.AddQueryString ("key", "9a2a6901a06f34b07e304680c9799af5");
 
-			foreach (string[] param in parameters) 
-				_request.AddQueryString (param[0], param[1]);
+			foreach (DbParameter param in parameters) 
+				_request.AddQueryString (param.key, param.value);
 		}
 
 		private class DataObject<T>
 		{
 			public List<T> Data { get; set; }
+		}
+
+		private struct DbParameter
+		{
+			public string key; 
+			public string value;
 		}
 		#endregion
 	}

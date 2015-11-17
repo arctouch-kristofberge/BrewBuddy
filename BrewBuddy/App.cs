@@ -11,7 +11,7 @@ namespace BrewBuddy
 		public App ()
 		{
 			Environment = DependencyService.Get<IEnvironment> ();
-			Favorites = new FavoritesDb (Environment.DatabasePlatform, Environment.PersonalFolder);
+			FavoritesDb = new FavoritesDb (Environment.DatabasePlatform, Environment.PersonalFolder);
 			BreweryDb = new BreweryDb ();
 			NavigationService = DependencyService.Get<INavigationService>();
 
@@ -19,7 +19,7 @@ namespace BrewBuddy
 		}
 
 		public IEnvironment Environment { get; private set; }
-		public IFavoritesDb Favorites  { get; private set; }
+		public IFavoritesDb FavoritesDb  { get; private set; }
 		public IBreweryDb BreweryDb  { get; private set; }
 		public INavigationService NavigationService { get; private set; }
 

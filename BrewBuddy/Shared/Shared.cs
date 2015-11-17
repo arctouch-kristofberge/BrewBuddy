@@ -10,6 +10,7 @@ namespace BrewBuddy.Shared
 			public static readonly string BEER_TAB_TITLE = "Beer";
 			public static readonly string BREWERY_TAB_TITLE = "Breweries";
 			public static readonly string NO_ITEMS_FOUND = "No items found";
+			public static readonly string FAVORITES_TAB_TITLE = "Favorites";
 		}
 
 		public static class Model

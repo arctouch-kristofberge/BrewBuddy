@@ -75,16 +75,23 @@
     <Compile Include="View\CustomViews\MyViewCell.xaml.cs">
       <DependentUpon>MyViewCell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\IBreweyDb.cs" />
     <Compile Include="Services\BreweryDb.cs" />
-    <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\IBaseModel.cs" />
     <Compile Include="Interface\IEnvironment.cs" />
     <Compile Include="Services\FavoritesDb.cs" />
-    <Compile Include="Services\IFavoritesDb.cs" />
     <Compile Include="Event\FavoriteToggledEventArgs.cs" />
+    <Compile Include="View\Tabs\FavoritesTab.xaml.cs">
+      <DependentUpon>FavoritesTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Interface\IBreweyDb.cs" />
+    <Compile Include="Services\Interface\IFavoritesDb.cs" />
+    <Compile Include="Services\Interface\INavigationService.cs" />
+    <Compile Include="ViewModel\FavoritesViewModel.cs" />
+    <Compile Include="View\CustomViews\CollapsableList.xaml.cs">
+      <DependentUpon>CollapsableList.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -147,6 +154,7 @@
     <Folder Include="Services\" />
     <Folder Include="Interface\" />
     <Folder Include="Event\" />
+    <Folder Include="Services\Interface\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\MainPage.xaml">
@@ -179,6 +187,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Star_nfav.png">
       <LogicalName>star_nfav</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Tabs\FavoritesTab.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomViews\CollapsableList.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 </Project>
