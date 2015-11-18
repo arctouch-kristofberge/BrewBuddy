@@ -18,49 +18,17 @@ namespace BrewBuddy.Service
 		#region ListItems
 		public async Task<ObservableCollection<Brewery>> GetBreweries(string name)
 		{
-			DbParameter[] parameters = { 
-				new DbParameter(){ 
-					key = "name", 
-					value = string.Format ("*{0}*", name) }
-			};
-
-			SetupClientAndRequest ("breweries", parameters);
-
-			try 
-			{
-				var response = await _client.ExecuteAsync<DataObject<Brewery>> (_request);
-				return new ObservableCollection<Brewery>(response.Data);
-			} 
-			catch (ArgumentNullException) 
-			{
-				throw new NoItemsFoundException ();
-			}
+			return new ObservableCollection<Brewery>( await SearchByName<Brewery> (name));
 		}
 
 		public async Task<ObservableCollection<Beer>> GetBeers (string name)
 		{ 
-			DbParameter[] parameters = { 
-				new DbParameter(){ 
-					key = "name", 
-					value = string.Format ("*{0}*", name) }
-			};
-
-			SetupClientAndRequest ("beers", parameters);
-
-			try 
-			{
-				var response = await _client.ExecuteAsync<DataObject<Beer>> (_request);
-				var beers = new ObservableCollection<Beer>(response.Data);
-				await FillBreweries(beers);
-				return beers;
-			} 
-			catch (ArgumentNullException) 
-			{
-				throw new NoItemsFoundException ();
-			}
+			var beers = await SearchByName<Beer> (name);
+			await FillBreweries (beers);
+			return new ObservableCollection<Beer>(beers);
 		}
 
-		public async Task FillBreweries(ObservableCollection<Beer> beers)
+		public async Task FillBreweries(IList<Beer> beers)
 		{
 			foreach(Beer beer in beers)
 			{
@@ -69,6 +37,49 @@ namespace BrewBuddy.Service
 			}
 		}
 
+		protected async Task<List<T>> SearchByName<T>(string name) where T : BaseModel
+		{
+			DbParameter[] parameters = { 
+				new DbParameter(){ 
+					key = "name", 
+					value = string.Format ("*{0}*", name) }
+			};
+			
+			string resource = GetResource<T>();
+			SetupClientAndRequest (resource, parameters);
+
+			DataObject<T> result = await GetResult<T> ();
+			if(result.NumberOfPages>1)
+				await LoadOtherPages(result, parameters);
+			
+			return result.Data;
+		}
+
+		private async Task<DataObject<T>> GetResult<T> ()
+		{
+			try {
+				return await _client.ExecuteAsync<DataObject<T>> (_request);
+			}
+			catch (ArgumentNullException) {
+				throw new NoItemsFoundException ();
+			}
+		}
+
+		private async Task LoadOtherPages<T>(DataObject<T> firstPage, DbParameter[] parameters)
+		{
+			int currentPage = 2;
+			Array.Resize<DbParameter> (ref parameters, parameters.Length + 1);
+			string resource = GetResource<T> ();
+
+			for(int i=currentPage; i<=firstPage.NumberOfPages && i<3 ; i++)
+			{
+				parameters [parameters.Length - 1] = new DbParameter (){ key = "p", value = i.ToString () };
+				SetupClientAndRequest (resource, parameters);
+				DataObject<T> newPage = await GetResult<T> ();
+				firstPage.Data.AddRange (newPage.Data);
+			}
+		}
+		
 		public async Task<List<Brewery>> GetBreweriesByBeer(string id)
 		{
 			string resource = string.Format (@"beer/{0}/breweries", id);
@@ -158,14 +169,31 @@ namespace BrewBuddy.Service
 			_client = new RestClient () { BaseUrl = @"http://api.brewerydb.com/v2/" };
 			_request = new RestRequest ();
 			_request.Resource = resource;
-			_request.AddQueryString ("key", "9a2a6901a06f34b07e304680c9799af5");
+//			_request.AddQueryString ("key", "9a2a6901a06f34b07e304680c9799af5");
+			_request.AddQueryString ("key", "8b99543cf345a3cdf23ea6fd2d1f895e");
 
 			foreach (DbParameter param in parameters) 
 				_request.AddQueryString (param.key, param.value);
 		}
 
+		private string GetResource<T>()
+		{
+			var type = typeof(T).ToString ();
+
+			switch(type)
+			{
+			case Constants.Model.BEER:
+				return "beers";
+			case Constants.Model.BREWERY:
+				return "breweries";
+			default:
+				throw new WrongArgumentException ();
+			}
+		}
+
 		private class DataObject<T>
 		{
+			public int NumberOfPages { get; set; }
 			public List<T> Data { get; set; }
 		}
 

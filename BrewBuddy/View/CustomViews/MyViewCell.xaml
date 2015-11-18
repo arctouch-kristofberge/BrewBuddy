@@ -4,17 +4,19 @@
 	x:Class="BrewBuddy.View.Custom.MyViewCell"
 	xmlns:design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy">
   <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-    <Image x:Name="FavIcon" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
-      <Image.GestureRecognizers>
-        <TapGestureRecognizer Tapped="FavIconTapped"/>
-      </Image.GestureRecognizers>
-    </Image>
-    <StackLayout Padding="20" VerticalOptions="CenterAndExpand" BackgroundColor="{x:Static design:VisualDesign.LISTITEM_BACKGROUND_COLOR}">
+    <ContentView Padding="10">
+      <Image x:Name="FavIcon" VerticalOptions="Center" HorizontalOptions="Start" Aspect="">
+        <Image.GestureRecognizers>
+          <TapGestureRecognizer Tapped="FavIconTapped"/>
+        </Image.GestureRecognizers>
+      </Image>
+    </ContentView>
+    <StackLayout Padding="0, 10, 10, 10" VerticalOptions="CenterAndExpand" BackgroundColor="{x:Static design:VisualDesign.LISTITEM_BACKGROUND_COLOR}">
       <Label x:Name="FirstLineLabel" 
       	FontFamily="{x:Static design:VisualDesign.LISTITEM_FIRSTLINE_FONT_FAMILY}"
     	FontSize="{x:Static design:VisualDesign.LISTITEM_FIRSTLINE_FONT_SIZE}" 
     	TextColor="{x:Static design:VisualDesign.LISTITEM_FIRSTLINE_TEXT_COLOR}"/>
-	  <ContentView Padding="20, 0, 0, 0">
+	  <ContentView Padding="20, 0, 20, 0">
 	    <Label x:Name="SecondLineLabel" 
 	  	  FontFamily="{x:Static design:VisualDesign.LISTITEM_SECONDLINE_FONT_FAMILY}"
 	  	  FontSize="{x:Static design:VisualDesign.LISTITEM_SECONDLINE_FONT_SIZE}" 

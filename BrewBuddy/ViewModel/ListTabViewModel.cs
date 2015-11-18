@@ -70,7 +70,7 @@ namespace BrewBuddy.ViewModel
 
 				await SetFavorites (items);
 				Items = items;
-				ListHeader = "Search results";
+				ListHeader = string.Format ( "Search results ({0})", Items.Count);
 			} 
 			catch (NoItemsFoundException)
 			{

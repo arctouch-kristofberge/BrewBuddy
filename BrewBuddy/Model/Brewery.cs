@@ -2,7 +2,7 @@
 
 namespace BrewBuddy.Model
 {
-	public class Brewery : BaseModel
+	public class Brewery : BaseModel, IListItem
 	{
 		public string Name { get; set; }
 	}

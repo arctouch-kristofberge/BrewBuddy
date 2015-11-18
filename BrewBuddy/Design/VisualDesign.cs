@@ -69,8 +69,8 @@ namespace BrewBuddy.Design
 		public static readonly Color LISTITEM_SECONDLINE_TEXT_COLOR = TEXT_COLOR_SECONDARY;
 		public static readonly string LISTITEM_FIRSTLINE_FONT_FAMILY = FONT_FAMILY;
 		public static readonly string LISTITEM_SECONDLINE_FONT_FAMILY = FONT_FAMILY_MEDIUM;
-		public const double LISTITEM_FIRSTLINE_FONT_SIZE = FONT_SIZE_LARGE;
-		public const double LISTITEM_SECONDLINE_FONT_SIZE = FONT_SIZE_MEDIUM;
+		public const double LISTITEM_FIRSTLINE_FONT_SIZE = FONT_SIZE_MEDIUM;
+		public const double LISTITEM_SECONDLINE_FONT_SIZE = FONT_SIZE_SMALL;
 		#endregion
 
 		#region Button
