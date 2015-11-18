@@ -19,7 +19,9 @@ namespace BrewBuddy.Service
 		public async Task<ObservableCollection<Brewery>> GetBreweries(string name)
 		{
 			DbParameter[] parameters = { 
-				new DbParameter(){ key = "name", value = name }
+				new DbParameter(){ 
+					key = "name", 
+					value = string.Format ("*{0}*", name) }
 			};
 
 			SetupClientAndRequest ("breweries", parameters);
@@ -38,7 +40,9 @@ namespace BrewBuddy.Service
 		public async Task<ObservableCollection<Beer>> GetBeers (string name)
 		{ 
 			DbParameter[] parameters = { 
-				new DbParameter(){ key = "name", value = name }
+				new DbParameter(){ 
+					key = "name", 
+					value = string.Format ("*{0}*", name) }
 			};
 
 			SetupClientAndRequest ("beers", parameters);

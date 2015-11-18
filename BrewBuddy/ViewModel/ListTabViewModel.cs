@@ -27,6 +27,31 @@ namespace BrewBuddy.ViewModel
 
 			GetItemsFunction = getItemsFunction;
 		}
+
+		public async void RefreshFavorites()
+		{
+			if(Items!=null && Items.Count > 0)
+			{
+				SetDataLoading (true);
+				await SetFavorites (Items);
+				ForceItemsPropertyChanged ();
+				SetDataLoading (false);
+			}
+		}
+
+		private async Task SetFavorites (ObservableCollection<T> items)
+		{
+			foreach (T item in items)
+				item.IsFavorite = await FavoritesDb.IsFavorite (item);
+		}
+
+		private void ForceItemsPropertyChanged()
+		{
+			var items = Items;
+			Items = new ObservableCollection<T>();
+			foreach(var item in items)
+				Items.Add (item);
+		}
 		
 		public void SearchClicked(string parameter)
 		{
@@ -43,9 +68,7 @@ namespace BrewBuddy.ViewModel
 			{
 				ObservableCollection<T> items = await GetItemsFunction(name);
 
-				foreach(T item in items)
-					item.IsFavorite = await FavoritesDb.IsFavorite (item);
-
+				await SetFavorites (items);
 				Items = items;
 				ListHeader = "Search results";
 			} 

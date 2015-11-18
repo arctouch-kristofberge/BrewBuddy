@@ -6,9 +6,11 @@ using System.Reflection;
 using System.Windows.Input;
 using BrewBuddy.Event;
 using BrewBuddy.Model;
+using PropertyChanged;
 
 namespace BrewBuddy.View.Custom
 {
+	[ImplementPropertyChanged]
 	public partial class MyViewCell : ViewCell
 	{
 		public MyViewCell ()

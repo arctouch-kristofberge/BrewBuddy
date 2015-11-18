@@ -20,6 +20,12 @@ namespace BrewBuddy.View
 			BindingContext = new Factory ().GetListTabViewModel<Brewery>();
 		}
 
+		protected override void OnAppearing ()
+		{
+			base.OnAppearing ();
+			((ListTabViewModel<Brewery>)BindingContext).RefreshFavorites();
+		}
+
 		private void SearchClicked(object sender, EventArgs e)
 		{
 			var searchParameter = ((SearchBar)Searchbar).Text;

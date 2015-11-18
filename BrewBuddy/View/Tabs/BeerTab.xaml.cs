@@ -19,18 +19,24 @@ namespace BrewBuddy.View
 			BindingContext = new Factory ().GetListTabViewModel<Beer>();
 		}
 
-		void SearchClicked(object sender, EventArgs e)
+		protected override void OnAppearing ()
+		{
+			base.OnAppearing ();
+			((ListTabViewModel<Beer>)BindingContext).RefreshFavorites();
+		}
+
+		private void SearchClicked(object sender, EventArgs e)
 		{
 			var searchParameter = ((SearchBar)Searchbar).Text;
 			((ListTabViewModel<Beer>)BindingContext).SearchClicked (searchParameter);
 		}
 
-		void ItemTapped(object sender, ItemTappedEventArgs e)
+		private void ItemTapped(object sender, ItemTappedEventArgs e)
 		{
 			((ListTabViewModel<Beer>)BindingContext).ItemTapped (e.Item as Beer);
 		}
 
-		void FavoriteToggled(object sender, FavoriteToggledEventArgs e)
+		private void FavoriteToggled(object sender, FavoriteToggledEventArgs e)
 		{
 			((ListTabViewModel<Beer>)BindingContext).FavoriteToggled (e.Item as Beer, e.IsFavorite);
 		}
