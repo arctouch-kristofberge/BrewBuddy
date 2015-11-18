@@ -4,14 +4,14 @@
 			 x:Class="BrewBuddy.View.FavoritesTab"
 			 xmlns:CustomView="clr-namespace:BrewBuddy.View.Custom;assembly=BrewBuddy"
 			 Title="{Binding Title}">
-	<ContentPage>
+	<ContentPage Title="{Binding BeersTitle}">
   	  <ScrollView>
   	    <StackLayout>
 	      <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}"/>
 	      <ListView ItemsSource="{Binding Beers}" IsVisible="{Binding IsDataVisible}" VerticalOptions="Start" HorizontalOptions="StartAndExpand">
 	        <ListView.ItemTemplate>
 	          <DataTemplate>
-	            <CustomView:MyViewCell FirstLine="{Binding Name}" SecondLine="{Binding BreweryName}"/>
+	            <CustomView:MyViewCell FirstLine="{Binding Name}" SecondLine="{Binding BreweryName}" IsFavorite="{Binding IsFavorite}" FavoriteToggled="OnFavoriteBeerToggled"/>
 	          </DataTemplate>
 	        </ListView.ItemTemplate>
 	      </ListView>
@@ -19,14 +19,14 @@
 	  </ScrollView>
 	</ContentPage>
 
-	<ContentPage>
+	<ContentPage Title="{Binding BreweriesTitle}">
   	  <ScrollView>
   	    <StackLayout>
 	      <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}"/>
 	      <ListView ItemsSource="{Binding Breweries}" IsVisible="{Binding IsDataVisible}" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
 	        <ListView.ItemTemplate>
 	          <DataTemplate>
-	            <CustomView:MyViewCell FirstLine="{Binding Name}"/>
+	            <CustomView:MyViewCell FirstLine="{Binding Name}" IsFavorite="{Binding IsFavorite}" FavoriteToggled="OnFavoriteBreweryToggled"/>
 	          </DataTemplate>
 	        </ListView.ItemTemplate>
 	      </ListView>

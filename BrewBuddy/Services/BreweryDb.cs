@@ -47,8 +47,8 @@ namespace BrewBuddy.Service
 			{
 				var response = await _client.ExecuteAsync<DataObject<Beer>> (_request);
 				var beers = new ObservableCollection<Beer>(response.Data);
-				var beersWithBreweries = await FillBreweries(beers);
-				return beersWithBreweries;
+				await FillBreweries(beers);
+				return beers;
 			} 
 			catch (ArgumentNullException) 
 			{
@@ -56,18 +56,16 @@ namespace BrewBuddy.Service
 			}
 		}
 
-		private async Task<ObservableCollection<Beer>> FillBreweries(ObservableCollection<Beer> beers)
+		public async Task FillBreweries(ObservableCollection<Beer> beers)
 		{
 			foreach(Beer beer in beers)
 			{
-				var brewery = await GetBreweryByBeer (beer.Id);
-				beer.BreweryName = brewery.Name;
+				var breweries = await GetBreweriesByBeer (beer.Id);
+				beer.BreweryName = breweries[0].Name;
 			}
-
-			return beers;
 		}
 
-		public async Task<Brewery> GetBreweryByBeer(string id)
+		public async Task<List<Brewery>> GetBreweriesByBeer(string id)
 		{
 			string resource = string.Format (@"beer/{0}/breweries", id);
 			SetupClientAndRequest (resource);
@@ -75,7 +73,7 @@ namespace BrewBuddy.Service
 			try
 			{
 				var response = await _client.ExecuteAsync<DataObject<Brewery>>(_request);
-				return response.Data[0];
+				return response.Data;
 			}
 			catch (ArgumentNullException) 
 			{

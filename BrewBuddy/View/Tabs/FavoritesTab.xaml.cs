@@ -6,6 +6,7 @@ using BrewBuddy.Shared;
 using System.Collections.ObjectModel;
 using BrewBuddy.Model;
 using BrewBuddy.ViewModel;
+using BrewBuddy.Event;
 
 namespace BrewBuddy.View
 {
@@ -22,6 +23,16 @@ namespace BrewBuddy.View
 		{
 			base.OnAppearing ();
 			((FavoritesViewModel)BindingContext).InitializeListsAsync ();
+		}
+
+		private void OnFavoriteBeerToggled(object sender, FavoriteToggledEventArgs e)
+		{
+			((FavoritesViewModel)BindingContext).FavoriteToggled (e.Item as Beer, e.IsFavorite);
+		}
+
+		private void OnFavoriteBreweryToggled(object sender, FavoriteToggledEventArgs e)
+		{
+			((FavoritesViewModel)BindingContext).FavoriteToggled (e.Item as Brewery, e.IsFavorite);
 		}
 	}
 }

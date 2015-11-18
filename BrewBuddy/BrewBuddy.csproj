@@ -41,7 +41,6 @@
       <DependentUpon>BeerTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ListTabViewModel.cs" />
-    <Compile Include="Shared\Shared.cs" />
     <Compile Include="Shared\Factory.cs" />
     <Compile Include="Model\Beer.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -70,7 +69,6 @@
     <Compile Include="View\CustomViews\TabSearchBar.xaml.cs">
       <DependentUpon>TabSearchBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CustomViews\SearchResultsList.cs" />
     <Compile Include="Model\IFavorite.cs" />
     <Compile Include="View\CustomViews\MyViewCell.xaml.cs">
       <DependentUpon>MyViewCell.xaml</DependentUpon>
@@ -89,9 +87,8 @@
     <Compile Include="Services\Interface\IFavoritesDb.cs" />
     <Compile Include="Services\Interface\INavigationService.cs" />
     <Compile Include="ViewModel\FavoritesViewModel.cs" />
-    <Compile Include="View\CustomViews\CollapsableList.xaml.cs">
-      <DependentUpon>CollapsableList.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Shared\Constants.cs" />
+    <Compile Include="Shared\Extensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -189,9 +186,6 @@
       <LogicalName>star_nfav</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Tabs\FavoritesTab.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\CustomViews\CollapsableList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

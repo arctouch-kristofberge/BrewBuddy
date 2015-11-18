@@ -37,6 +37,7 @@ namespace BrewBuddy.ViewModel
 		private async void FillItems(string name)
 		{
 			SetDataLoading (true);
+
 			Items = new ObservableCollection<T> ();
 			try 
 			{
@@ -53,7 +54,6 @@ namespace BrewBuddy.ViewModel
 				Items.Clear ();
 				ListHeader = Constants.Text.NO_ITEMS_FOUND;
 			}
-
 
 			SetDataLoading (false);
 		}

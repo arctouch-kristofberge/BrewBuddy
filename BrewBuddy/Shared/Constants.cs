@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BrewBuddy.Shared
 {
@@ -11,6 +13,8 @@ namespace BrewBuddy.Shared
 			public static readonly string BREWERY_TAB_TITLE = "Breweries";
 			public static readonly string NO_ITEMS_FOUND = "No items found";
 			public static readonly string FAVORITES_TAB_TITLE = "Favorites";
+			public static readonly string FAVORITE_BEERS_TITLE = "Favorite beers";
+			public static readonly string FAVORITE_BREWERIES_TITLE = "Favorite breweries";
 		}
 
 		public static class Model

@@ -145,7 +145,6 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Renderers\ButtonRenderer.cs" />
     <Compile Include="Renderers\SearchBarRenderer.cs" />
-    <Compile Include="Renderers\SearchResultsListRenderer.cs" />
     <Compile Include="Renderers\TwoLinesViewCellRenderer.cs" />
     <Compile Include="Renderers\MyLabelRenderer.cs" />
     <Compile Include="Helpers\Visual.cs" />

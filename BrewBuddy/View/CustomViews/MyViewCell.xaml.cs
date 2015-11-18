@@ -11,6 +11,13 @@ namespace BrewBuddy.View.Custom
 {
 	public partial class MyViewCell : ViewCell
 	{
+		public MyViewCell ()
+		{
+			InitializeComponent ();
+			
+			UpdateFavoriteIcon ();
+		}
+		
 		#region Bindable properties
 		#region First line
 		public string FirstLine
@@ -72,17 +79,9 @@ namespace BrewBuddy.View.Custom
 		}
 		#endregion
 
-		public event EventHandler<FavoriteToggledEventArgs> FavoriteToggled;
-
 		#endregion
 
-		public MyViewCell ()
-		{
-			InitializeComponent ();
-
-			UpdateFavoriteIcon ();
-		}
-
+		#region Favorite
 		private void UpdateFavoriteIcon()
 		{
 			if(IsFavorite)
@@ -91,6 +90,8 @@ namespace BrewBuddy.View.Custom
 				FavIcon.Source = ImageSource.FromResource (VisualDesign.ICON_NOT_FAVORITE);
 		}
 
+		public event EventHandler<FavoriteToggledEventArgs> FavoriteToggled;
+		
 		private void FavIconTapped(object sender, EventArgs e)
 		{
 			IsFavorite = !IsFavorite;
@@ -102,6 +103,7 @@ namespace BrewBuddy.View.Custom
 						Item = this.BindingContext as BaseModel
 					});
 		}
+		#endregion
 	}
 }
 
