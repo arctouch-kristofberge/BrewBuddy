@@ -13,7 +13,6 @@ namespace BrewBuddy.Service
 		Task<List<T>> GetItemsById<T> (List<string> ids) where T : BaseModel;
 		Task<BreweryDetails> GetBreweryDetails (string id);
 		Task<BeerDetails> GetBeerDetails (string id);
-		Task FillBreweries (IList<Beer> beers);
 		Task<List<Brewery>> GetBreweriesByBeer (string id);
 	}
 }

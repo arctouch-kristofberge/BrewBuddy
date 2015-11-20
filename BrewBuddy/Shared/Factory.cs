@@ -3,21 +3,15 @@ using BrewBuddy.ViewModel;
 using BrewBuddy.Model;
 using BrewBuddy.Service;
 using BrewBuddy.CustomExceptions;
+using Xamarin.Forms;
 
 namespace BrewBuddy.Shared
 {
 	public class Factory
-	{
-
-
-		public enum Model
-		{
-			BEER, BREWERY
-		}
-
+	{ 
 		public ListTabViewModel<T> GetListTabViewModel<T>() where T : BaseModel
 		{
-			var db = new BreweryDb ();
+			var db = ((App)Application.Current).BreweryDb;
 			var type = typeof(T).ToString();
 
 			switch (type) 

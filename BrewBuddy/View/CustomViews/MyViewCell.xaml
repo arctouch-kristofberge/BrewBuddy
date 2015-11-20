@@ -2,26 +2,28 @@
 <ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	x:Class="BrewBuddy.View.Custom.MyViewCell"
-	xmlns:design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy">
-  <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-    <ContentView Padding="10">
-      <Image x:Name="FavIcon" VerticalOptions="Center" HorizontalOptions="Start" Aspect="">
-        <Image.GestureRecognizers>
-          <TapGestureRecognizer Tapped="FavIconTapped"/>
-        </Image.GestureRecognizers>
-      </Image>
-    </ContentView>
-    <StackLayout Padding="0, 10, 10, 10" VerticalOptions="CenterAndExpand" BackgroundColor="{x:Static design:VisualDesign.LISTITEM_BACKGROUND_COLOR}">
-      <Label x:Name="FirstLineLabel" 
-      	FontFamily="{x:Static design:VisualDesign.LISTITEM_FIRSTLINE_FONT_FAMILY}"
-    	FontSize="{x:Static design:VisualDesign.LISTITEM_FIRSTLINE_FONT_SIZE}" 
-    	TextColor="{x:Static design:VisualDesign.LISTITEM_FIRSTLINE_TEXT_COLOR}"/>
-	  <ContentView Padding="20, 0, 20, 0">
-	    <Label x:Name="SecondLineLabel" 
-	  	  FontFamily="{x:Static design:VisualDesign.LISTITEM_SECONDLINE_FONT_FAMILY}"
-	  	  FontSize="{x:Static design:VisualDesign.LISTITEM_SECONDLINE_FONT_SIZE}" 
-	  	  TextColor="{x:Static design:VisualDesign.LISTITEM_SECONDLINE_TEXT_COLOR}"/>
-	  </ContentView>
-    </StackLayout>
-  </StackLayout>
+	xmlns:Design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy">
+      <StackLayout Orientation="Horizontal" Padding="10,0,10,15" x:Name="OuterLayout">
+        <ContentView Padding="4">
+          <Image x:Name="FavIcon" Aspect="0">
+            <Image.GestureRecognizers>
+              <TapGestureRecognizer Tapped="FavIconTapped"/>
+            </Image.GestureRecognizers>
+          </Image>
+        </ContentView>
+
+        <StackLayout Orientation="Vertical">
+          <Label x:Name="FirstLineLabel"
+            LineBreakMode="TailTruncation"
+          	FontFamily="{x:Static Design:VisualDesign.LISTITEM_FIRSTLINE_FONT_FAMILY}"
+        	FontSize="{x:Static Design:VisualDesign.LISTITEM_FIRSTLINE_FONT_SIZE}" 
+        	TextColor="{x:Static Design:VisualDesign.LISTITEM_FIRSTLINE_TEXT_COLOR}"/>
+    	  <Label x:Name="SecondLineLabel"
+    	    LineBreakMode="TailTruncation"
+	      	FontFamily="{x:Static Design:VisualDesign.LISTITEM_SECONDLINE_FONT_FAMILY}"
+	  	    FontSize="{x:Static Design:VisualDesign.LISTITEM_SECONDLINE_FONT_SIZE}" 
+    	    TextColor="{x:Static Design:VisualDesign.LISTITEM_SECONDLINE_TEXT_COLOR}"/>
+        </StackLayout>
+
+      </StackLayout>
 </ViewCell>

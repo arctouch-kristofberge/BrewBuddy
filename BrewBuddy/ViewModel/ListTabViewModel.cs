@@ -24,17 +24,17 @@ namespace BrewBuddy.ViewModel
 		public ListTabViewModel (Func<string, Task<ObservableCollection<T>>> getItemsFunction, string title)
 		{
 			Title = title;
-
 			GetItemsFunction = getItemsFunction;
+
+			Items = new ObservableCollection<T> ();
 		}
 
-		public async void RefreshFavorites()
+		public async Task RefreshFavorites()
 		{
 			if(Items!=null && Items.Count > 0)
 			{
 				SetDataLoading (true);
 				await SetFavorites (Items);
-				ForceItemsPropertyChanged ();
 				SetDataLoading (false);
 			}
 		}
@@ -44,33 +44,24 @@ namespace BrewBuddy.ViewModel
 			foreach (T item in items)
 				item.IsFavorite = await FavoritesDb.IsFavorite (item);
 		}
-
-		private void ForceItemsPropertyChanged()
-		{
-			var items = Items;
-			Items = new ObservableCollection<T>();
-			foreach(var item in items)
-				Items.Add (item);
-		}
 		
-		public void SearchClicked(string parameter)
+		public async void SearchClicked(string parameter)
 		{
 			if(!IsLoading)
-				FillItems (parameter);
+			{
+				SetDataLoading (true);
+				await FillItems (parameter);
+				ListHeader = string.Format ( "Search results ({0})", Items.Count);
+				SetDataLoading (false);
+			}
 		}
 
-		private async void FillItems(string name)
+		private async Task FillItems(string name)
 		{
-			SetDataLoading (true);
-
-			Items = new ObservableCollection<T> ();
 			try 
 			{
-				ObservableCollection<T> items = await GetItemsFunction(name);
-
-				await SetFavorites (items);
-				Items = items;
-				ListHeader = string.Format ( "Search results ({0})", Items.Count);
+				Items = new ObservableCollection<T>( await GetItemsFunction(name));
+				await RefreshFavorites ();
 			} 
 			catch (NoItemsFoundException)
 			{
@@ -78,7 +69,7 @@ namespace BrewBuddy.ViewModel
 				ListHeader = Constants.Text.NO_ITEMS_FOUND;
 			}
 
-			SetDataLoading (false);
+
 		}
 
 		public async void ItemTapped(T item)

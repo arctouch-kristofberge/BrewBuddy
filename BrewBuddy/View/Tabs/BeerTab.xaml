@@ -2,17 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 				xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 				xmlns:CustomView="clr-namespace:BrewBuddy.View.Custom;assembly=BrewBuddy"
+				xmlns:Design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy"
 				x:Class="BrewBuddy.View.BeerTab"
 				Title="{Binding Title}">
 	<ContentPage.Content>
 
-	  <StackLayout>
+	  <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
 	    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
 	      <CustomView:TabSearchBar x:Name="Searchbar" Placeholder="Search by beer name" SearchButtonPressed="SearchClicked" HorizontalOptions="FillAndExpand"/>
 	    </StackLayout>
 	      <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="Center"/>
 	      <Label Text="{Binding ListHeader}" IsVisible="{Binding IsDataVisible}"/>
-	      <ScrollView>
 	      <ListView ItemsSource="{Binding Items}" ItemTapped="ItemTapped" IsVisible="{Binding IsDataVisible}">
 	        <ListView.ItemTemplate>
 	          <DataTemplate>
@@ -20,7 +20,6 @@
 	          </DataTemplate>
 	        </ListView.ItemTemplate>
 	      </ListView>
-	      </ScrollView>
 	    </StackLayout>
 
 	</ContentPage.Content>

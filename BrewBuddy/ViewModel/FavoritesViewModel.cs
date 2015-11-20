@@ -40,7 +40,6 @@ namespace BrewBuddy.ViewModel
 		protected async Task<ObservableCollection<Beer>> GetFavoriteBeers ()
 		{
 			var favoriteBeers = await GetFavoritesAsync<Beer> ();
-			await BreweryDb.FillBreweries (favoriteBeers);
 			favoriteBeers.SetIsFavorite (true);
 
 			return favoriteBeers;

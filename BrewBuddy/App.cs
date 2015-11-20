@@ -13,6 +13,7 @@ namespace BrewBuddy
 			Environment = DependencyService.Get<IEnvironment> ();
 			FavoritesDb = new FavoritesDb (Environment.DatabasePlatform, Environment.PersonalFolder);
 			BreweryDb = new BreweryDb ();
+//			BreweryDb = new BreweryDbDummy ();
 			NavigationService = DependencyService.Get<INavigationService>();
 
 			MainPage = new NavigationPage (new MainPage());

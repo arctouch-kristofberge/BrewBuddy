@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:Class="BrewBuddy.View.Custom.StatsView"
+			 xmlns:Design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy">
+	<ContentView.Content>
+	  <StackLayout Orientation="Vertical" BackgroundColor="{x:Static Design:VisualDesign.STATS_BACKGROUND_COLOR}">
+	    <Label x:Name="NameLabel" HorizontalOptions="Center"/>
+	    <Label x:Name="ValueLabel" HorizontalOptions="Center"/>
+	  </StackLayout>
+	</ContentView.Content>
+</ContentView>

@@ -1,7 +1,9 @@
 ﻿using System;
+using PropertyChanged;
 
 namespace BrewBuddy.Model
 {
+	[ImplementPropertyChanged]
 	public class Images
 	{
 		public string Icon { get; set; }

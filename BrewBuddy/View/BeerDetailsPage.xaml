@@ -2,15 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		x:Class="BrewBuddy.View.BeerDetailsPage"
-		Title="{Binding Title}">
+		xmlns:CustomView="clr-namespace:BrewBuddy.View.Custom;assembly=BrewBuddy"
+		xmlns:Design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy"
+		Title="{Binding Title}"
+		BackgroundColor="{x:Static Design:VisualDesign.PAGE_BACKGROUND_COLOR}">
 	<ContentPage.Content>
 	<StackLayout>
 	  <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
 	  <StackLayout  IsVisible="{Binding IsDataVisible}">
+	    <CustomView:ImageWithOverlay ImageUri="{Binding ImageUri}" OverlayText="{Binding Name}" VerticalOptions="Start"/>
 	    <Label Text="{Binding Header}"/>
 	      <Grid HorizontalOptions="FillAndExpand">
 	      	<Grid.RowDefinitions>
-	      	  <RowDefinition Height="Auto"/>
 	      	  <RowDefinition Height="Auto"/>
 	      	</Grid.RowDefinitions>
 	      	<Grid.ColumnDefinitions>
@@ -19,35 +22,12 @@
 	      	  <ColumnDefinition Width="*"/>
 	      	</Grid.ColumnDefinitions>
 
-	      	<Label Text="Alc."
-	      	  Grid.Row="0" Grid.Column="0"
-	      	  HorizontalOptions="Center"
-	      	  VerticalOptions="Center"/>
-
-	      	<Label Text="{Binding Abv}"
-	      	  Grid.Row="1" Grid.Column="0"
-	      	  HorizontalOptions="Center"
-	      	  VerticalOptions="Center"/>
-
-	      	  <Label Text="IBU"
-	      	  Grid.Row="0" Grid.Column="1"
-	      	  HorizontalOptions="Center"
-	      	  VerticalOptions="Center"/>
-
-	      	  <Label Text="{Binding Ibu}"
-	      	  Grid.Row="1" Grid.Column="1"
-	      	  HorizontalOptions="Center"
-	      	  VerticalOptions="Center"/>
-
-	      	  <Label Text="OG"
-	      	  Grid.Row="0" Grid.Column="2"
-	      	  HorizontalOptions="Center"
-	      	  VerticalOptions="Center"/>
-
-	      	  <Label Text="{Binding OriginalGravity}"
-	      	  Grid.Row="1" Grid.Column="2"
-	      	  HorizontalOptions="Center"
-	      	  VerticalOptions="Center"/>
+	      	<CustomView:StatsView Name="Alc." Value="{Binding Abv}"
+	      						  Grid.Column="0" Grid.Row="0"/>
+	      	<CustomView:StatsView Name="IBU." Value="{Binding Ibu}"
+	      						  Grid.Column="1" Grid.Row="0"/>
+	      	<CustomView:StatsView Name="OG." Value="{Binding OriginalGravity}"
+	      						  Grid.Column="2" Grid.Row="0"/>
 
 	      </Grid>
 	    <Label Text="{Binding Description}"/>

@@ -7,6 +7,8 @@ namespace BrewBuddy
 	{
 		string PersonalFolder{ get;}
 		ISQLitePlatform DatabasePlatform { get; }
+		int ScreenWidth { get; }
+		int ScreenHeight { get; }
 	}
 }
 

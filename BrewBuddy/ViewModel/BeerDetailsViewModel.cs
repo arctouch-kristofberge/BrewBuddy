@@ -11,7 +11,6 @@ namespace BrewBuddy.ViewModel
 	public class BeerDetailsViewModel : BaseDataViewModel
 	{
 		private BeerDetails _beer;
-		private BreweryDb _breweryDb;
 
 		public string Header { get; set; }
 		public string Name { get; set; }
@@ -29,12 +28,11 @@ namespace BrewBuddy.ViewModel
 		public Available Available { get; set; }
 		public string BeerVariation { get; set; }
 		public string Year { get; set; }
+		public string ImageUri{ get; set; }
 
 		public BeerDetailsViewModel (Beer beer)
 		{
 			SetDataLoading (true);
-
-			_breweryDb = new BreweryDb ();
 
 			try
 			{
@@ -50,7 +48,7 @@ namespace BrewBuddy.ViewModel
 
 		private async void FillDetails(string id)
 		{
-			_beer = await _breweryDb.GetBeerDetails (id);
+			_beer = await BreweryDb.GetBeerDetails (id);
 
 			Name = _beer.Name;
 			Description = _beer.Description;
@@ -67,6 +65,8 @@ namespace BrewBuddy.ViewModel
 			Available = _beer.Available;
 			BeerVariation = _beer.BeerVariation;
 			Year = _beer.Year;
+
+			ImageUri = Labels.Large;
 
 			Title = Name;
 			Header = GetHeaderText();

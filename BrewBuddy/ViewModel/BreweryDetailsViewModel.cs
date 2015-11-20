@@ -11,7 +11,6 @@ namespace BrewBuddy.ViewModel
 	[ImplementPropertyChanged]
 	public class BreweryDetailsViewModel : BaseDataViewModel
 	{
-		private BreweryDb _breweryDb;
 		private BreweryDetails _brewery;
 
 		public string Header { get; set; }
@@ -30,8 +29,6 @@ namespace BrewBuddy.ViewModel
 		{
 			SetDataLoading (true);
 
-			_breweryDb = new BreweryDb ();
-
 			try
 			{
 				FillDetails (brewery.Id);
@@ -47,7 +44,7 @@ namespace BrewBuddy.ViewModel
 
 		private async void FillDetails (string id)
 		{
-			_brewery = await _breweryDb.GetBreweryDetails (id);
+			_brewery = await BreweryDb.GetBreweryDetails (id);
 			Name = _brewery.Name;
 			Description = _brewery.Description;
 			Website = _brewery.Website;

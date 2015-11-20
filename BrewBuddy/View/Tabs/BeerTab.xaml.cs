@@ -33,6 +33,7 @@ namespace BrewBuddy.View
 
 		private void ItemTapped(object sender, ItemTappedEventArgs e)
 		{
+			((ListView)sender).SelectedItem = null;
 			((ListTabViewModel<Beer>)BindingContext).ItemTapped (e.Item as Beer);
 		}
 

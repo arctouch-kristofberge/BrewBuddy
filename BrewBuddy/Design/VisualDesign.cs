@@ -10,6 +10,7 @@ namespace BrewBuddy.Design
 		private static readonly Color BRAND_COLOR = Color.FromHex ("#2979FF");
 		private static readonly Color BRAND_COLOR_LIGHT = Color.FromHex ("#448AFF");
 		private static readonly Color BRAND_COLOR_DARK = Color.FromHex ("#2962FF");
+		private static readonly Color ACCENT_COLOR = Color.FromHex ("#FAD255");
 		private static readonly Color BACKGROUND_COLOR = Color.White;
 		#endregion
 
@@ -24,8 +25,8 @@ namespace BrewBuddy.Design
 		#region Font
 		private static readonly string FONT_FAMILY = Device.OnPlatform("Gotham-Book", "Gotham-Book.ttf", "Gotham-Book");
 		private static readonly string FONT_FAMILY_MEDIUM = Device.OnPlatform("Gotham-Medium", "Gotham-Medium.ttf", "Gotham-Medium");
-		private const double FONT_SIZE_SMALL = 10.0;
-		private const double FONT_SIZE_MEDIUM = 14.0;
+		private const double FONT_SIZE_SMALL = 12.0;
+		private const double FONT_SIZE_MEDIUM = 16.0;
 		private const double FONT_SIZE_LARGE = 20.0;
         #endregion
 		
@@ -61,16 +62,18 @@ namespace BrewBuddy.Design
 		public const double SEARCHBAR_FONT_SIZE = FONT_SIZE_MEDIUM;
 		#endregion
 
-		#region List item
+		#region List
+		public static readonly Color LIST_BACKGROUND_COLOR = BRAND_COLOR_LIGHT;
 		public static readonly Color LISTITEM_BACKGROUND_COLOR = BACKGROUND_COLOR;
-		public static readonly Color LISTITEM_FIRSTLINE_BACKGROUND_COLOR = BRAND_COLOR;
-		public static readonly Color LISTITEM_SECONDLINE_BACKGROUND_COLOR = BRAND_COLOR_LIGHT;
+		public static readonly Color LISTITEM_UNEVENCELL_BACKGROUND_COLOR = BRAND_COLOR_LIGHT;
+		public static readonly Color LISTITEM_EVENCELL_BACKGROUND_COLOR = BRAND_COLOR;
 		public static readonly Color LISTITEM_FIRSTLINE_TEXT_COLOR = TEXT_COLOR_PRIMARY;
 		public static readonly Color LISTITEM_SECONDLINE_TEXT_COLOR = TEXT_COLOR_SECONDARY;
 		public static readonly string LISTITEM_FIRSTLINE_FONT_FAMILY = FONT_FAMILY;
 		public static readonly string LISTITEM_SECONDLINE_FONT_FAMILY = FONT_FAMILY_MEDIUM;
 		public const double LISTITEM_FIRSTLINE_FONT_SIZE = FONT_SIZE_MEDIUM;
 		public const double LISTITEM_SECONDLINE_FONT_SIZE = FONT_SIZE_SMALL;
+		public static readonly Color LISTITEM_SEPERATOR_COLOR = TEXT_COLOR_DIVIDER;
 		#endregion
 
 		#region Button
@@ -82,12 +85,32 @@ namespace BrewBuddy.Design
 		#endregion
 
 		#region Page
-		public static readonly Color PAGE_BACKGROUND_COLOR = BACKGROUND_COLOR;
+		public static readonly Color PAGE_BACKGROUND_COLOR = BRAND_COLOR_LIGHT;
 		#endregion
 
 		#region Images
 		public static readonly string ICON_NOT_FAVORITE = "star_nfav";
 		public static readonly string ICON_FAVORITE = "Star_fav.png";
+		#endregion
+
+		#region Label
+		public static readonly string LABEL_FONT_FAMILY = FONT_FAMILY;
+		public const double LABEL_FONT_SIZE_TITLE = FONT_SIZE_LARGE;
+		public const double LABEL_FONT_SIZE_NORMAL = FONT_SIZE_MEDIUM;
+		public const double LABEL_FONT_SIZE_SMALL = FONT_SIZE_SMALL;
+		public static readonly Color LABEL_TEXT_COLOR_PRIMARY = TEXT_COLOR_PRIMARY;
+		public static readonly Color LABEL_TEXT_COLOR_SECONDARY = TEXT_COLOR_SECONDARY;
+		#endregion
+
+		#region StatsView
+		public static readonly Color STATS_BACKGROUND_COLOR = ACCENT_COLOR;
+		public static readonly string STATS_FONT_FAMILY = FONT_FAMILY;
+		public static readonly Color STATS_NAME_TEXT_COLOR = TEXT_COLOR_SECONDARY;
+		public static readonly Color STATS_VALUE_TEXT_COLOR = TEXT_COLOR_PRIMARY;
+		#endregion
+
+		#region Image with overlay
+		public static readonly Color OVERLAY_BACKGROUND_COLOR = TEXT_COLOR_DIVIDER;
 		#endregion
 	}
 }

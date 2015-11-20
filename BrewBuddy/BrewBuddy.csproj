@@ -90,6 +90,13 @@
     <Compile Include="Shared\Constants.cs" />
     <Compile Include="Shared\Extensions.cs" />
     <Compile Include="Model\IListItem.cs" />
+    <Compile Include="Services\BreweryDbDummy.cs" />
+    <Compile Include="View\CustomViews\StatsView.xaml.cs">
+      <DependentUpon>StatsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomViews\ImageWithOverlay.xaml.cs">
+      <DependentUpon>ImageWithOverlay.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -187,6 +194,12 @@
       <LogicalName>star_nfav</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Tabs\FavoritesTab.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomViews\StatsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomViews\ImageWithOverlay.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

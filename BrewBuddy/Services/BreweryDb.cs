@@ -6,6 +6,7 @@ using PortableRest;
 using System.Collections.Generic;
 using BrewBuddy.CustomExceptions;
 using BrewBuddy.Shared;
+using System.Linq;
 
 [assembly: Xamarin.Forms.Dependency(typeof(BrewBuddy.Service.BreweryDb))]
 namespace BrewBuddy.Service 
@@ -23,27 +24,29 @@ namespace BrewBuddy.Service
 
 		public async Task<ObservableCollection<Beer>> GetBeers (string name)
 		{ 
-			var beers = await SearchByName<Beer> (name);
-			await FillBreweries (beers);
+			List<DbParameter> parameters = new List<DbParameter> () {
+				new DbParameter () {
+					key = "withBreweries",
+					value = "Y"
+				}
+			};
+			var beers = await SearchByName<Beer> (name, parameters);
+			if (beers == null)
+				throw new NoItemsFoundException ();
+			
 			return new ObservableCollection<Beer>(beers);
 		}
 
-		public async Task FillBreweries(IList<Beer> beers)
+		protected async Task<List<T>> SearchByName<T>(string name, List<DbParameter> parameters = null) where T : BaseModel
 		{
-			foreach(Beer beer in beers)
-			{
-				var breweries = await GetBreweriesByBeer (beer.Id);
-				beer.BreweryName = breweries[0].Name;
-			}
-		}
+			if (parameters == null)
+				parameters = new List<DbParameter> ();
 
-		protected async Task<List<T>> SearchByName<T>(string name) where T : BaseModel
-		{
-			DbParameter[] parameters = { 
-				new DbParameter(){ 
+			parameters.Add (
+				new DbParameter () { 
 					key = "name", 
-					value = string.Format ("*{0}*", name) }
-			};
+					value = string.Format ("*{0}*", name)
+				});
 			
 			string resource = GetResource<T>();
 			SetupClientAndRequest (resource, parameters);
@@ -60,20 +63,20 @@ namespace BrewBuddy.Service
 			try {
 				return await _client.ExecuteAsync<DataObject<T>> (_request);
 			}
-			catch (ArgumentNullException) {
+			catch (Exception) 
+			{
 				throw new NoItemsFoundException ();
 			}
 		}
 
-		private async Task LoadOtherPages<T>(DataObject<T> firstPage, DbParameter[] parameters)
+		private async Task LoadOtherPages<T>(DataObject<T> firstPage, List<DbParameter> parameters)
 		{
 			int currentPage = 2;
-			Array.Resize<DbParameter> (ref parameters, parameters.Length + 1);
 			string resource = GetResource<T> ();
 
 			for(int i=currentPage; i<=firstPage.NumberOfPages && i<3 ; i++)
 			{
-				parameters [parameters.Length - 1] = new DbParameter (){ key = "p", value = i.ToString () };
+				parameters.Add ( new DbParameter (){ key = "p", value = i.ToString () });
 				SetupClientAndRequest (resource, parameters);
 				DataObject<T> newPage = await GetResult<T> ();
 				firstPage.Data.AddRange (newPage.Data);
@@ -100,7 +103,7 @@ namespace BrewBuddy.Service
 		#region Details
 		public async Task<BreweryDetails> GetBreweryDetails (string id)
 		{
-			DbParameter[] parameters = { 
+			List<DbParameter> parameters = new List<DbParameter>() {
 				new DbParameter(){ key = "ids", value = id }
 			};
 
@@ -119,7 +122,7 @@ namespace BrewBuddy.Service
 
 		public async Task<BeerDetails> GetBeerDetails(string id)
 		{
-			DbParameter[] parameters = { 
+			List<DbParameter> parameters = new List<DbParameter>() {
 				new DbParameter(){ key = "ids", value = id }
 			};
 
@@ -138,7 +141,7 @@ namespace BrewBuddy.Service
 
 		public async Task<List<T>> GetItemsById<T>(List<string> ids) where T : BaseModel
 		{
-			DbParameter[] parameters = { 
+			List<DbParameter> parameters = new List<DbParameter>() { 
 				new DbParameter(){ key = "ids", value = string.Join (",", ids) }
 			};
 
@@ -159,12 +162,7 @@ namespace BrewBuddy.Service
 		#endregion
 
 		#region Private methods
-		private void SetupClientAndRequest (string resource)
-		{
-			SetupClientAndRequest (resource, new DbParameter[]{});
-		}
-
-		private void SetupClientAndRequest (string resource, DbParameter[] parameters)
+		private void SetupClientAndRequest (string resource, List<DbParameter> parameters = null)
 		{
 			_client = new RestClient () { BaseUrl = @"http://api.brewerydb.com/v2/" };
 			_request = new RestRequest ();
@@ -172,7 +170,14 @@ namespace BrewBuddy.Service
 //			_request.AddQueryString ("key", "9a2a6901a06f34b07e304680c9799af5");
 			_request.AddQueryString ("key", "8b99543cf345a3cdf23ea6fd2d1f895e");
 
-			foreach (DbParameter param in parameters) 
+
+			if (parameters!=null)
+				AddParametersToRequest (parameters);
+		}
+
+		private void AddParametersToRequest (List<DbParameter> parameters)
+		{
+			foreach (DbParameter param in parameters)
 				_request.AddQueryString (param.key, param.value);
 		}
 
@@ -197,7 +202,7 @@ namespace BrewBuddy.Service
 			public List<T> Data { get; set; }
 		}
 
-		private struct DbParameter
+		protected struct DbParameter
 		{
 			public string key; 
 			public string value;

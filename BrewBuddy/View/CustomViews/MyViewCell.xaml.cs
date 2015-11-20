@@ -7,6 +7,8 @@ using System.Windows.Input;
 using BrewBuddy.Event;
 using BrewBuddy.Model;
 using PropertyChanged;
+using System.Collections;
+using BrewBuddy.CustomExceptions;
 
 namespace BrewBuddy.View.Custom
 {
@@ -18,6 +20,18 @@ namespace BrewBuddy.View.Custom
 			InitializeComponent ();
 			
 			UpdateFavoriteIcon ();
+		}
+
+		private int GetCellIndex(IEnumerable models, BaseModel currentModel)
+		{
+			int cellIndex = 0;
+			for (var i = models.GetEnumerator (); i.MoveNext ();) {
+				var model = i.Current;
+				if (model == currentModel)
+					return cellIndex;
+				cellIndex++;
+			}
+			throw new NoItemsFoundException ();
 		}
 		
 		#region Bindable properties
@@ -57,8 +71,10 @@ namespace BrewBuddy.View.Custom
 		
 		private static void SecondLineUpdated(BindableObject bindable, string oldValue, string newValue)
 		{
-			((MyViewCell)bindable).SecondLineLabel.Text = newValue;
+			((MyViewCell)bindable).UpdateSecondLine (newValue);
 		}
+
+		 
 		#endregion
 
 		#region Is favorite
@@ -81,6 +97,13 @@ namespace BrewBuddy.View.Custom
 		}
 		#endregion
 
+		#endregion
+
+		#region Labels
+		private void UpdateSecondLine(string text)
+		{
+			SecondLineLabel.Text = text;
+		}
 		#endregion
 
 		#region Favorite

@@ -1,11 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using PropertyChanged;
 
 namespace BrewBuddy.Model
 {
+	[ImplementPropertyChanged]
 	public class Beer : BaseModel, IListItem
 	{
 		public string Name { get; set; }
-		public string BreweryName { get; set; }
+		public List<Brewery> Breweries { get; set; }
+		public string BreweryName { 
+			get{
+				return (Breweries != null && Breweries.Count > 0) ? Breweries [0].Name : string.Empty;
+			} 
+			private set{ } 
+		}
 	}
 }
 
