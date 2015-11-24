@@ -158,7 +158,7 @@ namespace BrewBuddy.Design
 		public static readonly Color LISTHEADER_TEXT_COLOR = TEXT_COLOR_PRIMARY;
 		public static readonly double LISTHEADER_FONT_SIZE = FONT_SIZE_MEDIUM;
 		public static readonly string LISTHEADER_FONT_ATTRIBUTES = "Bold";
-		public static readonly Color LISTHEADER_SEPERATOR_COLOR = TEXT_COLOR_DIVIDER_LIGHTBACKGROUND;
+		public static readonly Color LISTHEADER_SEPERATOR_COLOR = BRAND_COLOR_DARK;
 		#endregion
 	}
 }

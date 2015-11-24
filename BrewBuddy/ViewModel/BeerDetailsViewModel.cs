@@ -24,6 +24,7 @@ namespace BrewBuddy.ViewModel
 		public string IsOrganic { get; set; }
 		public Images Labels { get; set; }
 		public string ServingTemperatureDisplay { get; set; }
+		public string TemperatureForServingView { get; set;}
 		public string StatusDisplay { get; set; }
 		public Available Available { get; set; }
 		public string BeerVariation { get; set; }
@@ -50,6 +51,13 @@ namespace BrewBuddy.ViewModel
 		{
 			_beer = await BreweryDb.GetBeerDetails (id);
 
+			FillNormalProperties ();
+
+			FillOtherProperties ();
+		}
+
+		private void FillNormalProperties ()
+		{
 			Name = _beer.Name;
 			Description = _beer.Description;
 			FoodPairings = _beer.FoodPairings;
@@ -65,11 +73,24 @@ namespace BrewBuddy.ViewModel
 			Available = _beer.Available;
 			BeerVariation = _beer.BeerVariation;
 			Year = _beer.Year;
-
-			ImageUri = Labels!=null ? Labels.Large : string.Empty;
-
+		}
+		
+		private void FillOtherProperties ()
+		{
+			ImageUri = Labels != null ? Labels.Large : string.Empty;
+			TemperatureForServingView = GetTemperatureForServingView ();
 			Title = Name;
-			Header = GetHeaderText();
+			Header = GetHeaderText ();
+		}
+
+		private string GetTemperatureForServingView()
+		{
+			if (!string.IsNullOrWhiteSpace (_beer.ServingTemperature))
+				return _beer.ServingTemperature;
+			else if (!string.IsNullOrWhiteSpace (ServingTemperatureDisplay))
+				return ServingTemperatureDisplay.Split (new char[] {'-'},1) [0].Trim ().ToLower ();
+			else
+				return string.Empty;
 		}
 
 		private string GetHeaderText()

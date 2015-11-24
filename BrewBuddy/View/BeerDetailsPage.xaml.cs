@@ -15,6 +15,14 @@ namespace BrewBuddy.View
 
 			BindingContext = new BeerDetailsViewModel (beer);
 		}
+
+		private void ServingViewTapped(object sender, EventArgs e)
+		{
+			string temperature = ((BeerDetailsViewModel)BindingContext).ServingTemperatureDisplay;
+
+			if(!string.IsNullOrWhiteSpace (temperature))
+				DisplayAlert ("Serving temperature", temperature, "Close");
+		}
 	}
 }
 

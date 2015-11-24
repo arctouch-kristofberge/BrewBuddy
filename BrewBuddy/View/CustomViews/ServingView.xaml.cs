@@ -10,6 +10,7 @@ namespace BrewBuddy.View.Custom
 		private const string LABEL_PHRASE_FULL = "Served {0} in a {1}.";
 		private const string LABEL_PHRASE_GLASS_ONLY = "Served in a {0}.";
 		private const string LABEL_PHRASE_TEMP_ONLY = "Served {0}.";
+		private const string POPUP_TITLE = "Serving temperature";
 
 		#region Bindable Property
 		#region Glass
@@ -27,7 +28,7 @@ namespace BrewBuddy.View.Custom
 			new BindableProperty.BindingPropertyChangedDelegate<Glass>(PropertyUpdated));
 		#endregion
 
-		#region ServingTemparature
+		#region Temperature
 		public string Temperature
 		{
 			get{ return (string)GetValue (TemperatureProperty); }
@@ -44,9 +45,9 @@ namespace BrewBuddy.View.Custom
 
 		public static void PropertyUpdated(BindableObject bindable, object oldValue, object newValue)
 		{
-			
 			((ServingView)bindable).UpdateLabel();
 		}
+
 		#endregion
 
 		public ServingView ()
@@ -54,6 +55,7 @@ namespace BrewBuddy.View.Custom
 			InitializeComponent ();
 		}
 
+		#region UpdateLabel
 		private void UpdateLabel()
 		{
 			UpdateVisibility ();
@@ -64,19 +66,31 @@ namespace BrewBuddy.View.Custom
 
 		private void UpdateVisibility()
 		{
-			this.IsVisible = (Glass != null && !string.IsNullOrEmpty (Glass.Name))
-								|| !string.IsNullOrEmpty (Temperature);
+			this.IsVisible = HasGlassInfo () || HasTemperatureInfo ();
 		}
 
 		private void UpdateText()
 		{
-			if (Glass == null || string.IsNullOrEmpty (Glass.Name))
+			if (!HasGlassInfo ())
 				DisplayLabel.Text = string.Format (LABEL_PHRASE_TEMP_ONLY, Temperature);
-			else if (string.IsNullOrEmpty (Temperature))
+			else if (!HasTemperatureInfo ())
 				DisplayLabel.Text = string.Format (LABEL_PHRASE_GLASS_ONLY, Glass.Name);
 			else
 				DisplayLabel.Text = string.Format (LABEL_PHRASE_FULL, Temperature, Glass.Name);
 		}
+		#endregion
+
+		#region Has info
+		private bool HasGlassInfo ()
+		{
+			return Glass != null && !string.IsNullOrEmpty (Glass.Name);
+		}
+		
+		private bool HasTemperatureInfo()
+		{
+			return !string.IsNullOrEmpty (Temperature);
+		}
+		#endregion
 	}
 }
 

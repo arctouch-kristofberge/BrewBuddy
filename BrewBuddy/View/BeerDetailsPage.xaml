@@ -34,7 +34,11 @@
 	      						  Grid.Column="2" Grid.Row="0"/>
 
 	      </Grid>
-	      <CustomView:ServingView Temperature="{Binding ServingTemperature}" Glass="{Binding Glass}" IsVisible="{Binding IsServingVisible}"/>
+	      <CustomView:ServingView Temperature="{Binding TemperatureForServingView}" Glass="{Binding Glass}" IsVisible="{Binding IsServingVisible}">
+	        <CustomView:ServingView.GestureRecognizers>
+	          <TapGestureRecognizer Tapped="ServingViewTapped"/>
+	        </CustomView:ServingView.GestureRecognizers>
+	      </CustomView:ServingView>
 	      <Label Text="{Binding Description}"/>
 	    </StackLayout>
 	  </StackLayout>

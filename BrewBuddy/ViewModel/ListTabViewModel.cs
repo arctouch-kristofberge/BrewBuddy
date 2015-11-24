@@ -19,6 +19,10 @@ namespace BrewBuddy.ViewModel
 		public string ListHeader { get; set; }
 		#endregion
 
+		#region Commands
+		public ICommand ItemTappedCommand { get; private set; }
+		#endregion
+
 		private Func<string, Task<ObservableCollection<T>>> GetItemsFunction;
 
 		public ListTabViewModel (Func<string, Task<ObservableCollection<T>>> getItemsFunction, string title)

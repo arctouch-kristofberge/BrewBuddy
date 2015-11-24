@@ -4,10 +4,10 @@ using PropertyChanged;
 namespace BrewBuddy.Model
 {
 	[ImplementPropertyChanged]
-	public class Glass : IBaseModel
+	public class Temperature
 	{
-		public string Id { get; set; }
-		public string Name { get; set; }
+		public string Short { get; set; }
+		public string Full { get; set; }
 	}
 }
 
