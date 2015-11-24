@@ -21,7 +21,6 @@ namespace BrewBuddy.ViewModel
 		public string Abv { get; set; }
 		public string Ibu { get; set; }
 		public Glass Glass { get; set; }
-		public string StyleId { get; set; }
 		public string IsOrganic { get; set; }
 		public Images Labels { get; set; }
 		public string ServingTemperatureDisplay { get; set; }
@@ -33,6 +32,7 @@ namespace BrewBuddy.ViewModel
 		public string ImageUri{ get; set; }
 		public List<BreweryListItem> Breweries { get; set; }
 		public Srm Srm { get; set; }
+		public Style Style { get; set; }
 
 		public BeerDetailsViewModel (BeerListItem beer)
 		{
@@ -68,7 +68,6 @@ namespace BrewBuddy.ViewModel
 			Abv = _beer.Abv;
 			Ibu = _beer.Ibu;
 			Glass = _beer.Glass;
-			StyleId = _beer.StyleId;
 			IsOrganic = _beer.IsOrganic;
 			Labels = _beer.Labels;
 			ServingTemperatureDisplay = _beer.ServingTemperatureDisplay;
@@ -78,6 +77,7 @@ namespace BrewBuddy.ViewModel
 			Year = _beer.Year;
 			Breweries = _beer.Breweries;
 			Srm = _beer.Srm;
+			Style = _beer.Style;
 		}
 		
 		private void FillOtherProperties ()

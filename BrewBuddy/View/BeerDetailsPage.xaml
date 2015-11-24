@@ -10,10 +10,13 @@
 	<StackLayout>
 	  <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
 	  <StackLayout  IsVisible="{Binding IsDataVisible}">
+
 	    <CustomView:ImageWithOverlay ImageUri="{Binding ImageUri}" 
 	    							 OverlayText="{Binding Name}" 
+	    							 OverlaySecondLine="{Binding Style.ShortName}"
 	    							 VerticalOptions="Start" 
 	    							 HeightRequest="{x:Static Design:VisualDesign.IMAGE_WITH_OVERLAY_MAX_HEIGHT}"/>
+
 	    <ScrollView>
 	      <StackLayout Padding="{x:Static Design:VisualDesign.STANDARD_PADDING}">
 	        <Label Text="{Binding Header}"/>
@@ -46,7 +49,9 @@
 	        </CustomView:ServingView>
 
 	        <CustomView:SrmView Srm="{Binding Srm}">
-
+	          <ContentView.GestureRecognizers>
+	            <TapGestureRecognizer Tapped="SrmViewTapped"/>
+	          </ContentView.GestureRecognizers>
 	        </CustomView:SrmView>
 
 	        <Label Text="{Binding Description}"/>

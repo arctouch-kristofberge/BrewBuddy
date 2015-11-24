@@ -13,7 +13,7 @@
 	      <ListView ItemsSource="{Binding Beers}" IsVisible="{Binding IsDataVisible}" VerticalOptions="Start" HorizontalOptions="StartAndExpand">
 	        <ListView.ItemTemplate>
 	          <DataTemplate>
-	            <CustomView:MyViewCell FirstLine="{Binding Name}" SecondLine="{Binding BreweryName}" IsFavorite="{Binding IsFavorite}" FavoriteToggled="OnFavoriteBeerToggled"/>
+	            <CustomView:MyViewCell FirstLine="{Binding Name}" SecondLine="{Binding BreweryName}" IsFavorite="{Binding IsFavorite}" Index="{Binding Index}" FavoriteToggled="OnFavoriteBeerToggled"/>
 	          </DataTemplate>
 	        </ListView.ItemTemplate>
 	      </ListView>
@@ -28,7 +28,7 @@
 	      <ListView ItemsSource="{Binding Breweries}" IsVisible="{Binding IsDataVisible}" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
 	        <ListView.ItemTemplate>
 	          <DataTemplate>
-	            <CustomView:MyViewCell FirstLine="{Binding Name}" IsFavorite="{Binding IsFavorite}" FavoriteToggled="OnFavoriteBreweryToggled"/>
+	            <CustomView:MyViewCell FirstLine="{Binding Name}" IsFavorite="{Binding IsFavorite}" Index="{Binding Index}" FavoriteToggled="OnFavoriteBreweryToggled"/>
 	          </DataTemplate>
 	        </ListView.ItemTemplate>
 	      </ListView>

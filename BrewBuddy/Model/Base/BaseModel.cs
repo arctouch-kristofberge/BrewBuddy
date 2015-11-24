@@ -7,5 +7,6 @@ namespace BrewBuddy.Model
 	public class BaseModel : IBaseModel
 	{
 		public string Id { get; set; }
+		public string Name{ get; set; }
 	}
 }

@@ -7,7 +7,6 @@ namespace BrewBuddy.Model
 	[ImplementPropertyChanged]
 	public class BeerListItem : BaseListItem
 	{
-		public string Name { get; set; }
 		public List<BreweryListItem> Breweries { get; set; }
 		public string BreweryName { 
 			get{

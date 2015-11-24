@@ -141,7 +141,7 @@ namespace BrewBuddy.Service
 				ServingTemperature = "8C",
 				ServingTemperatureDisplay = "8",
 				StatusDisplay = "Available",
-				StyleId = "style" + id,
+				Style = new Style(){ Id = "0", ShortName = "style" + id},
 				Year = "1984"
 			};
 		}

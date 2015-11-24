@@ -23,6 +23,11 @@ namespace BrewBuddy.View
 			if(!string.IsNullOrWhiteSpace (temperature))
 				DisplayAlert ("Serving temperature", temperature, "Close");
 		}
+
+		private void SrmViewTapped(object sender, EventArgs e)
+		{
+			DisplayAlert ("Standard Reference Method", "The Standard Reference Method or SRM is one of several systems modern brewers use to specify beer color.", "Close");
+		}
 	}
 }
 

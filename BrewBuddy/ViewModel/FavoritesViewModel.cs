@@ -41,6 +41,7 @@ namespace BrewBuddy.ViewModel
 		{
 			var favoriteBeers = await GetFavoritesAsync<BeerListItem> ();
 			favoriteBeers.SetIsFavorite (true);
+			favoriteBeers.SetIndexes ();
 
 			return favoriteBeers;
 		}
@@ -49,6 +50,7 @@ namespace BrewBuddy.ViewModel
 		{
 			var favoriteBreweries = await GetFavoritesAsync<BreweryListItem> ();
 			favoriteBreweries.SetIsFavorite (true);
+			favoriteBreweries.SetIndexes ();
 			
 			return favoriteBreweries;
 		}

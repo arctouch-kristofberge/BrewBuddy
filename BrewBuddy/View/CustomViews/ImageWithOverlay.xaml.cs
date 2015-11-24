@@ -67,7 +67,7 @@ namespace BrewBuddy.View.Custom
 			((ImageWithOverlay)bindable).UpdateSecondLine();
 		}
 		#endregion
-		#endregion
+            		#endregion
 
 		public ImageWithOverlay ()
 		{

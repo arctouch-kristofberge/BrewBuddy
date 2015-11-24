@@ -13,7 +13,7 @@
 		<ContentView BackgroundColor="{x:Static Design:VisualDesign.OVERLAY_BACKGROUND_COLOR}"
 					 AbsoluteLayout.LayoutFlags="All"
 	    	   		 AbsoluteLayout.LayoutBounds="0, 1, 1, 0.2">
-	      <StackLayout Padding="{x:Static Design:VisualDesign.STANDARD_PADDING}">
+	      <StackLayout x:Name="Overlay" Padding="{x:Static Design:VisualDesign.STANDARD_PADDING}">
 		    <Label x:Name="OverlayTextLabel" 
 		  		   LineBreakMode="TailTruncation" 
 		  		   HorizontalOptions="Start"

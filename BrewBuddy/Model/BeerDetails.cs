@@ -7,14 +7,12 @@ namespace BrewBuddy.Model
 	[ImplementPropertyChanged]
 	public class BeerDetails : BaseDetails
 	{
-		public string Name { get; set; }
 		public string Description { get; set; }
 		public string FoodPairings { get; set; }
 		public string OriginalGravity { get; set; }
 		public string Abv { get; set; }
 		public string Ibu { get; set; }
 		public Glass Glass { get; set; }
-		public string StyleId { get; set; }
 		public string IsOrganic { get; set; }
 		public Images Labels { get; set; }
 		public string ServingTemperature { get; set; }
@@ -25,6 +23,7 @@ namespace BrewBuddy.Model
 		public string Year { get; set; }
 		public List<BreweryListItem> Breweries { get; set; }
 		public Srm Srm { get; set; }
+		public Style Style { get; set; }
 	}
 }
 
