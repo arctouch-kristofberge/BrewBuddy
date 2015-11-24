@@ -25,7 +25,7 @@ namespace BrewBuddy.ViewModel
 		public Images Images { get; set;}
 
 
-		public BreweryDetailsViewModel (Brewery brewery)
+		public BreweryDetailsViewModel (BreweryListItem brewery)
 		{
 			SetDataLoading (true);
 

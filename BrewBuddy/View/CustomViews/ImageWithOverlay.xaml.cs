@@ -47,6 +47,26 @@ namespace BrewBuddy.View.Custom
 			((ImageWithOverlay)bindable).OverlayTextLabel.Text = newValue;
 		}
 		#endregion
+
+		#region OverlaySecondLine
+		public string OverlaySecondLine
+		{
+			get{ return (string)GetValue (OverlaySecondLineProperty); }
+			set{ SetValue (OverlaySecondLineProperty, value); }
+		}
+
+		public static readonly BindableProperty OverlaySecondLineProperty = BindableProperty.Create<ImageWithOverlay, string>(
+			x => x.OverlaySecondLine,
+			string.Empty,
+			BindingMode.OneWay,
+			null,
+			new BindableProperty.BindingPropertyChangedDelegate<string>(SecondLineUpdated));
+				
+		public static void SecondLineUpdated(BindableObject bindable, string oldValue, string newValue)
+		{
+			((ImageWithOverlay)bindable).UpdateSecondLine();
+		}
+		#endregion
 		#endregion
 
 		public ImageWithOverlay ()
@@ -58,6 +78,15 @@ namespace BrewBuddy.View.Custom
 		{
 			DisplayedImage.IsVisible = true;
 			DisplayedImage.Source = ImageSource.FromUri (new Uri (uri));
+		}
+
+		private void UpdateSecondLine()
+		{
+			if(!string.IsNullOrWhiteSpace(OverlaySecondLine))
+			{
+				SecondLineLabel.IsVisible = true;
+				SecondLineLabel.Text = OverlaySecondLine;
+			}
 		}
 	}
 }

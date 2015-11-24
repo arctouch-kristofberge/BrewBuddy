@@ -10,21 +10,21 @@ namespace BrewBuddy.Service
 	public class BreweryDbDummy
 	{
 		#region IBreweryDb implementation
-		public Task<ObservableCollection<Brewery>> GetBreweries (string name)
+		public Task<ObservableCollection<BreweryListItem>> GetBreweries (string name)
 		{
-			var taskSource = new TaskCompletionSource<ObservableCollection<Brewery>>();
+			var taskSource = new TaskCompletionSource<ObservableCollection<BreweryListItem>>();
 			taskSource.SetResult(CreateBreweriesList (3));
 			return taskSource.Task;
 		}
 
-		public Task<ObservableCollection<Beer>> GetBeers (string name)
+		public Task<ObservableCollection<BeerListItem>> GetBeers (string name)
 		{
-			var taskSource = new TaskCompletionSource<ObservableCollection<Beer>>();
+			var taskSource = new TaskCompletionSource<ObservableCollection<BeerListItem>>();
 			taskSource.SetResult(CreateBeersList (3));
 			return taskSource.Task;
 		}
 
-		public Task<List<T>> GetItemsById<T> (List<string> ids) where T : BaseDataModel
+		public Task<List<T>> GetItemsById<T> (List<string> ids) where T : BaseModel
 		{
 			var taskSource = new TaskCompletionSource<List<T>>();
 			List<T> result = new List<T>();
@@ -58,23 +58,23 @@ namespace BrewBuddy.Service
 			return taskSource.Task;
 		}
 
-		public Task FillBreweries (List<Beer> beers)
+		public Task FillBreweries (List<BeerListItem> beers)
 		{
 			return Task.FromResult (false);
 		}
 
-		public Task<List<Brewery>> GetBreweriesByBeer (string id)
+		public Task<List<BreweryListItem>> GetBreweriesByBeer (string id)
 		{
 			
-			var result = new List<Brewery>(CreateBreweriesList (1));
+			var result = new List<BreweryListItem>(CreateBreweriesList (1));
 			return Task.FromResult (result);
 		}
 		#endregion
 
 		#region Creators
-		private ObservableCollection<Beer> CreateBeersList(int amount)
+		private ObservableCollection<BeerListItem> CreateBeersList(int amount)
 		{
-			var beers = new ObservableCollection<Beer> ();
+			var beers = new ObservableCollection<BeerListItem> ();
 
 			for (int i = 0; i < amount; i++)
 				beers.Add (CreateBeer (i));
@@ -82,9 +82,9 @@ namespace BrewBuddy.Service
 			return beers;
 		}
 
-		private ObservableCollection<Brewery> CreateBreweriesList(int amount)
+		private ObservableCollection<BreweryListItem> CreateBreweriesList(int amount)
 		{
-			var breweries = new ObservableCollection<Brewery> ();
+			var breweries = new ObservableCollection<BreweryListItem> ();
 
 			for(int i=0; i<amount; i++)
 				breweries.Add (CreateBrewery (i));
@@ -92,21 +92,21 @@ namespace BrewBuddy.Service
 			return breweries;
 		}
 
-		private Brewery CreateBrewery(int index)
+		private BreweryListItem CreateBrewery(int index)
 		{
-			return new Brewery () {
+			return new BreweryListItem () {
 				Id = index.ToString (),
 				Name = "brewery " + index,
 				IsFavorite = index % 2==0
 			};
 		}
 
-		private Beer CreateBeer(int index)
+		private BeerListItem CreateBeer(int index)
 		{
-			return new Beer () {
+			return new BeerListItem () {
 				Id = index.ToString (),
 				Name = "beer " + index,
-				Breweries = new List<Brewery>(){ new Brewery (){Name = "Brewery of beer " + index}},
+				Breweries = new List<BreweryListItem>(){ new BreweryListItem (){Name = "Brewery of beer " + index}},
 				IsFavorite = index % 2==0
 			};
 		}

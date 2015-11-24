@@ -5,10 +5,10 @@ using PropertyChanged;
 namespace BrewBuddy.Model
 {
 	[ImplementPropertyChanged]
-	public class Beer : BaseDataModel, IListItem
+	public class BeerListItem : BaseListItem
 	{
 		public string Name { get; set; }
-		public List<Brewery> Breweries { get; set; }
+		public List<BreweryListItem> Breweries { get; set; }
 		public string BreweryName { 
 			get{
 				return (Breweries != null && Breweries.Count > 0) ? Breweries [0].Name : string.Empty;

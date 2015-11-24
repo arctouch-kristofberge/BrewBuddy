@@ -9,7 +9,7 @@ namespace BrewBuddy.View
 {
 	public partial class BeerDetailsPage : ContentPage
 	{
-		public BeerDetailsPage (Beer beer)
+		public BeerDetailsPage (BeerListItem beer)
 		{
 			InitializeComponent ();
 

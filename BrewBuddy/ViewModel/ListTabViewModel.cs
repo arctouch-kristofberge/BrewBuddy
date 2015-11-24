@@ -12,7 +12,7 @@ using System.Windows.Input;
 namespace BrewBuddy.ViewModel
 {
 	[ImplementPropertyChanged]
-	public class ListTabViewModel<T> : BaseDataViewModel where T : BaseDataModel, IFavorite
+	public class ListTabViewModel<T> : BaseDataViewModel where T : BaseListItem
 	{
 		#region Properties
 		public ObservableCollection<T> Items { get; set; }
@@ -66,14 +66,19 @@ namespace BrewBuddy.ViewModel
 			{
 				Items = new ObservableCollection<T>( await GetItemsFunction(name));
 				await RefreshFavorites ();
+				SetIndexes();
 			} 
 			catch (NoItemsFoundException)
 			{
 				Items.Clear ();
 				ListHeader = Constants.Text.NO_ITEMS_FOUND;
 			}
+		}
 
-
+		private void SetIndexes()
+		{
+			for(int i=0; i<Items.Count; i++)
+				Items [i].Index = i;
 		}
 
 		public async void ItemTapped(T item)

@@ -89,6 +89,7 @@ namespace BrewBuddy.Design
 		public static readonly Color SEARCHBAR_TEXT_COLOR = TEXT_COLOR_PRIMARY_LIGHTBACKGROUND;
 		public static readonly Color SEARCHBAR_INNER_BACKGROUND_COLOR = STANDARD_BACKGROUND_COLOR;
 		public static readonly Color SEARCHBAR_BORDER_COLOR = BRAND_COLOR_DARK;
+		public static readonly Color SEARCHBAR_PLACEHOLDER_TEXT_COLOR = TEXT_COLOR_SECONDARY_LIGHTBACKGROUND;
 		public static readonly string SEARCHBAR_FONT_FAMILY = FONT_FAMILY;
 		public const double SEARCHBAR_FONT_SIZE = FONT_SIZE_MEDIUM;
 		#endregion
@@ -96,8 +97,8 @@ namespace BrewBuddy.Design
 		#region List
 		public static readonly Color LIST_BACKGROUND_COLOR = STANDARD_BACKGROUND_COLOR;
 		public static readonly Color LISTITEM_BACKGROUND_COLOR = BACKGROUND_COLOR;
-		public static readonly Color LISTITEM_UNEVENCELL_BACKGROUND_COLOR = BRAND_COLOR_DARK;
-		public static readonly Color LISTITEM_EVENCELL_BACKGROUND_COLOR = BRAND_COLOR;
+		public static readonly Color LISTITEM_EVENCELL_BACKGROUND_COLOR = BRAND_COLOR_DARK;
+		public static readonly Color LISTITEM_UNEVENCELL_BACKGROUND_COLOR = BRAND_COLOR;
 		public static readonly Color LISTITEM_FIRSTLINE_TEXT_COLOR = TEXT_COLOR_PRIMARY;
 		public static readonly Color LISTITEM_SECONDLINE_TEXT_COLOR = TEXT_COLOR_SECONDARY;
 		public static readonly string LISTITEM_FIRSTLINE_FONT_FAMILY = FONT_FAMILY;
@@ -146,6 +147,7 @@ namespace BrewBuddy.Design
 		public static readonly Color OVERLAY_TEXT_COLOR = Color.White;
 		public static readonly string OVERLAY_FONT_FAMILY = FONT_FAMILY;
 		public static readonly double OVERLAY_FONT_SIZE = FONT_SIZE_MEDIUM;
+		public static readonly double OVERLAY_SECONDLINE_FONT_SIZE = FONT_SIZE_SMALL;
 		public static readonly double IMAGE_WITH_OVERLAY_MAX_HEIGHT = SCREEN_HEIGHT / 3;
 		#endregion
 
@@ -159,6 +161,11 @@ namespace BrewBuddy.Design
 		public static readonly double LISTHEADER_FONT_SIZE = FONT_SIZE_MEDIUM;
 		public static readonly string LISTHEADER_FONT_ATTRIBUTES = "Bold";
 		public static readonly Color LISTHEADER_SEPERATOR_COLOR = BRAND_COLOR_DARK;
+		#endregion
+
+		#region SrmView
+		public static readonly Color SRM_TEXT_COLOR_LIGHT_BACKGROUND = TEXT_COLOR_PRIMARY_LIGHTBACKGROUND;
+		public static readonly Color SRM_TEXT_COLOR_DARK_BACKGROUND = TEXT_COLOR_PRIMARY;
 		#endregion
 	}
 }

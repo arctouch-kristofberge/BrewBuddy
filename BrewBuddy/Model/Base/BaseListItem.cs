@@ -4,9 +4,10 @@ using PropertyChanged;
 namespace BrewBuddy.Model
 {
 	[ImplementPropertyChanged]
-	public class BaseDataModel : IBaseModel, IFavorite
+	public class BaseListItem : BaseModel, IIndexed , IFavorite
 	{
-		public string Id { get; set; }
+		public int Index { get; set; }
 		public bool IsFavorite { get; set; }
 	}
 }
+

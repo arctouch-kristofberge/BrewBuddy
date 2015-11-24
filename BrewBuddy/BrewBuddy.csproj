@@ -31,7 +31,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\Brewery.cs" />
     <Compile Include="App.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="View\MainPage.xaml.cs">
@@ -42,7 +41,6 @@
     </Compile>
     <Compile Include="ViewModel\ListTabViewModel.cs" />
     <Compile Include="Shared\Factory.cs" />
-    <Compile Include="Model\Beer.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Model\BreweryDetails.cs" />
     <Compile Include="Model\BeerDetails.cs" />
@@ -55,12 +53,10 @@
     <Compile Include="Exception\NoItemsFoundException.cs" />
     <Compile Include="Exception\WrongArgumentException.cs" />
     <Compile Include="ViewModel\BreweryDetailsViewModel.cs" />
-    <Compile Include="Model\Images.cs" />
     <Compile Include="View\BeerDetailsPage.xaml.cs">
       <DependentUpon>BeerDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BeerDetailsViewModel.cs" />
-    <Compile Include="Model\Available.cs" />
     <Compile Include="ViewModel\BaseDataViewModel.cs" />
     <Compile Include="Design\VisualDesign.cs" />
     <Compile Include="View\CustomViews\StandardButton.xaml.cs">
@@ -69,13 +65,11 @@
     <Compile Include="View\CustomViews\TabSearchBar.xaml.cs">
       <DependentUpon>TabSearchBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\IFavorite.cs" />
     <Compile Include="View\CustomViews\MyViewCell.xaml.cs">
       <DependentUpon>MyViewCell.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\BreweryDb.cs" />
     <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Model\IBaseModel.cs" />
     <Compile Include="Interface\IEnvironment.cs" />
     <Compile Include="Services\FavoritesDb.cs" />
     <Compile Include="Event\FavoriteToggledEventArgs.cs" />
@@ -88,7 +82,6 @@
     <Compile Include="ViewModel\FavoritesViewModel.cs" />
     <Compile Include="Shared\Constants.cs" />
     <Compile Include="Shared\Extensions.cs" />
-    <Compile Include="Model\IListItem.cs" />
     <Compile Include="Services\BreweryDbDummy.cs" />
     <Compile Include="View\CustomViews\StatsView.xaml.cs">
       <DependentUpon>StatsView.xaml</DependentUpon>
@@ -96,11 +89,24 @@
     <Compile Include="View\CustomViews\ImageWithOverlay.xaml.cs">
       <DependentUpon>ImageWithOverlay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Glass.cs" />
-    <Compile Include="Model\BaseDataModel.cs" />
     <Compile Include="View\CustomViews\ServingView.xaml.cs">
       <DependentUpon>ServingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Interface\IBaseModel.cs" />
+    <Compile Include="Model\Interface\IFavorite.cs" />
+    <Compile Include="Model\Interface\IIndexed.cs" />
+    <Compile Include="Model\BeerListItem.cs" />
+    <Compile Include="Model\BreweryListItem.cs" />
+    <Compile Include="Model\SubModels\Available.cs" />
+    <Compile Include="Model\SubModels\Glass.cs" />
+    <Compile Include="Model\SubModels\Images.cs" />
+    <Compile Include="Model\SubModels\Srm.cs" />
+    <Compile Include="Model\Base\BaseListItem.cs" />
+    <Compile Include="Model\Base\BaseModel.cs" />
+    <Compile Include="View\CustomViews\SrmView.xaml.cs">
+      <DependentUpon>SrmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Base\BaseDetails.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -149,6 +155,8 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="FodyWeavers.xml" />
+    <None Include="About.txt" />
+    <None Include="Resources\extra_info.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -164,6 +172,10 @@
     <Folder Include="Interface\" />
     <Folder Include="Event\" />
     <Folder Include="Services\Interface\" />
+    <Folder Include="Model\Interface\" />
+    <Folder Include="Services\Interface\New Folder\" />
+    <Folder Include="Model\SubModels\" />
+    <Folder Include="Model\Base\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\MainPage.xaml">
@@ -207,6 +219,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="View\CustomViews\ServingView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomViews\SrmView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

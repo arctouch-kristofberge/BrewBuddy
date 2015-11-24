@@ -2,9 +2,9 @@
 
 namespace BrewBuddy.Model
 {
-	public interface IListItem
+	public interface IIndexed
 	{
-		
+		int Index { get; set; }
 	}
 }
 

@@ -29,7 +29,7 @@
 	        <ListView ItemsSource="{Binding Items}" ItemTapped="ItemTapped" IsVisible="{Binding IsDataVisible}">
 	          <ListView.ItemTemplate>
 	            <DataTemplate>
-	              <CustomView:MyViewCell FirstLine="{Binding Name}" SecondLine="{Binding BreweryName}" FavoriteToggled="FavoriteToggled" IsFavorite="{Binding IsFavorite}"/>
+	              <CustomView:MyViewCell FirstLine="{Binding Name}" SecondLine="{Binding BreweryName}" IsFavorite="{Binding IsFavorite}" Index="{Binding Index}" FavoriteToggled="FavoriteToggled"/>
 	            </DataTemplate>
 	          </ListView.ItemTemplate>
 	        </ListView>

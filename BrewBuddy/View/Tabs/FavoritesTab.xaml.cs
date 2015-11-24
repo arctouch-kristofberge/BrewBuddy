@@ -27,12 +27,12 @@ namespace BrewBuddy.View
 
 		private void OnFavoriteBeerToggled(object sender, FavoriteToggledEventArgs e)
 		{
-			((FavoritesViewModel)BindingContext).FavoriteToggled (e.Item as Beer, e.IsFavorite);
+			((FavoritesViewModel)BindingContext).FavoriteToggled (e.Item as BeerListItem, e.IsFavorite);
 		}
 
 		private void OnFavoriteBreweryToggled(object sender, FavoriteToggledEventArgs e)
 		{
-			((FavoritesViewModel)BindingContext).FavoriteToggled (e.Item as Brewery, e.IsFavorite);
+			((FavoritesViewModel)BindingContext).FavoriteToggled (e.Item as BreweryListItem, e.IsFavorite);
 		}
 	}
 }

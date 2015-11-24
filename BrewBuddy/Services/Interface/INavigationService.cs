@@ -6,7 +6,7 @@ namespace BrewBuddy.Service
 {
 	public interface INavigationService
 	{
-		Task NavigateToDetails<T>(T item) where T : BaseDataModel;
+		Task NavigateToDetails<T>(T item) where T : BaseModel;
 	}
 }
 

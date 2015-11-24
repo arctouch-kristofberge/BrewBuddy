@@ -35,7 +35,7 @@ namespace BrewBuddy.Service
 		}
 
 		#region Public
-		public Task AddAsync<T>(T item) where T : BaseDataModel
+		public Task AddAsync<T>(T item) where T : BaseModel
 		{
 			var record = new FavoriteRecord () {
 				Type = GetType<T> (),
@@ -44,7 +44,7 @@ namespace BrewBuddy.Service
 			return GetAsyncConnection ().InsertAsync (record);
 		}
 
-		public Task RemoveAsync<T> (T item) where T : BaseDataModel
+		public Task RemoveAsync<T> (T item) where T : BaseModel
 		{
 			string type = GetType<T>();
 			var sql = string.Format ( "DELETE FROM FavoriteRecord WHERE Id = '{0}' AND Type = '{1}'", item.Id, type);
@@ -52,14 +52,14 @@ namespace BrewBuddy.Service
 			return GetAsyncConnection ().ExecuteAsync (sql);
 		}
 		
-		public async Task<bool> IsFavorite<T> (T item) where T :BaseDataModel
+		public async Task<bool> IsFavorite<T> (T item) where T :BaseModel
 		{ 
 			var sql = string.Format ("Select count(*) from FavoriteRecord where Id = '{0}' and Type = '{1}'", item.Id, GetType<T>());
 			var result = await GetAsyncConnection ().ExecuteScalarAsync<int> (sql);
 			return result > 0;
 		}
 
-		public async Task<List<string>> GetAllIds<T> () where T : BaseDataModel
+		public async Task<List<string>> GetAllIds<T> () where T : BaseModel
 		{
 			string type = GetType<T> ();
 			List<FavoriteRecord> records = await GetAsyncConnection ()

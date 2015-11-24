@@ -13,8 +13,8 @@ namespace BrewBuddy.ViewModel
 	public class FavoritesViewModel : BaseDataViewModel
 	{
 		#region Properties
-		public ObservableCollection<Beer> Beers { get; set; }
-		public ObservableCollection<Brewery> Breweries { get; set; }
+		public ObservableCollection<BeerListItem> Beers { get; set; }
+		public ObservableCollection<BreweryListItem> Breweries { get; set; }
 		public string BeersTitle { get; set; }
 		public string BreweriesTitle { get; set; }
 		#endregion
@@ -37,29 +37,29 @@ namespace BrewBuddy.ViewModel
 			SetDataLoading (false);
 		}
 
-		protected async Task<ObservableCollection<Beer>> GetFavoriteBeers ()
+		protected async Task<ObservableCollection<BeerListItem>> GetFavoriteBeers ()
 		{
-			var favoriteBeers = await GetFavoritesAsync<Beer> ();
+			var favoriteBeers = await GetFavoritesAsync<BeerListItem> ();
 			favoriteBeers.SetIsFavorite (true);
 
 			return favoriteBeers;
 		}
 		
-		protected async Task<ObservableCollection<Brewery>> GetFavoriteBreweries()
+		protected async Task<ObservableCollection<BreweryListItem>> GetFavoriteBreweries()
 		{
-			var favoriteBreweries = await GetFavoritesAsync<Brewery> ();
+			var favoriteBreweries = await GetFavoritesAsync<BreweryListItem> ();
 			favoriteBreweries.SetIsFavorite (true);
 			
 			return favoriteBreweries;
 		}
 
-		protected async Task<ObservableCollection<T>> GetFavoritesAsync<T>() where T : BaseDataModel
+		protected async Task<ObservableCollection<T>> GetFavoritesAsync<T>() where T : BaseModel
 		{
 			List<string> favoriteIds = await FavoritesDb.GetAllIds<T> ();
 			return await GetFavoriteModels<T> (favoriteIds);
 		}
 
-		protected async Task<ObservableCollection<T>> GetFavoriteModels<T>(List<string> ids) where T : BaseDataModel
+		protected async Task<ObservableCollection<T>> GetFavoriteModels<T>(List<string> ids) where T : BaseModel
 		{
 			var models = new List<T> ();
 			int batchSize = 10;
@@ -73,7 +73,7 @@ namespace BrewBuddy.ViewModel
 		}
 		#endregion
 
-		public void FavoriteToggled<T>(T item, bool isFavorite) where T : BaseDataModel
+		public void FavoriteToggled<T>(T item, bool isFavorite) where T : BaseModel
 		{
 			if (isFavorite)
 				FavoritesDb.AddAsync (item);

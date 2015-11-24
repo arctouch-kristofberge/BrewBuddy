@@ -17,12 +17,12 @@ namespace BrewBuddy.Service
 		private RestRequest _request;
 
 		#region ListItems
-		public async Task<ObservableCollection<Brewery>> GetBreweries(string name)
+		public async Task<ObservableCollection<BreweryListItem>> GetBreweries(string name)
 		{
-			return new ObservableCollection<Brewery>( await SearchByName<Brewery> (name));
+			return new ObservableCollection<BreweryListItem>( await SearchByName<BreweryListItem> (name));
 		}
 
-		public async Task<ObservableCollection<Beer>> GetBeers (string name)
+		public async Task<ObservableCollection<BeerListItem>> GetBeers (string name)
 		{ 
 			List<DbParameter> parameters = new List<DbParameter> () {
 				new DbParameter () {
@@ -30,14 +30,14 @@ namespace BrewBuddy.Service
 					value = "Y"
 				}
 			};
-			var beers = await SearchByName<Beer> (name, parameters);
+			var beers = await SearchByName<BeerListItem> (name, parameters);
 			if (beers == null)
 				throw new NoItemsFoundException ();
 			
-			return new ObservableCollection<Beer>(beers);
+			return new ObservableCollection<BeerListItem>(beers);
 		}
 
-		protected async Task<List<T>> SearchByName<T>(string name, List<DbParameter> parameters = null) where T : BaseDataModel
+		protected async Task<List<T>> SearchByName<T>(string name, List<DbParameter> parameters = null) where T : BaseModel
 		{
 			if (parameters == null)
 				parameters = new List<DbParameter> ();
@@ -83,14 +83,14 @@ namespace BrewBuddy.Service
 			}
 		}
 		
-		public async Task<List<Brewery>> GetBreweriesByBeer(string id)
+		public async Task<List<BreweryListItem>> GetBreweriesByBeer(string id)
 		{
 			string resource = string.Format (@"beer/{0}/breweries", id);
 			SetupClientAndRequest (resource);
 
 			try
 			{
-				var response = await _client.ExecuteAsync<DataObject<Brewery>>(_request);
+				var response = await _client.ExecuteAsync<DataObject<BreweryListItem>>(_request);
 				return response.Data;
 			}
 			catch (ArgumentNullException) 
@@ -123,7 +123,8 @@ namespace BrewBuddy.Service
 		public async Task<BeerDetails> GetBeerDetails(string id)
 		{
 			List<DbParameter> parameters = new List<DbParameter>() {
-				new DbParameter(){ key = "ids", value = id }
+				new DbParameter(){ key = "ids", value = id },
+				new DbParameter () { key = "withBreweries", value = "Y" }
 			};
 
 			SetupClientAndRequest ("beers", parameters);
@@ -139,7 +140,7 @@ namespace BrewBuddy.Service
 			}
 		}
 
-		public async Task<List<T>> GetItemsById<T>(List<string> ids) where T : BaseDataModel
+		public async Task<List<T>> GetItemsById<T>(List<string> ids) where T : BaseModel
 		{
 			List<DbParameter> parameters = new List<DbParameter>() { 
 				new DbParameter(){ key = "ids", value = string.Join (",", ids) }

@@ -143,13 +143,10 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Renderers\ButtonRenderer.cs" />
     <Compile Include="Renderers\SearchBarRenderer.cs" />
-    <Compile Include="Renderers\MyLabelRenderer.cs" />
     <Compile Include="Helpers\Visual.cs" />
     <Compile Include="Implementations\Environment.cs" />
     <Compile Include="Renderers\MyListViewRenderer.cs" />
-    <Compile Include="Renderers\MyViewCellRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="ITunesArtwork" />

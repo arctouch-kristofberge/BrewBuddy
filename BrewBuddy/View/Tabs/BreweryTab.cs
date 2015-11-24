@@ -17,29 +17,29 @@ namespace BrewBuddy.View
 		{
 			InitializeComponent ();
 
-			BindingContext = new Factory ().GetListTabViewModel<Brewery>();
+			BindingContext = new Factory ().GetListTabViewModel<BreweryListItem>();
 		}
 
 		protected override void OnAppearing ()
 		{
 			base.OnAppearing ();
-			((ListTabViewModel<Brewery>)BindingContext).RefreshFavorites();
+			((ListTabViewModel<BreweryListItem>)BindingContext).RefreshFavorites();
 		}
 
 		private void SearchClicked(object sender, EventArgs e)
 		{
 			var searchParameter = ((SearchBar)Searchbar).Text;
-			((ListTabViewModel<Brewery>)BindingContext).SearchClicked (searchParameter);
+			((ListTabViewModel<BreweryListItem>)BindingContext).SearchClicked (searchParameter);
 		}
 
 		private void ItemTapped(object sender, ItemTappedEventArgs e)
 		{
-			((ListTabViewModel<Brewery>)BindingContext).ItemTapped (e.Item as Brewery);
+			((ListTabViewModel<BreweryListItem>)BindingContext).ItemTapped (e.Item as BreweryListItem);
 		}
 
 		private void FavoriteToggled(object sender, FavoriteToggledEventArgs e)
 		{
-			((ListTabViewModel<Brewery>)BindingContext).FavoriteToggled (e.Item as Brewery, e.IsFavorite);
+			((ListTabViewModel<BreweryListItem>)BindingContext).FavoriteToggled (e.Item as BreweryListItem, e.IsFavorite);
 		}
 	}
 }

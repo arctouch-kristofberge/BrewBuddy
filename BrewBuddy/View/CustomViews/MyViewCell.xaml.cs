@@ -85,6 +85,27 @@ namespace BrewBuddy.View.Custom
 		}
 		#endregion
 
+		#region Index
+		public int Index
+		{
+			get{ return (int)GetValue (IndexProperty); }
+			set{ SetValue (IndexProperty, value); }
+		}
+
+		public static readonly BindableProperty IndexProperty = BindableProperty.Create<MyViewCell, int>(
+			x => x.Index,
+			-1,
+			BindingMode.OneWay,
+			null,
+			new BindableProperty.BindingPropertyChangedDelegate<int>(IndexUpdated));
+				
+		public static void IndexUpdated(BindableObject bindable, int oldValue, int newValue)
+		{
+			if(newValue>=0)
+				((MyViewCell)bindable).UpdateBackgroundColor ();
+		}
+		#endregion
+
 		#endregion
 
 		#region Labels
@@ -113,8 +134,18 @@ namespace BrewBuddy.View.Custom
 				FavoriteToggled(this, 
 					new FavoriteToggledEventArgs (){
 						IsFavorite = IsFavorite,
-						Item = this.BindingContext as BaseDataModel
+						Item = this.BindingContext as BaseModel
 					});
+		}
+		#endregion
+
+		#region Background
+		private void UpdateBackgroundColor()
+		{
+			if (Index % 2 == 0)
+				OuterLayout.BackgroundColor = VisualDesign.LISTITEM_EVENCELL_BACKGROUND_COLOR;
+			else
+				OuterLayout.BackgroundColor = VisualDesign.LISTITEM_UNEVENCELL_BACKGROUND_COLOR;
 		}
 		#endregion
 	}

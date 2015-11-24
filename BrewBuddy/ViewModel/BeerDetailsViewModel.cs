@@ -4,6 +4,7 @@ using BrewBuddy.Service;
 using PropertyChanged;
 using BrewBuddy.Shared;
 using BrewBuddy.CustomExceptions;
+using System.Collections.Generic;
 
 namespace BrewBuddy.ViewModel
 {
@@ -30,8 +31,10 @@ namespace BrewBuddy.ViewModel
 		public string BeerVariation { get; set; }
 		public string Year { get; set; }
 		public string ImageUri{ get; set; }
+		public List<BreweryListItem> Breweries { get; set; }
+		public Srm Srm { get; set; }
 
-		public BeerDetailsViewModel (Beer beer)
+		public BeerDetailsViewModel (BeerListItem beer)
 		{
 			SetDataLoading (true);
 
@@ -73,6 +76,8 @@ namespace BrewBuddy.ViewModel
 			Available = _beer.Available;
 			BeerVariation = _beer.BeerVariation;
 			Year = _beer.Year;
+			Breweries = _beer.Breweries;
+			Srm = _beer.Srm;
 		}
 		
 		private void FillOtherProperties ()
@@ -88,7 +93,7 @@ namespace BrewBuddy.ViewModel
 			if (!string.IsNullOrWhiteSpace (_beer.ServingTemperature))
 				return _beer.ServingTemperature;
 			else if (!string.IsNullOrWhiteSpace (ServingTemperatureDisplay))
-				return ServingTemperatureDisplay.Split (new char[] {'-'},1) [0].Trim ().ToLower ();
+				return ServingTemperatureDisplay.Split (new char[] {'-'}, 1)[0].Trim ().ToLower ();
 			else
 				return string.Empty;
 		}

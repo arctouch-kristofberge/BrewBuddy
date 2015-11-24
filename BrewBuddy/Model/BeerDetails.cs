@@ -1,10 +1,11 @@
 ﻿using System;
 using PropertyChanged;
+using System.Collections.Generic;
 
 namespace BrewBuddy.Model
 {
 	[ImplementPropertyChanged]
-	public class BeerDetails : BaseDataModel
+	public class BeerDetails : BaseDetails
 	{
 		public string Name { get; set; }
 		public string Description { get; set; }
@@ -22,6 +23,8 @@ namespace BrewBuddy.Model
 		public Available Available { get; set; }
 		public string BeerVariation { get; set; }
 		public string Year { get; set; }
+		public List<BreweryListItem> Breweries { get; set; }
+		public Srm Srm { get; set; }
 	}
 }
 

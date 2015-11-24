@@ -20,62 +20,11 @@ namespace BrewBuddy.iOS.Renderers
 		{
 			base.OnElementChanged (e);
 
-			if(e.OldElement!=null)
+			var list = Control as UITableView;
+			if(list != null)
 			{
-				e.OldElement.ItemAppearing -= ItemAppearing;
-				e.OldElement.PropertyChanged -= PropertyChanged;
-			}
-
-			if(e.NewElement != null)
-			{
-				e.NewElement.ItemAppearing += ItemAppearing;
-				e.NewElement.PropertyChanged += PropertyChanged;
-
-				var list = Control as UITableView;
 				list.SeparatorStyle = UITableViewCellSeparatorStyle.None;
 				list.BackgroundColor = Helpers.Visual.GetUIColor( VisualDesign.LIST_BACKGROUND_COLOR);
-			}
-		}
-
-
-
-		private void PropertyChanged (object sender, PropertyChangedEventArgs e)
-		{
-			if (e.PropertyName == "IsVisible" && ((ListView)sender).IsVisible && Control.VisibleCells !=null && Control.VisibleCells.Length>0)
-				SetColorsOfAllCells ();
-		}
-
-		private void ItemAppearing(object sender, ItemVisibilityEventArgs e)
-		{
-			SetColorsOfAllCells ();
-		}
-
-		private int GetItemIndex(BaseDataModel item, IEnumerable items)
-		{
-			var itemsList = new List<BaseDataModel> ();
-			if(itemsList!=null)
-			{
-				return itemsList.IndexOf (item);
-			}
-			else
-			{
-				throw new NoItemsFoundException ();
-			}
-		}
-
-		private void SetColorsOfAllCells ()
-		{
-			var indexOfFirstCell = Control.IndexPathsForVisibleRows[0].Item;
-			var cells = ((UITableView)Control).VisibleCells;
-
-			nint index = indexOfFirstCell;
-			foreach(var cell in cells)
-			{
-				if (index % 2 == 0)
-					cell.BackgroundColor = Helpers.Visual.GetUIColor (VisualDesign.LISTITEM_EVENCELL_BACKGROUND_COLOR);
-				else
-					cell.BackgroundColor = Helpers.Visual.GetUIColor (VisualDesign.LISTITEM_UNEVENCELL_BACKGROUND_COLOR);
-				index++; 
 			}
 		}
 	}

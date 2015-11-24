@@ -19,8 +19,8 @@ namespace BrewBuddy.Shared
 
 		public static class Model
 		{
-			public const string BEER = "BrewBuddy.Model.Beer";
-			public const string BREWERY = "BrewBuddy.Model.Brewery";
+			public const string BEER = "BrewBuddy.Model.BeerListItem";
+			public const string BREWERY = "BrewBuddy.Model.BreweryListItem";
 		}
 	}
 }

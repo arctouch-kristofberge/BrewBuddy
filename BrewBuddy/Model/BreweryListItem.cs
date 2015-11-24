@@ -4,10 +4,9 @@ using PropertyChanged;
 namespace BrewBuddy.Model
 {
 	[ImplementPropertyChanged]
-	public class Available: BaseDataModel
+	public class BreweryListItem : BaseListItem
 	{
 		public string Name { get; set; }
-		public string Description { get; set; }
 	}
 }
 
