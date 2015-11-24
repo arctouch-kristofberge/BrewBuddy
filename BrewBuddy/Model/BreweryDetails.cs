@@ -4,7 +4,7 @@ using PropertyChanged;
 namespace BrewBuddy.Model
 {
 	[ImplementPropertyChanged]
-	public class BreweryDetails : BaseModel
+	public class BreweryDetails : BaseDataModel
 	{
 		public string Name { get; set;}
 		public string Description { get; set;}

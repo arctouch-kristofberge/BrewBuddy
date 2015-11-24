@@ -75,7 +75,6 @@
     </Compile>
     <Compile Include="Services\BreweryDb.cs" />
     <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\IBaseModel.cs" />
     <Compile Include="Interface\IEnvironment.cs" />
     <Compile Include="Services\FavoritesDb.cs" />
@@ -96,6 +95,11 @@
     </Compile>
     <Compile Include="View\CustomViews\ImageWithOverlay.xaml.cs">
       <DependentUpon>ImageWithOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Glass.cs" />
+    <Compile Include="Model\BaseDataModel.cs" />
+    <Compile Include="View\CustomViews\ServingView.xaml.cs">
+      <DependentUpon>ServingView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -200,6 +204,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="View\CustomViews\ImageWithOverlay.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomViews\ServingView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

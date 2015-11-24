@@ -37,7 +37,7 @@ namespace BrewBuddy.Service
 			return new ObservableCollection<Beer>(beers);
 		}
 
-		protected async Task<List<T>> SearchByName<T>(string name, List<DbParameter> parameters = null) where T : BaseModel
+		protected async Task<List<T>> SearchByName<T>(string name, List<DbParameter> parameters = null) where T : BaseDataModel
 		{
 			if (parameters == null)
 				parameters = new List<DbParameter> ();
@@ -139,7 +139,7 @@ namespace BrewBuddy.Service
 			}
 		}
 
-		public async Task<List<T>> GetItemsById<T>(List<string> ids) where T : BaseModel
+		public async Task<List<T>> GetItemsById<T>(List<string> ids) where T : BaseDataModel
 		{
 			List<DbParameter> parameters = new List<DbParameter>() { 
 				new DbParameter(){ key = "ids", value = string.Join (",", ids) }

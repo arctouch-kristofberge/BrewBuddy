@@ -16,8 +16,6 @@ namespace BrewBuddy.iOS.Renderers
 {
 	public class MyListViewRenderer : ListViewRenderer
 	{
-		private bool _cellColorsSet = false;
-		
 		protected override void OnElementChanged (ElementChangedEventArgs<ListView> e)
 		{
 			base.OnElementChanged (e);
@@ -25,14 +23,13 @@ namespace BrewBuddy.iOS.Renderers
 			if(e.OldElement!=null)
 			{
 				e.OldElement.ItemAppearing -= ItemAppearing;
-				e.OldElement.PropertyChanging -= PropertyChanging;
+				e.OldElement.PropertyChanged -= PropertyChanged;
 			}
 
 			if(e.NewElement != null)
 			{
 				e.NewElement.ItemAppearing += ItemAppearing;
-				e.NewElement.PropertyChanging += PropertyChanging;
-
+				e.NewElement.PropertyChanged += PropertyChanged;
 
 				var list = Control as UITableView;
 				list.SeparatorStyle = UITableViewCellSeparatorStyle.None;
@@ -40,15 +37,34 @@ namespace BrewBuddy.iOS.Renderers
 			}
 		}
 
-		private void PropertyChanging (object sender, Xamarin.Forms.PropertyChangingEventArgs e)
+
+
+		private void PropertyChanged (object sender, PropertyChangedEventArgs e)
 		{
-			if (e.PropertyName == "ItemsSource")
-				_cellColorsSet = false;
+			if (e.PropertyName == "IsVisible" && ((ListView)sender).IsVisible && Control.VisibleCells !=null && Control.VisibleCells.Length>0)
+				SetColorsOfAllCells ();
 		}
 
 		private void ItemAppearing(object sender, ItemVisibilityEventArgs e)
 		{
-			var itemsSource = ((ListView)sender).ItemsSource; 
+			SetColorsOfAllCells ();
+		}
+
+		private int GetItemIndex(BaseDataModel item, IEnumerable items)
+		{
+			var itemsList = new List<BaseDataModel> ();
+			if(itemsList!=null)
+			{
+				return itemsList.IndexOf (item);
+			}
+			else
+			{
+				throw new NoItemsFoundException ();
+			}
+		}
+
+		private void SetColorsOfAllCells ()
+		{
 			var indexOfFirstCell = Control.IndexPathsForVisibleRows[0].Item;
 			var cells = ((UITableView)Control).VisibleCells;
 
@@ -60,27 +76,6 @@ namespace BrewBuddy.iOS.Renderers
 				else
 					cell.BackgroundColor = Helpers.Visual.GetUIColor (VisualDesign.LISTITEM_UNEVENCELL_BACKGROUND_COLOR);
 				index++; 
-			}
-
-		}
-
-		private int GetItemIndex(BaseModel item, IEnumerable items)
-		{
-			var itemsList = new List<BaseModel> ();
-			if(itemsList!=null)
-			{
-				return itemsList.IndexOf (item);
-			}
-			else
-			{
-				throw new NoItemsFoundException ();
-			}
-		}
-
-		private void SetCellColors (UITableViewCell[] cells)
-		{
-			for (int i = 0; i < cells.Length; i++) {
-				
 			}
 		}
 	}

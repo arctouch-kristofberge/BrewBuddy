@@ -9,7 +9,7 @@ namespace BrewBuddy.Shared
 {
 	public class Factory
 	{ 
-		public ListTabViewModel<T> GetListTabViewModel<T>() where T : BaseModel
+		public ListTabViewModel<T> GetListTabViewModel<T>() where T : BaseDataModel
 		{
 			var db = ((App)Application.Current).BreweryDb;
 			var type = typeof(T).ToString();

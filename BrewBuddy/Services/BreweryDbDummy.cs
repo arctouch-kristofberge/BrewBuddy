@@ -24,7 +24,7 @@ namespace BrewBuddy.Service
 			return taskSource.Task;
 		}
 
-		public Task<List<T>> GetItemsById<T> (List<string> ids) where T : BaseModel
+		public Task<List<T>> GetItemsById<T> (List<string> ids) where T : BaseDataModel
 		{
 			var taskSource = new TaskCompletionSource<List<T>>();
 			List<T> result = new List<T>();
@@ -133,11 +133,12 @@ namespace BrewBuddy.Service
 				BeerVariation = "Brown beer",
 				Description = "Description " + id,
 				FoodPairings = "Meat",
-				GlasswareId = "glass " + id,
+				Glass = new Glass(){ Name = "Pint", Id = "0" },
 				Ibu = "9",
 				IsFavorite = true,
 				IsOrganic = "false",
 				OriginalGravity = "1.065",
+				ServingTemperature = "8C",
 				ServingTemperatureDisplay = "8",
 				StatusDisplay = "Available",
 				StyleId = "style" + id,

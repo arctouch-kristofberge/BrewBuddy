@@ -3,6 +3,7 @@
 using Xamarin.Forms;
 using BrewBuddy.View;
 using BrewBuddy.Service;
+using BrewBuddy.Design;
 
 namespace BrewBuddy
 {
@@ -41,3 +42,4 @@ namespace BrewBuddy
 	}
 }
 
+ 

@@ -19,7 +19,7 @@ namespace BrewBuddy.ViewModel
 		public string OriginalGravity { get; set; }
 		public string Abv { get; set; }
 		public string Ibu { get; set; }
-		public string GlasswareId { get; set; }
+		public Glass Glass { get; set; }
 		public string StyleId { get; set; }
 		public string IsOrganic { get; set; }
 		public Images Labels { get; set; }
@@ -56,7 +56,7 @@ namespace BrewBuddy.ViewModel
 			OriginalGravity = _beer.OriginalGravity;
 			Abv = _beer.Abv;
 			Ibu = _beer.Ibu;
-			GlasswareId = _beer.GlasswareId;
+			Glass = _beer.Glass;
 			StyleId = _beer.StyleId;
 			IsOrganic = _beer.IsOrganic;
 			Labels = _beer.Labels;
@@ -66,7 +66,7 @@ namespace BrewBuddy.ViewModel
 			BeerVariation = _beer.BeerVariation;
 			Year = _beer.Year;
 
-			ImageUri = Labels.Large;
+			ImageUri = Labels!=null ? Labels.Large : string.Empty;
 
 			Title = Name;
 			Header = GetHeaderText();

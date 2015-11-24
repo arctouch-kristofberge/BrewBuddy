@@ -43,7 +43,8 @@ namespace BrewBuddy.View.Custom
 				
 		public static void ValueUpdated(BindableObject bindable, string oldValue, string newValue)
 		{
-			((StatsView)bindable).ValueLabel.Text = newValue;
+			if(!string.IsNullOrEmpty (newValue))
+				((StatsView)bindable).ValueLabel.Text = newValue;
 		}
 		#endregion
 

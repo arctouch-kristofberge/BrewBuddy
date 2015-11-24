@@ -27,11 +27,16 @@ namespace BrewBuddy.Droid
 		}
 
 		public int ScreenWidth {
-			get { Resources.DisplayMetrics.WidthPixels; }
+			get { return Resources.System.DisplayMetrics.HeightPixels; }
 		}
 
 		public int ScreenHeight {
-			get { Resources.DisplayMetrics.HeightPixels; }
+			get { return Resources.System.DisplayMetrics.HeightPixels; }
+		}
+
+		private int ConvertToDpi(int pixels)
+		{
+			return (int) (pixels / Resources.System.DisplayMetrics.Density);
 		}
 		#endregion
 	}

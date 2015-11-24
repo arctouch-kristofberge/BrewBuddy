@@ -12,7 +12,7 @@ using System.Windows.Input;
 namespace BrewBuddy.ViewModel
 {
 	[ImplementPropertyChanged]
-	public class ListTabViewModel<T> : BaseDataViewModel where T : BaseModel, IFavorite
+	public class ListTabViewModel<T> : BaseDataViewModel where T : BaseDataModel, IFavorite
 	{
 		#region Properties
 		public ObservableCollection<T> Items { get; set; }

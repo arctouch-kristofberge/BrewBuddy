@@ -5,33 +5,39 @@
 		xmlns:CustomView="clr-namespace:BrewBuddy.View.Custom;assembly=BrewBuddy"
 		xmlns:Design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy"
 		Title="{Binding Title}"
-		BackgroundColor="{x:Static Design:VisualDesign.PAGE_BACKGROUND_COLOR}">
+		BackgroundColor="{x:Static Design:VisualDesign.DETAILSPAGE_BACKGROUND_COLOR}">
 	<ContentPage.Content>
 	<StackLayout>
 	  <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
 	  <StackLayout  IsVisible="{Binding IsDataVisible}">
-	    <CustomView:ImageWithOverlay ImageUri="{Binding ImageUri}" OverlayText="{Binding Name}" VerticalOptions="Start"/>
-	    <Label Text="{Binding Header}"/>
+	    <CustomView:ImageWithOverlay ImageUri="{Binding ImageUri}" 
+	    							 OverlayText="{Binding Name}" 
+	    							 VerticalOptions="Start" 
+	    							 HeightRequest="{x:Static Design:VisualDesign.IMAGE_WITH_OVERLAY_MAX_HEIGHT}"/>
+	    <StackLayout Padding="{x:Static Design:VisualDesign.STANDARD_PADDING}">
+	      <Label Text="{Binding Header}"/>
 	      <Grid HorizontalOptions="FillAndExpand">
-	      	<Grid.RowDefinitions>
+	        <Grid.RowDefinitions>
 	      	  <RowDefinition Height="Auto"/>
-	      	</Grid.RowDefinitions>
-	      	<Grid.ColumnDefinitions>
+	        </Grid.RowDefinitions>
+	        <Grid.ColumnDefinitions>
 	      	  <ColumnDefinition Width="*"/>
-	      	  <ColumnDefinition Width="*"/>
-	      	  <ColumnDefinition Width="*"/>
-	      	</Grid.ColumnDefinitions>
+	          <ColumnDefinition Width="*"/>
+	    	  <ColumnDefinition Width="*"/>
+	        </Grid.ColumnDefinitions>
 
-	      	<CustomView:StatsView Name="Alc." Value="{Binding Abv}"
+	        <CustomView:StatsView Name="Alc." Value="{Binding Abv}"
 	      						  Grid.Column="0" Grid.Row="0"/>
-	      	<CustomView:StatsView Name="IBU." Value="{Binding Ibu}"
+	        <CustomView:StatsView Name="IBU." Value="{Binding Ibu}"
 	      						  Grid.Column="1" Grid.Row="0"/>
-	      	<CustomView:StatsView Name="OG." Value="{Binding OriginalGravity}"
+	        <CustomView:StatsView Name="OG." Value="{Binding OriginalGravity}"
 	      						  Grid.Column="2" Grid.Row="0"/>
 
 	      </Grid>
-	    <Label Text="{Binding Description}"/>
+	      <CustomView:ServingView Temperature="{Binding ServingTemperature}" Glass="{Binding Glass}" IsVisible="{Binding IsServingVisible}"/>
+	      <Label Text="{Binding Description}"/>
+	    </StackLayout>
 	  </StackLayout>
-	  </StackLayout>
-	</ContentPage.Content>
+	</StackLayout>
+  </ContentPage.Content>
 </ContentPage>

@@ -4,22 +4,36 @@
 				xmlns:CustomView="clr-namespace:BrewBuddy.View.Custom;assembly=BrewBuddy"
 				xmlns:Design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy"
 				x:Class="BrewBuddy.View.BeerTab"
-				Title="{Binding Title}">
+				Title="{Binding Title}"
+				BackgroundColor="{x:Static Design:VisualDesign.PAGE_BACKGROUND_COLOR}">
 	<ContentPage.Content>
 
-	  <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
-	    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-	      <CustomView:TabSearchBar x:Name="Searchbar" Placeholder="Search by beer name" SearchButtonPressed="SearchClicked" HorizontalOptions="FillAndExpand"/>
-	    </StackLayout>
+	  <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand" Spacing="0">
+	      <CustomView:TabSearchBar x:Name="Searchbar" 
+	      						   Placeholder="Search by beer name" 
+	      						   SearchButtonPressed="SearchClicked" 
+	      						   VerticalOptions="Start"
+	      						   HorizontalOptions="FillAndExpand"/>
 	      <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="Center"/>
-	      <Label Text="{Binding ListHeader}" IsVisible="{Binding IsDataVisible}"/>
-	      <ListView ItemsSource="{Binding Items}" ItemTapped="ItemTapped" IsVisible="{Binding IsDataVisible}">
-	        <ListView.ItemTemplate>
-	          <DataTemplate>
-	            <CustomView:MyViewCell FirstLine="{Binding Name}" SecondLine="{Binding BreweryName}" FavoriteToggled="FavoriteToggled" IsFavorite="{Binding IsFavorite}"/>
-	          </DataTemplate>
-	        </ListView.ItemTemplate>
-	      </ListView>
+	      <StackLayout IsVisible="{Binding IsDataVisible}" Spacing="0">
+
+	        <ContentView Padding="10, 10, 10, 10"
+	        			 BackgroundColor="{x:Static Design:VisualDesign.LISTHEADER_BACKGROUND_COLOR}">
+	          <Label 	Text="{Binding ListHeader}" IsVisible="{Binding IsDataVisible}" 
+	          			TextColor="{x:Static Design:VisualDesign.LISTHEADER_TEXT_COLOR}"
+	          			FontSize="{x:Static Design:VisualDesign.LISTHEADER_FONT_SIZE}"
+	          			FontAttributes="{x:Static Design:VisualDesign.LISTHEADER_FONT_ATTRIBUTES}"/>
+	        </ContentView>
+	        <BoxView HeightRequest="1" BackgroundColor="{x:Static Design:VisualDesign.LISTHEADER_SEPERATOR_COLOR}"/>
+
+	        <ListView ItemsSource="{Binding Items}" ItemTapped="ItemTapped" IsVisible="{Binding IsDataVisible}">
+	          <ListView.ItemTemplate>
+	            <DataTemplate>
+	              <CustomView:MyViewCell FirstLine="{Binding Name}" SecondLine="{Binding BreweryName}" FavoriteToggled="FavoriteToggled" IsFavorite="{Binding IsFavorite}"/>
+	            </DataTemplate>
+	          </ListView.ItemTemplate>
+	        </ListView>
+	      </StackLayout>
 	    </StackLayout>
 
 	</ContentPage.Content>

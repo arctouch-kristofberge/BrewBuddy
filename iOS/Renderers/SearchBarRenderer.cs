@@ -4,6 +4,7 @@ using Xamarin.Forms.Platform.iOS;
 using UIKit;
 using BrewBuddy.View.Custom;
 using Foundation;
+using BrewBuddy.Design;
 
 [assembly: ExportRenderer(typeof(TabSearchBar), typeof(BrewBuddy.iOS.Renderers.SearchBarRenderer))]
 namespace BrewBuddy.iOS.Renderers
@@ -27,13 +28,14 @@ namespace BrewBuddy.iOS.Renderers
 			var tabBar = e.NewElement as TabSearchBar;
 
 			if(tabBar!= null)
-				SetTextColor (tabBar.TextColor);
+				SetColors (tabBar.TextColor, tabBar.InnerBackgroundColor);
 		} 
 
-		private void SetTextColor(Color color)
+		private void SetColors(Color textColor, Color backgroundColor)
 		{
 			var searchBar = Control as UISearchBar;
-			UIColor uiColor = Helpers.Visual.GetUIColor (color);
+
+			searchBar.Layer.BorderColor = Helpers.Visual.GetUIColor (VisualDesign.SEARCHBAR_BORDER_COLOR).CGColor;
 
 			foreach (UIView view in searchBar.Subviews)
 			{
@@ -44,9 +46,11 @@ namespace BrewBuddy.iOS.Renderers
 					{
 						textField.AttributedPlaceholder = new NSAttributedString(textField.Placeholder, new UIStringAttributes()
 							{
-								ForegroundColor = uiColor
+									ForegroundColor = Helpers.Visual.GetUIColor (textColor)
 							});
-						textField.TextColor = uiColor;
+						textField.TextColor = Helpers.Visual.GetUIColor (textColor);
+						textField.BackgroundColor = Helpers.Visual.GetUIColor (backgroundColor);
+						textField.Layer.BorderColor = Helpers.Visual.GetUIColor (VisualDesign.SEARCHBAR_BORDER_COLOR).CGColor;
 					}
 				}
 			}

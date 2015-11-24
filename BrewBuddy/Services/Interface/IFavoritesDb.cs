@@ -7,10 +7,10 @@ namespace BrewBuddy
 {
 	public interface IFavoritesDb
 	{
-		Task AddAsync<T>(T item) where T : BaseModel;
-		Task RemoveAsync<T> (T item) where T : BaseModel;
-		Task<bool> IsFavorite<T> (T item) where T :BaseModel;
-		Task<List<string>> GetAllIds<T> () where T : BaseModel;
+		Task AddAsync<T>(T item) where T : BaseDataModel;
+		Task RemoveAsync<T> (T item) where T : BaseDataModel;
+		Task<bool> IsFavorite<T> (T item) where T :BaseDataModel;
+		Task<List<string>> GetAllIds<T> () where T : BaseDataModel;
 	}
 }
 

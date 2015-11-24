@@ -21,18 +21,6 @@ namespace BrewBuddy.View.Custom
 			
 			UpdateFavoriteIcon ();
 		}
-
-		private int GetCellIndex(IEnumerable models, BaseModel currentModel)
-		{
-			int cellIndex = 0;
-			for (var i = models.GetEnumerator (); i.MoveNext ();) {
-				var model = i.Current;
-				if (model == currentModel)
-					return cellIndex;
-				cellIndex++;
-			}
-			throw new NoItemsFoundException ();
-		}
 		
 		#region Bindable properties
 		#region First line
@@ -125,7 +113,7 @@ namespace BrewBuddy.View.Custom
 				FavoriteToggled(this, 
 					new FavoriteToggledEventArgs (){
 						IsFavorite = IsFavorite,
-						Item = this.BindingContext as BaseModel
+						Item = this.BindingContext as BaseDataModel
 					});
 		}
 		#endregion

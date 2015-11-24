@@ -5,7 +5,7 @@ using PropertyChanged;
 namespace BrewBuddy.Model
 {
 	[ImplementPropertyChanged]
-	public class Beer : BaseModel, IListItem
+	public class Beer : BaseDataModel, IListItem
 	{
 		public string Name { get; set; }
 		public List<Brewery> Breweries { get; set; }

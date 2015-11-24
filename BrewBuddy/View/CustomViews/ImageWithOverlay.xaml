@@ -13,7 +13,15 @@
 		<ContentView BackgroundColor="{x:Static Design:VisualDesign.OVERLAY_BACKGROUND_COLOR}"
 					 AbsoluteLayout.LayoutFlags="All"
 	    	   		 AbsoluteLayout.LayoutBounds="0, 1, 1, 0.2">
-		  <Label x:Name="OverlayTextLabel" LineBreakMode="TailTruncation" HorizontalOptions="Center"/>
+	      <ContentView Padding="{x:Static Design:VisualDesign.STANDARD_PADDING}">
+		    <Label x:Name="OverlayTextLabel" 
+		  		   LineBreakMode="TailTruncation" 
+		  		   HorizontalOptions="Start"
+		  		   VerticalOptions="Center"
+		  		   TextColor="{x:Static Design:VisualDesign.OVERLAY_TEXT_COLOR}"
+		  		   FontFamily="{x:Static Design:VisualDesign.OVERLAY_FONT_FAMILY}"
+		  		   FontSize="{x:Static Design:VisualDesign.OVERLAY_FONT_SIZE}"/>
+		  </ContentView>
 		</ContentView>
 	  </AbsoluteLayout>
 	</ContentView.Content>

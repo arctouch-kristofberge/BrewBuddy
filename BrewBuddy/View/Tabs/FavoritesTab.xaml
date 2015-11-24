@@ -3,7 +3,9 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 			 x:Class="BrewBuddy.View.FavoritesTab"
 			 xmlns:CustomView="clr-namespace:BrewBuddy.View.Custom;assembly=BrewBuddy"
-			 Title="{Binding Title}">
+			 xmlns:Design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy"
+			 Title="{Binding Title}"
+			 BackgroundColor="{x:Static Design:VisualDesign.PAGE_BACKGROUND_COLOR}">
 	<ContentPage Title="{Binding BeersTitle}">
   	  <ScrollView>
   	    <StackLayout>

@@ -23,10 +23,9 @@ namespace BrewBuddy.iOS
 			get { return Convert.ToInt32 ( UIScreen.MainScreen.Bounds.Width); }
 		}
 		public int ScreenHeight {
-			get {
-				throw new NotImplementedException ();
-			}
+			get { return Convert.ToInt32 ( UIScreen.MainScreen.Bounds.Height); }
 		}
+
 	}
 }
 
