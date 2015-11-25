@@ -147,6 +147,7 @@
     <Compile Include="Helpers\Visual.cs" />
     <Compile Include="Implementations\Environment.cs" />
     <Compile Include="Renderers\MyListViewRenderer.cs" />
+    <Compile Include="Implementations\LocationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="ITunesArtwork" />

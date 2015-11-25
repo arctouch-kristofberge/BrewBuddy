@@ -28,7 +28,7 @@ namespace BrewBuddy.View
 		private void SearchClicked(object sender, EventArgs e)
 		{
 			var searchParameter = ((SearchBar)Searchbar).Text;
-			((ListTabViewModel<BeerListItem>)BindingContext).SearchClicked (searchParameter);
+			((ListTabViewModel<BeerListItem>)BindingContext).SearchByName (searchParameter);
 		}
 
 		private void ItemTapped(object sender, ItemTappedEventArgs e)

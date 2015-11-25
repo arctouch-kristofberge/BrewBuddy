@@ -8,6 +8,7 @@ using PropertyChanged;
 using BrewBuddy.Shared;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Collections.Generic;
 
 namespace BrewBuddy.ViewModel
 {
@@ -17,6 +18,8 @@ namespace BrewBuddy.ViewModel
 		#region Properties
 		public ObservableCollection<T> Items { get; set; }
 		public string ListHeader { get; set; }
+		public string Message { get; set; }
+		public bool IsMessageVisible { get; set; }
 		#endregion
 
 		#region Commands
@@ -49,7 +52,7 @@ namespace BrewBuddy.ViewModel
 				item.IsFavorite = await FavoritesDb.IsFavorite (item);
 		}
 		
-		public async void SearchClicked(string parameter)
+		public async void SearchByName(string parameter)
 		{
 			if(!IsLoading)
 			{
@@ -58,6 +61,30 @@ namespace BrewBuddy.ViewModel
 				ListHeader = string.Format ( "Search results ({0})", Items.Count);
 				SetDataLoading (false);
 			}
+		}
+
+		public void SearchByLocation()
+		{
+			if (!IsLoading) 
+			{
+				SetDataLoading (true);
+				try
+				{
+					LocationManager.StartLocationManager (FillItemsByLocation);
+				}
+				catch (LocationServiceNotRunningException)
+				{
+					//Set message
+				}
+			}
+		}
+
+		private async void FillItemsByLocation(Location location)
+		{
+			Items = new ObservableCollection<T>( await BreweryDb.GetBreweriesByLocation (location.Latitude, location.Longtitude, 10) as List<T>);
+			await SetFavorites (Items);
+			Items.SetIndexes ();
+			SetDataLoading (false);
 		}
 
 		private async Task FillItems(string name)

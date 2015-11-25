@@ -16,6 +16,7 @@ namespace BrewBuddy.Service
 		private RestClient _client;
 		private RestRequest _request;
 
+		#region IBreweryDb implementations
 		#region ListItems
 		public async Task<ObservableCollection<BreweryListItem>> GetBreweries(string name)
 		{
@@ -30,57 +31,7 @@ namespace BrewBuddy.Service
 					value = "Y"
 				}
 			};
-			var beers = await SearchByName<BeerListItem> (name, parameters);
-			if (beers == null)
-				throw new NoItemsFoundException ();
-			
-			return new ObservableCollection<BeerListItem>(beers);
-		}
-
-		protected async Task<List<T>> SearchByName<T>(string name, List<DbParameter> parameters = null) where T : BaseModel
-		{
-			if (parameters == null)
-				parameters = new List<DbParameter> ();
-
-			parameters.Add (
-				new DbParameter () { 
-					key = "name", 
-					value = string.Format ("*{0}*", name)
-				});
-			
-			string resource = GetResource<T>();
-			SetupClientAndRequest (resource, parameters);
-
-			DataObject<T> result = await GetResult<T> ();
-			if(result.NumberOfPages>1)
-				await LoadOtherPages(result, parameters);
-			
-			return result.Data;
-		}
-
-		private async Task<DataObject<T>> GetResult<T> ()
-		{
-			try {
-				return await _client.ExecuteAsync<DataObject<T>> (_request);
-			}
-			catch (Exception) 
-			{
-				throw new NoItemsFoundException ();
-			}
-		}
-
-		private async Task LoadOtherPages<T>(DataObject<T> firstPage, List<DbParameter> parameters)
-		{
-			int currentPage = 2;
-			string resource = GetResource<T> ();
-
-			for(int i=currentPage; i<=firstPage.NumberOfPages && i<3 ; i++)
-			{
-				parameters.Add ( new DbParameter (){ key = "p", value = i.ToString () });
-				SetupClientAndRequest (resource, parameters);
-				DataObject<T> newPage = await GetResult<T> ();
-				firstPage.Data.AddRange (newPage.Data);
-			}
+			return new ObservableCollection<BeerListItem>( await SearchByName<BeerListItem> (name, parameters));
 		}
 		
 		public async Task<List<BreweryListItem>> GetBreweriesByBeer(string id)
@@ -94,6 +45,27 @@ namespace BrewBuddy.Service
 				return response.Data;
 			}
 			catch (ArgumentNullException) 
+			{
+				throw new NoItemsFoundException ();
+			}
+		}
+
+		public async Task<List<BreweryListItem>> GetBreweriesByLocation(double lat, double lng, int radius)
+		{
+			List<DbParameter> parameters = new List<DbParameter> () {
+				new DbParameter () { key = "lat", value = lat.ToString () },
+				new DbParameter (){ key = "lng", value = lng.ToString () },
+				new DbParameter (){ key = "radius", value = radius.ToString () }
+			};
+
+			SetupClientAndRequest (@"search/geo/point", parameters);
+
+			try
+			{
+				var result = await _client.ExecuteAsync<DataObject<BreweryByLocation>>(_request);
+				return result.Data.Select (x => x.Brewery).ToList ();
+			}
+			catch (ArgumentNullException)
 			{
 				throw new NoItemsFoundException ();
 			}
@@ -140,7 +112,7 @@ namespace BrewBuddy.Service
 			}
 		}
 
-		public async Task<List<T>> GetItemsById<T>(List<string> ids) where T : BaseModel
+		public async Task<List<T>> GetListItemsById<T> (List<string> ids) where T : BaseListItem
 		{
 			List<DbParameter> parameters = new List<DbParameter>() { 
 				new DbParameter(){ key = "ids", value = string.Join (",", ids) }
@@ -161,8 +133,54 @@ namespace BrewBuddy.Service
 			}
 		}
 		#endregion
+		#endregion
 
 		#region Private methods
+		private async Task<List<T>> SearchByName<T>(string name, List<DbParameter> parameters = null) where T : BaseModel
+		{
+			if (parameters == null)
+				parameters = new List<DbParameter> ();
+
+			parameters.Add (
+				new DbParameter () { 
+					key = "name", 
+					value = string.Format ("*{0}*", name)
+				});
+
+			string resource = GetResource<T>();
+			SetupClientAndRequest (resource, parameters);
+
+			DataObject<T> result = await GetResult<T> ();
+			if(result.NumberOfPages>1)
+				await LoadOtherPages(result, parameters);
+
+			return result.Data;
+		}
+
+		private async Task<DataObject<T>> GetResult<T> ()
+		{
+			try {
+				return await _client.ExecuteAsync<DataObject<T>> (_request);
+			}
+			catch (Exception) 
+			{
+				throw new NoItemsFoundException ();
+			}
+		}
+
+		private async Task LoadOtherPages<T>(DataObject<T> firstPage, List<DbParameter> parameters)
+		{
+			int currentPage = 2;
+			string resource = GetResource<T> ();
+
+			for(int i=currentPage; i<=firstPage.NumberOfPages && i<3 ; i++)
+			{
+				parameters.Add ( new DbParameter (){ key = "p", value = i.ToString () });
+				SetupClientAndRequest (resource, parameters);
+				DataObject<T> newPage = await GetResult<T> ();
+				firstPage.Data.AddRange (newPage.Data);
+			}
+		}
 		private void SetupClientAndRequest (string resource, List<DbParameter> parameters = null)
 		{
 			_client = new RestClient () { BaseUrl = @"http://api.brewerydb.com/v2/" };
@@ -201,6 +219,11 @@ namespace BrewBuddy.Service
 		{
 			public int NumberOfPages { get; set; }
 			public List<T> Data { get; set; }
+		}
+
+		private class BreweryByLocation
+		{
+			public BreweryListItem Brewery { get; set; }
 		}
 
 		protected struct DbParameter

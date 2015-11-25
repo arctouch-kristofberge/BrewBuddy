@@ -10,7 +10,8 @@ namespace BrewBuddy.Service
 	{
 		Task<ObservableCollection<BreweryListItem>> GetBreweries (string name);
 		Task<ObservableCollection<BeerListItem>> GetBeers (string name);
-		Task<List<T>> GetItemsById<T> (List<string> ids) where T : BaseModel;
+		Task<List<T>> GetListItemsById<T> (List<string> ids) where T : BaseListItem;
+		Task<List<BreweryListItem>> GetBreweriesByLocation (double lat, double lng, int radius);
 		Task<BreweryDetails> GetBreweryDetails (string id);
 		Task<BeerDetails> GetBeerDetails (string id);
 		Task<List<BreweryListItem>> GetBreweriesByBeer (string id);

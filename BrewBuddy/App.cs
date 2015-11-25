@@ -16,7 +16,7 @@ namespace BrewBuddy
 			BreweryDb = new BreweryDb ();
 //			BreweryDb = new BreweryDbDummy ();
 			NavigationService = DependencyService.Get<INavigationService>();
-
+			LocationManager = DependencyService.Get<ILocationManager> ();
 			MainPage = new NavigationPage (new MainPage());
 		}
 
@@ -24,6 +24,7 @@ namespace BrewBuddy
 		public IFavoritesDb FavoritesDb  { get; private set; }
 		public IBreweryDb BreweryDb  { get; private set; }
 		public INavigationService NavigationService { get; private set; }
+		public ILocationManager LocationManager { get; private set; }
 
 		protected override void OnStart ()
 		{

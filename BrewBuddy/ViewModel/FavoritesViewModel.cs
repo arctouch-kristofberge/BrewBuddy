@@ -55,13 +55,13 @@ namespace BrewBuddy.ViewModel
 			return favoriteBreweries;
 		}
 
-		protected async Task<ObservableCollection<T>> GetFavoritesAsync<T>() where T : BaseModel
+		protected async Task<ObservableCollection<T>> GetFavoritesAsync<T>() where T : BaseListItem
 		{
 			List<string> favoriteIds = await FavoritesDb.GetAllIds<T> ();
 			return await GetFavoriteModels<T> (favoriteIds);
 		}
 
-		protected async Task<ObservableCollection<T>> GetFavoriteModels<T>(List<string> ids) where T : BaseModel
+		protected async Task<ObservableCollection<T>> GetFavoriteModels<T>(List<string> ids) where T : BaseListItem
 		{
 			var models = new List<T> ();
 			int batchSize = 10;
@@ -69,13 +69,13 @@ namespace BrewBuddy.ViewModel
 			{
 				int range = Math.Min (batchSize, ids.Count - i); // This prevents IndexOutOfBoundsException
 				List<string> batch = ids.GetRange (i, range);
-				models.AddRange ( await BreweryDb.GetItemsById<T> (batch));
+				models.AddRange ( await BreweryDb.GetListItemsById<T> (batch));
 			}
 			return new ObservableCollection<T> (models);
 		}
 		#endregion
 
-		public void FavoriteToggled<T>(T item, bool isFavorite) where T : BaseModel
+		public void FavoriteToggled<T>(T item, bool isFavorite) where T : BaseListItem
 		{
 			if (isFavorite)
 				FavoritesDb.AddAsync (item);

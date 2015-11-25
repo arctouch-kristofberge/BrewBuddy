@@ -32,6 +32,14 @@ namespace BrewBuddy.ViewModel
 			}
 		}
 
+		public ILocationManager LocationManager
+		{
+			get
+			{
+				return ((App)Application.Current).LocationManager;
+			}
+		}
+
 		public string Title { get; set; }
 	}
 }

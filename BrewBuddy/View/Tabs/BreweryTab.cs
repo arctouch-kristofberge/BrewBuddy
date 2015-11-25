@@ -29,7 +29,7 @@ namespace BrewBuddy.View
 		private void SearchClicked(object sender, EventArgs e)
 		{
 			var searchParameter = ((SearchBar)Searchbar).Text;
-			((ListTabViewModel<BreweryListItem>)BindingContext).SearchClicked (searchParameter);
+			((ListTabViewModel<BreweryListItem>)BindingContext).SearchByName (searchParameter);
 		}
 
 		private void ItemTapped(object sender, ItemTappedEventArgs e)
@@ -40,6 +40,11 @@ namespace BrewBuddy.View
 		private void FavoriteToggled(object sender, FavoriteToggledEventArgs e)
 		{
 			((ListTabViewModel<BreweryListItem>)BindingContext).FavoriteToggled (e.Item as BreweryListItem, e.IsFavorite);
+		}
+
+		private void AreaSearchClicked(object sender, EventArgs e)
+		{
+			((ListTabViewModel<BreweryListItem>)BindingContext).SearchByLocation ();
 		}
 	}
 }

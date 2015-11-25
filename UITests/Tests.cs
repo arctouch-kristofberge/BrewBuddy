@@ -26,6 +26,7 @@ namespace BrewBuddy.UITests
 		}
 
 		[Test]
+		[Ignore]
 		public void WelcomeTextIsDisplayed ()
 		{
 			AppResult[] results = app.WaitForElement (c => c.Marked ("Welcome to Xamarin Forms!"));

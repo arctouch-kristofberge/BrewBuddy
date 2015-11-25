@@ -13,8 +13,16 @@
 	    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
 	      <CustomView:TabSearchBar x:Name="Searchbar" Placeholder="Search by brewery name" SearchButtonPressed="SearchClicked" HorizontalOptions="FillAndExpand"/>
 	    </StackLayout>
+		  <CustomView:StandardButton Text="Breweries in my area" Clicked="AreaSearchClicked" HorizontalOptions="FillAndExpand"/>
+		  <Label Text="{Binding Message}" IsVisible="{Binding IsMessageVisible}"
+		  				TextColor="{x:Static Design:VisualDesign.LISTHEADER_TEXT_COLOR}"
+	          			FontSize="{x:Static Design:VisualDesign.LISTHEADER_FONT_SIZE}"/>
+
 	      <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="Center"/>
-	      <Label Text="{Binding ListHeader}" IsVisible="{Binding IsDataVisible}"/>
+	      <Label Text="{Binding ListHeader}" IsVisible="{Binding IsDataVisible}" 
+	          			TextColor="{x:Static Design:VisualDesign.LISTHEADER_TEXT_COLOR}"
+	          			FontSize="{x:Static Design:VisualDesign.LISTHEADER_FONT_SIZE}"/>
+
 	      <ListView ItemsSource="{Binding Items}" ItemTapped="ItemTapped" IsVisible="{Binding IsDataVisible}">
 	        <ListView.ItemTemplate>
 	          <DataTemplate>
