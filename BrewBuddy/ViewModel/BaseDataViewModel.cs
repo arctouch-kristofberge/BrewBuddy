@@ -15,7 +15,7 @@ namespace BrewBuddy.ViewModel
 			IsDataVisible = false;
 		}
 
-		protected void SetDataLoading(bool isDataLoading)
+		public void SetDataLoading(bool isDataLoading)
 		{
 			IsLoading = isDataLoading;
 			IsDataVisible = !isDataLoading;

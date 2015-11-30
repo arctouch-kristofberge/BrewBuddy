@@ -2,8 +2,13 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" 
 			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 			x:Class="BrewBuddy.View.MainPage"
-			Title="{Binding Title}"
 			xmlns:Design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy"
-			BackgroundColor="{x:Static Design:VisualDesign.PAGE_BACKGROUND_COLOR}">
+			xmlns:View="clr-namespace:BrewBuddy.View;assembly=BrewBuddy">
+
+	<TabbedPage.Children>
+        <View:BeerTab Title="Beer" Icon="beer_icon.png"/>
+        <View:BreweryTab Title="Brewery" Icon="brewery_icon.png"/>
+        <View:FavoritesTab  Title="Favorites" Icon="favorites_icon.png"/>
+    </TabbedPage.Children>
 
 </TabbedPage>

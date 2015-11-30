@@ -18,8 +18,9 @@
 	      <StackLayout IsVisible="{Binding IsDataVisible}" Spacing="0">
 
 	        <ContentView Padding="10, 10, 10, 10"
-	        			 BackgroundColor="{x:Static Design:VisualDesign.LISTHEADER_BACKGROUND_COLOR}">
-	          <Label 	Text="{Binding ListHeader}" IsVisible="{Binding IsDataVisible}" 
+	        			 BackgroundColor="{x:Static Design:VisualDesign.LISTHEADER_BACKGROUND_COLOR}"
+	        			 IsVisible="{Binding IsHeaderVisible}" >
+	          <Label 	Text="{Binding Header}" 
 	          			TextColor="{x:Static Design:VisualDesign.LISTHEADER_TEXT_COLOR}"
 	          			FontSize="{x:Static Design:VisualDesign.LISTHEADER_FONT_SIZE}"
 	          			FontAttributes="{x:Static Design:VisualDesign.LISTHEADER_FONT_ATTRIBUTES}"/>

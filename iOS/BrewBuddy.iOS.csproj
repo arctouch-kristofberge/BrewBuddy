@@ -127,10 +127,12 @@
     <BundleResource Include="Resources\Icon-Small-40.png" />
     <BundleResource Include="Resources\Icon-Small-40%402x.png" />
     <BundleResource Include="Resources\Icon-Small-40%403x.png" />
-    <BundleResource Include="Resources\Star_fav.png">
-      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
-      <LogicalName>Star_fav.png</LogicalName>
-    </BundleResource>
+    <BundleResource Include="Resources\beer_icon.png" />
+    <BundleResource Include="Resources\brewery_icon.png" />
+    <BundleResource Include="Resources\favorites_icon.png" />
+    <BundleResource Include="Resources\extra_info.png" />
+    <BundleResource Include="Resources\star_fav.png" />
+    <BundleResource Include="Resources\star_nfav.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -159,10 +161,5 @@
     <Folder Include="Renderers\" />
     <Folder Include="Helpers\" />
     <Folder Include="Implementations\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Star_nfav.png">
-      <LogicalName>star_nfav</LogicalName>
-    </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@ using Android.App;
 
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
+using Android;
 
 [assembly: AssemblyTitle ("BrewBuddy.Droid")]
 [assembly: AssemblyDescription ("")]
@@ -26,3 +27,5 @@ using Android.App;
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("")]
 
+[assembly: UsesPermission(Manifest.Permission.AccessFineLocation)]
+[assembly: UsesPermission(Manifest.Permission.AccessCoarseLocation)]

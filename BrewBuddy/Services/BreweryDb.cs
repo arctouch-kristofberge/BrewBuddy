@@ -136,11 +136,13 @@ namespace BrewBuddy.Service
 		#endregion
 
 		#region Private methods
-		private async Task<List<T>> SearchByName<T>(string name, List<DbParameter> parameters = null) where T : BaseModel
+		private async Task<List<T>> SearchByName<T>(string name) where T : BaseModel
 		{
-			if (parameters == null)
-				parameters = new List<DbParameter> ();
+			return await SearchByName<T> (name, new List<DbParameter> ());
+		}
 
+		private async Task<List<T>> SearchByName<T>(string name, List<DbParameter> parameters) where T : BaseModel
+		{
 			parameters.Add (
 				new DbParameter () { 
 					key = "name", 
@@ -151,6 +153,7 @@ namespace BrewBuddy.Service
 			SetupClientAndRequest (resource, parameters);
 
 			DataObject<T> result = await GetResult<T> ();
+
 			if(result.NumberOfPages>1)
 				await LoadOtherPages(result, parameters);
 
@@ -159,7 +162,8 @@ namespace BrewBuddy.Service
 
 		private async Task<DataObject<T>> GetResult<T> ()
 		{
-			try {
+			try 
+			{
 				return await _client.ExecuteAsync<DataObject<T>> (_request);
 			}
 			catch (Exception) 

@@ -17,9 +17,8 @@ namespace BrewBuddy.ViewModel
 	{
 		#region Properties
 		public ObservableCollection<T> Items { get; set; }
-		public string ListHeader { get; set; }
-		public string Message { get; set; }
-		public bool IsMessageVisible { get; set; }
+		public string Header { get; set; }
+		public bool IsHeaderVisible { get; set; }
 		#endregion
 
 		#region Commands
@@ -34,6 +33,7 @@ namespace BrewBuddy.ViewModel
 			GetItemsFunction = getItemsFunction;
 
 			Items = new ObservableCollection<T> ();
+			SetHeader (string.Empty);
 		}
 
 		public async Task RefreshFavorites()
@@ -41,15 +41,9 @@ namespace BrewBuddy.ViewModel
 			if(Items!=null && Items.Count > 0)
 			{
 				SetDataLoading (true);
-				await SetFavorites (Items);
+				await Items.SetFavorites ();
 				SetDataLoading (false);
 			}
-		}
-
-		private async Task SetFavorites (ObservableCollection<T> items)
-		{
-			foreach (T item in items)
-				item.IsFavorite = await FavoritesDb.IsFavorite (item);
 		}
 		
 		public async void SearchByName(string parameter)
@@ -57,55 +51,30 @@ namespace BrewBuddy.ViewModel
 			if(!IsLoading)
 			{
 				SetDataLoading (true);
-				await FillItems (parameter);
-				ListHeader = string.Format ( "Search results ({0})", Items.Count);
+				await FillItemsByName (parameter);
+				SetHeader (string.Format ( Constants.Text.HEADER_SEARCH_RESULTS, Items.Count));
 				SetDataLoading (false);
 			}
 		}
 
-		public void SearchByLocation()
-		{
-			if (!IsLoading) 
-			{
-				SetDataLoading (true);
-				try
-				{
-					LocationManager.StartLocationManager (FillItemsByLocation);
-				}
-				catch (LocationServiceNotRunningException)
-				{
-					//Set message
-				}
-			}
-		}
-
-		private async void FillItemsByLocation(Location location)
-		{
-			Items = new ObservableCollection<T>( await BreweryDb.GetBreweriesByLocation (location.Latitude, location.Longtitude, 10) as List<T>);
-			await SetFavorites (Items);
-			Items.SetIndexes ();
-			SetDataLoading (false);
-		}
-
-		private async Task FillItems(string name)
+		private async Task FillItemsByName(string name)
 		{
 			try 
 			{
 				Items = new ObservableCollection<T>( await GetItemsFunction(name));
 				await RefreshFavorites ();
-				SetIndexes();
+				Items.SetIndexes();
 			} 
 			catch (NoItemsFoundException)
 			{
-				Items.Clear ();
-				ListHeader = Constants.Text.NO_ITEMS_FOUND;
+				ShowNoItemsFound ();
 			}
 		}
 
-		private void SetIndexes()
+		public void ShowNoItemsFound ()
 		{
-			for(int i=0; i<Items.Count; i++)
-				Items [i].Index = i;
+			Items.Clear ();
+			Header = Constants.Text.NO_ITEMS_FOUND;
 		}
 
 		public async void ItemTapped(T item)
@@ -119,6 +88,12 @@ namespace BrewBuddy.ViewModel
 				FavoritesDb.AddAsync (item);
 			else
 				FavoritesDb.RemoveAsync (item);
+		}
+
+		public void SetHeader(string text)
+		{
+			Header = text;
+			IsHeaderVisible = !string.IsNullOrWhiteSpace (text);
 		}
 	}
 }

@@ -15,6 +15,7 @@ namespace BrewBuddy.Shared
 			public static readonly string FAVORITES_TAB_TITLE = "Favorites";
 			public static readonly string FAVORITE_BEERS_TITLE = "Favorite beers";
 			public static readonly string FAVORITE_BREWERIES_TITLE = "Favorite breweries";
+			public static readonly string HEADER_SEARCH_RESULTS = "Search results ({0})";
 		}
 
 		public static class Model

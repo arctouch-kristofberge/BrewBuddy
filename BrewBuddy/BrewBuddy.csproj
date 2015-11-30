@@ -109,9 +109,13 @@
     <Compile Include="Model\Base\BaseDetails.cs" />
     <Compile Include="Model\SubModels\Style.cs" />
     <Compile Include="Model\SubModels\Category.cs" />
-    <Compile Include="Model\SubModels\Location.cs" />
     <Compile Include="Interface\ILocationManager.cs" />
     <Compile Include="Exception\LocationServiceNotRunningException.cs" />
+    <Compile Include="Model\SubModels\MyLocation.cs" />
+    <Compile Include="View\CustomViews\CollapsableView.xaml.cs">
+      <DependentUpon>CollapsableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Exception\ServiceNotReachableException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -161,7 +165,6 @@
     <None Include="packages.config" />
     <None Include="FodyWeavers.xml" />
     <None Include="About.txt" />
-    <None Include="Resources\extra_info.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -172,7 +175,6 @@
     <Folder Include="Exception\" />
     <Folder Include="Design\" />
     <Folder Include="View\CustomViews\" />
-    <Folder Include="Resources\" />
     <Folder Include="Services\" />
     <Folder Include="Interface\" />
     <Folder Include="Event\" />
@@ -180,6 +182,7 @@
     <Folder Include="Model\Interface\" />
     <Folder Include="Model\SubModels\" />
     <Folder Include="Model\Base\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\MainPage.xaml">
@@ -206,13 +209,6 @@
     <EmbeddedResource Include="View\CustomViews\MyViewCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Star_fav.png">
-      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
-      <LogicalName>Star_fav.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Star_nfav.png">
-      <LogicalName>star_nfav</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\Tabs\FavoritesTab.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -227,6 +223,22 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\CustomViews\SrmView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\star_fav.png">
+      <LogicalName>star_fav.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\star_nfav.png">
+      <LogicalName>star_nfav.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomViews\CollapsableView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>BrewBuddy.View.CustomView.CollapsableView.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\arrow_down_icon.png">
+      <LogicalName>arrow_down_icon.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\arrow_right_icon.png">
+      <LogicalName>arrow_right_icon.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

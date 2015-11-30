@@ -1,4 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<Button xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BrewBuddy.View.Custom.StandardButton">
-	
-</Button>
+<Button xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="BrewBuddy.View.Custom.StandardButton"
+		xmlns:Design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy"
+		BackgroundColor="{x:Static Design:VisualDesign.BUTTON_BACKGROUND_COLOR}"
+		FontFamily="{x:Static Design:VisualDesign.BUTTON_FONT_FAMILY}"
+		FontSize="{x:Static Design:VisualDesign.BUTTON_FONT_SIZE}"
+		TextColor="{x:Static Design:VisualDesign.BUTTON_TEXT_COLOR_ENABLED}"/>

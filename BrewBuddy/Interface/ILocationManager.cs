@@ -6,7 +6,7 @@ namespace BrewBuddy
 {
 	public interface ILocationManager
 	{
-		void StartLocationManager (Action<Location> callBack);
+		void StartLocationManager (Action<MyLocation> callBack);
 	}
 }
 

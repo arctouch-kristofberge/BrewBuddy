@@ -10,10 +10,11 @@
 	    	   Aspect="1"
 	    	   AbsoluteLayout.LayoutFlags="All"
 	    	   AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
-		<ContentView BackgroundColor="{x:Static Design:VisualDesign.OVERLAY_BACKGROUND_COLOR}"
-					 AbsoluteLayout.LayoutFlags="All"
-	    	   		 AbsoluteLayout.LayoutBounds="0, 1, 1, 0.2">
-	      <StackLayout x:Name="Overlay" Padding="{x:Static Design:VisualDesign.STANDARD_PADDING}">
+	      <StackLayout x:Name="Overlay" 
+	      			   Padding="{x:Static Design:VisualDesign.STANDARD_PADDING}"
+	      			   BackgroundColor="{x:Static Design:VisualDesign.OVERLAY_BACKGROUND_COLOR}"
+	      			   AbsoluteLayout.LayoutFlags="All"
+	    	   		   AbsoluteLayout.LayoutBounds="0, 1, 1, 0.2">
 		    <Label x:Name="OverlayTextLabel" 
 		  		   LineBreakMode="TailTruncation" 
 		  		   HorizontalOptions="Start"
@@ -24,13 +25,12 @@
 		    <Label x:Name="SecondLineLabel" 
 		  		   LineBreakMode="TailTruncation" 
 		  		   HorizontalOptions="Start"
-		  		   VerticalOptions="Center"
+		  		   VerticalOptions="End"
 		  		   IsVisible="false"
 		  		   TextColor="{x:Static Design:VisualDesign.OVERLAY_TEXT_COLOR}"
 		  		   FontFamily="{x:Static Design:VisualDesign.OVERLAY_FONT_FAMILY}"
 		  		   FontSize="{x:Static Design:VisualDesign.OVERLAY_SECONDLINE_FONT_SIZE}"/>
 		  </StackLayout>
-		</ContentView>
 	  </AbsoluteLayout>
 	</ContentView.Content>
 </ContentView>

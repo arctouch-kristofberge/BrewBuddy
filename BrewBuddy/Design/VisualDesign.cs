@@ -72,11 +72,111 @@ namespace BrewBuddy.Design
 			TEXT_COLOR_LIGHT_BACKGROUND.B,
 			TEXT_ALPHA_DIVIDER);
         #endregion
-		
+
 		#region Screen size
-		private static readonly int SCREEN_HEIGHT = DependencyService.Get<IEnvironment>().ScreenHeight;
+		private static int ScreenHeight = DependencyService.Get<IEnvironment>().ScreenHeight;
+		private static int ScreenWidth = DependencyService.Get<IEnvironment>().ScreenWidth;
+		private const double TARGET_DESIGN_WIDTH_TABLET = 1536;
+		private const double TARGET_DESIGN_HEIGHT_TABLET = 2048;
+
+		private const double TARGET_DESIGN_WIDTH_PHONE = 640;
+		private const double TARGET_DESIGN_HEIGHT_PHONE = 1136;
 		#endregion
         #endregion
+
+		#region Screen size
+		public static double TargetDesignWidth
+		{
+			get
+			{
+				if (IsPortrait)
+				{
+					return IsTablet ? TARGET_DESIGN_WIDTH_TABLET : TARGET_DESIGN_WIDTH_PHONE;
+				}
+				else
+				{
+					return IsTablet ? TARGET_DESIGN_HEIGHT_TABLET : TARGET_DESIGN_HEIGHT_PHONE;
+				}
+			}
+		}
+
+		public static double TargetDesignHeight
+		{
+			get
+			{
+				if (IsPortrait)
+				{
+					return IsTablet ? TARGET_DESIGN_HEIGHT_TABLET : TARGET_DESIGN_HEIGHT_PHONE;
+				}
+				else
+				{
+					return IsTablet ? TARGET_DESIGN_WIDTH_TABLET : TARGET_DESIGN_WIDTH_PHONE;
+				}
+			}
+		} 
+
+		public static bool IsPortrait
+		{
+			get
+			{
+				return (ScreenHeight > ScreenWidth);
+			}
+		}
+
+		public static bool IsTablet
+		{
+			get
+			{
+				return (Device.Idiom == TargetIdiom.Tablet);
+			}
+		}
+
+		public static bool IsPhone
+		{
+			get
+			{
+				return (Device.Idiom == TargetIdiom.Phone);
+			}
+		}
+
+
+		#endregion
+
+		#region Scaling methods
+		public static double ScaleWidth(double width)
+		{
+			return (width / TargetDesignWidth) * ScreenWidth;
+		}
+
+		public static double ScaleHeight(double height)
+		{
+			return (height / TargetDesignHeight) * ScreenHeight;
+		}
+
+		public static Thickness ScalePadding(Thickness thickness)
+		{
+			return new Thickness(VisualDesign.ScaleWidth(thickness.Left), VisualDesign.ScaleHeight(thickness.Top),
+				VisualDesign.ScaleWidth(thickness.Right), VisualDesign.ScaleHeight(thickness.Bottom));
+		}
+
+		public static double ScaleFontSize(double fontSize)
+		{
+			return ScaleHeight(fontSize);
+		}
+
+		public static int ScaleBorderRadius(double radius)
+		{
+			return (int)Math.Min(ScaleHeight(radius), ScaleWidth(radius));
+		}
+
+		public static Rectangle ScaleLayoutBounds(Rectangle rectangle)
+		{
+			return new Rectangle(rectangle.X <= 1 ? rectangle.X : ScaleWidth(rectangle.X), 
+				rectangle.Y <= 1 ? rectangle.Y : ScaleHeight(rectangle.Y), 
+				rectangle.Width <= 1 ? rectangle.Width : ScaleWidth(rectangle.Width), 
+				rectangle.Height <= 1 ? rectangle.Height : ScaleHeight(rectangle.Height));
+		}     
+		#endregion
 
 		#region General
 		public static readonly Thickness STANDARD_PADDING = new Thickness(10, 0);
@@ -122,8 +222,10 @@ namespace BrewBuddy.Design
 		#endregion
 
 		#region Icons
-		public static readonly string ICON_NOT_FAVORITE = "star_nfav";
-		public static readonly string ICON_FAVORITE = "Star_fav.png";
+		public static readonly string ICON_NOT_FAVORITE = "star_nfav.png";
+		public static readonly string ICON_FAVORITE = "star_fav.png";
+		public static readonly string ICON_COLLAPSABLE_CONTENT_COLLAPSED = "arrow_right_icon.png";
+		public static readonly string ICON_COLLAPSABLE_CONTENT_VISIBLE = "arrow_down_icon.png";
 		#endregion
 
 		#region Label
@@ -148,7 +250,7 @@ namespace BrewBuddy.Design
 		public static readonly string OVERLAY_FONT_FAMILY = FONT_FAMILY;
 		public static readonly double OVERLAY_FONT_SIZE = FONT_SIZE_MEDIUM;
 		public static readonly double OVERLAY_SECONDLINE_FONT_SIZE = FONT_SIZE_SMALL;
-		public static readonly double IMAGE_WITH_OVERLAY_MAX_HEIGHT = SCREEN_HEIGHT / 3;
+		public static readonly double IMAGE_WITH_OVERLAY_MAX_HEIGHT = ScreenHeight / 3;
 		#endregion
 
 		#region ServingView
@@ -166,6 +268,11 @@ namespace BrewBuddy.Design
 		#region SrmView
 		public static readonly Color SRM_TEXT_COLOR_LIGHT_BACKGROUND = TEXT_COLOR_PRIMARY_LIGHTBACKGROUND;
 		public static readonly Color SRM_TEXT_COLOR_DARK_BACKGROUND = TEXT_COLOR_PRIMARY;
+		#endregion
+
+		#region CollapsableView
+		public static readonly Color COLLAPSABLE_HEADER_BACKGROUND_COLOR = ACCENT_COLOR;
+		public static readonly Color COLLAPSABLE_HEADER_TEXT_COLOR = TEXT_COLOR_PRIMARY_LIGHTBACKGROUND;
 		#endregion
 	}
 }

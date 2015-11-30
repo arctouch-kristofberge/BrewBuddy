@@ -12,7 +12,7 @@ namespace BrewBuddy.iOS
 	public class LocationManager : ILocationManager
 	{
 		protected CLLocationManager manager;
-		protected Action<Location> CallBack;
+		protected Action<MyLocation> CallBack;
 
 		public LocationManager ()
 		{
@@ -26,7 +26,7 @@ namespace BrewBuddy.iOS
 
 		#region ILocation implementation
 
-		public void StartLocationManager (Action<Location> callBack)
+		public void StartLocationManager (Action<MyLocation> callBack)
 		{
 			CallBack = callBack;
 			if (CLLocationManager.LocationServicesEnabled) {
@@ -47,7 +47,7 @@ namespace BrewBuddy.iOS
 				{
 					double lat = e.NewLocation.Coordinate.Latitude;
 					double lng = e.NewLocation.Coordinate.Longitude;
-					var loc = new Location (){Latitude = lat, Longtitude = lng};
+					var loc = new MyLocation (){Latitude = lat, Longtitude = lng};
 					CallBack(loc);
 				}
 		
@@ -61,7 +61,7 @@ namespace BrewBuddy.iOS
 			{
 				double lat = e.Locations[e.Locations.Length-1].Coordinate.Latitude;
 				double lng = e.Locations[e.Locations.Length-1].Coordinate.Longitude;
-				var loc = new Location (){Latitude = lat, Longtitude = lng};
+				var loc = new MyLocation (){Latitude = lat, Longtitude = lng};
 				CallBack(loc);
 			}
 		}

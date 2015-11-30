@@ -14,39 +14,50 @@
 	    <CustomView:ImageWithOverlay ImageUri="{Binding ImageUri}" 
 	    							 OverlayText="{Binding Name}" 
 	    							 OverlaySecondLine="{Binding Style.ShortName}"
-	    							 VerticalOptions="Start" 
+	    							 VerticalOptions="StartAndExpand" 
 	    							 HeightRequest="{x:Static Design:VisualDesign.IMAGE_WITH_OVERLAY_MAX_HEIGHT}"/>
 
-	    <ScrollView>
+	    <ScrollView VerticalOptions="StartAndExpand">
 	      <StackLayout Padding="{x:Static Design:VisualDesign.STANDARD_PADDING}">
-	        <Label Text="{Binding Header}"/>
 
-	        <Grid HorizontalOptions="FillAndExpand">
-	          <Grid.RowDefinitions>
-	      	    <RowDefinition Height="Auto"/>
-	          </Grid.RowDefinitions>
-	          <Grid.ColumnDefinitions>
-	      	    <ColumnDefinition Width="*"/>
-	            <ColumnDefinition Width="*"/>
-	    	    <ColumnDefinition Width="*"/>
-	    	    <ColumnDefinition Width="*"/>
-	          </Grid.ColumnDefinitions>
+	        <CustomView:CollapsableView Header="Technical details" 
+	        							HeaderBackgroundColor="{x:Static Design:VisualDesign.COLLAPSABLE_HEADER_BACKGROUND_COLOR}"
+	        							HeaderTextColor="{x:Static Design:VisualDesign.COLLAPSABLE_HEADER_TEXT_COLOR}">
+	          <CustomView:CollapsableView.ContentToCollapse IsVisibleDefault="false">
+	            <StackLayout>
+	              <Grid HorizontalOptions="FillAndExpand">
+	                <Grid.RowDefinitions>
+	      	          <RowDefinition Height="Auto"/>
+	                </Grid.RowDefinitions>
+	                <Grid.ColumnDefinitions>
+	      	          <ColumnDefinition Width="*"/>
+	                  <ColumnDefinition Width="*"/>
+	    	          <ColumnDefinition Width="*"/>
+	    	          <ColumnDefinition Width="*"/>
+	                </Grid.ColumnDefinitions>
 
-	          <CustomView:StatsView Name="Alc." Value="{Binding Abv}"
-	      						    Grid.Column="0" Grid.Row="0"/>
-	          <CustomView:StatsView Name="IBU." Value="{Binding Ibu}"
-	      						    Grid.Column="1" Grid.Row="0"/>
-	          <CustomView:StatsView Name="OG." Value="{Binding OriginalGravity}"
-	      	   					    Grid.Column="2" Grid.Row="0"/>
-	      	  <CustomView:StatsView Name="Year" Value="{Binding Year}"
-	      						    Grid.Column="3" Grid.Row="0"/>
-	        </Grid>
+	                <CustomView:StatsView Name="Alc." Value="{Binding Abv}"
+	      						          Grid.Column="0" Grid.Row="0"/>
+	                <CustomView:StatsView Name="IBU." Value="{Binding Ibu}"
+	      						          Grid.Column="1" Grid.Row="0"/>
+	                <CustomView:StatsView Name="OG." Value="{Binding OriginalGravity}"
+	      	   					          Grid.Column="2" Grid.Row="0"/>
+	      	        <CustomView:StatsView Name="Year" Value="{Binding Year}"
+	      			  			          Grid.Column="3" Grid.Row="0"/>
+	              </Grid>
 
-	        <CustomView:ServingView Temperature="{Binding TemperatureForServingView}" Glass="{Binding Glass}" IsVisible="{Binding IsServingVisible}">
-	          <CustomView:ServingView.GestureRecognizers>
-	            <TapGestureRecognizer Tapped="ServingViewTapped"/>
-	          </CustomView:ServingView.GestureRecognizers>
-	        </CustomView:ServingView>
+	              <CustomView:ServingView Temperature="{Binding TemperatureForServingView}" Glass="{Binding Glass}" IsVisible="{Binding IsServingVisible}">
+	                <CustomView:ServingView.GestureRecognizers>
+	                  <TapGestureRecognizer Tapped="ServingViewTapped"/>
+	                </CustomView:ServingView.GestureRecognizers>
+	              </CustomView:ServingView>
+
+	            </StackLayout>
+	          </CustomView:CollapsableView.ContentToCollapse>
+	        </CustomView:CollapsableView>
+
+
+	          
 
 	        <CustomView:SrmView Srm="{Binding Srm}">
 	          <ContentView.GestureRecognizers>

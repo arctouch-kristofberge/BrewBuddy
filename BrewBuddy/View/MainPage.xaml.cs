@@ -15,10 +15,6 @@ namespace BrewBuddy.View
 			InitializeComponent ();
 
 			Title = Constants.Text.MAIN_PAGE_TITLE;
-
-			Children.Add (new BeerTab ());
-			Children.Add (new BreweryTab ());
-			Children.Add (new FavoritesTab ());
 		}
 	}
 }

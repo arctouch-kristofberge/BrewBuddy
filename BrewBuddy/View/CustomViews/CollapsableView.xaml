@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:Class="BrewBuddy.View.Custom.CollapsableView"
+			 xmlns:Design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy">
+  <ContentView.Content>
+	<StackLayout x:Name="OuterLayout">
+
+	  <StackLayout x:Name="LabelContentView" Orientation="Horizontal">
+	    <StackLayout.GestureRecognizers>
+	        <TapGestureRecognizer Tapped="HeaderTapped" />
+	    </StackLayout.GestureRecognizers>
+	    <Image x:Name="ArrowIcon" HeightRequest="10" WidthRequest="10" HorizontalOptions="Start"/>
+	    <Label x:Name="HeaderLabel" HorizontalOptions="Start"/>
+
+	  </StackLayout>
+
+	</StackLayout>
+  </ContentView.Content>
+</ContentView>

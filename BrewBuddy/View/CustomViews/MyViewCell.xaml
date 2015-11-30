@@ -4,6 +4,7 @@
 	x:Class="BrewBuddy.View.Custom.MyViewCell"
 	xmlns:Design="clr-namespace:BrewBuddy.Design;assembly=BrewBuddy">
       <StackLayout Orientation="Horizontal" Padding="10,0,10,15" x:Name="OuterLayout">
+
         <ContentView Padding="4">
           <Image x:Name="FavIcon" Aspect="0">
             <Image.GestureRecognizers>
